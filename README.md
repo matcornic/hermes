@@ -5,11 +5,7 @@ It's a package that generates clean, responsive HTML e-mails for sending transac
 
 # Demo
 
-<img src="https://raw.github.com/matcornic/hermes/master/screens/default/welcome.png" height="400" />
-
-<img src="https://raw.github.com/matcornic/hermes/master/screens/default/reset.png" height="400" />
-
-<img src="https://raw.github.com/matcornic/hermes/master/screens/default/receipt.png" height="400" />
+<img src="https://raw.github.com/matcornic/hermes/master/screens/default/welcome.png" height="400" /> <img src="https://raw.github.com/matcornic/hermes/master/screens/default/reset.png" height="400" /> <img src="https://raw.github.com/matcornic/hermes/master/screens/default/receipt.png" height="400" />
 
 # Usage
 
@@ -82,7 +78,7 @@ if err != nil {
 
 This code would output the following HTML template:
 
-![Demo](screens/demo.png)
+<img src="https://raw.github.com/matcornic/hermes/master/screens/demo.png" height="400" />
 
 > Theme templates will be incorporated in your application binary. If you want to use external templates (for configuration), use your own theme by implementing `hermes.Theme` interface with code searching for your files.
 
@@ -132,47 +128,25 @@ To customize the e-mail greeting (Hi) or signature (Yours truly), supply custom 
 
 ```go
 email := hermes.Email{
-		Body: hermes.Body{
-            Greeting: "Dear",
-            Signature: "Sincerly",
-		},
-	}
+    Body: hermes.Body{
+        Greeting: "Dear",
+        Signature: "Sincerly",
+    },
+}
 ```
 
 To use a custom title string rather than a greeting/name introduction, provide it instead of `Name`:
 
-```js
-var email = {
-    body: {
-        // Title will override `name`
-        title: 'Welcome to Mailgen!'
-    }
-};
-```
-
 ```go
 email := hermes.Email{
-		Body: hermes.Body{
-            // Title will override `Name`
-            Title: "Welcome to Mailgen",
-		},
-	}
+    Body: hermes.Body{
+        // Title will override `Name`
+        Title: "Welcome to Mailgen",
+    },
+}
 ```
 
 To customize the `Copyright`, override it when initializing `Hermes` within your `Product` as follows:
-
-```js
-// Configure mailgen
-var mailGenerator = new Mailgen({
-    theme: 'salted',
-    product: {
-        name: 'Mailgen',
-        link: 'https://mailgen.js/',
-        // Custom copyright notice
-        copyright: 'Copyright © 2016 Mailgen. All rights reserved.',
-    }
-});
-```
 
 ```go
 // Configure hermes by setting a theme and your product info
@@ -200,19 +174,19 @@ To inject an action button in to the e-mail, supply the `Actions` object as foll
 
 ```go
 email := hermes.Email{
-		Body: hermes.Body{
-			Actions: []hermes.Action{
-				{
-					Instructions: "To get started with Hermes, please click here:",
-					Button: hermes.Button{
-						Color: "#22BC66", // Optional action button color
-						Text:  "Confirm your account",
-						Link:  "https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010",
-					},
-				},
-			},
-		},
-	}
+    Body: hermes.Body{
+        Actions: []hermes.Action{
+            {
+                Instructions: "To get started with Hermes, please click here:",
+                Button: hermes.Button{
+                    Color: "#22BC66", // Optional action button color
+                    Text:  "Confirm your account",
+                    Link:  "https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010",
+                },
+            },
+        },
+    },
+}
 ```
 
 To inject multiple action buttons in to the e-mail, supply another struct in Actions slice `Action`.
@@ -263,13 +237,13 @@ email := hermes.Email{
 
  ```go
 email := hermes.Email{
-		Body: hermes.Body{
-			Dictionary: []hermes.Entry{
-				{Key: "Date", Value: "20 November 1887"},
-				{Key: "Address", Value: "221B Baker Street, London"},
-			},
-		},
-	}
+    Body: hermes.Body{
+        Dictionary: []hermes.Entry{
+            {Key: "Date", Value: "20 November 1887"},
+            {Key: "Address", Value: "221B Baker Street, London"},
+        },
+    },
+}
 ```
 
 ## Troubleshooting
