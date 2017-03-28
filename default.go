@@ -1,9 +1,7 @@
 package hermes
 
 // Default is the theme by default
-type Default struct {
-	name string
-}
+type Default struct{}
 
 // Name returns the name of the default theme
 func (dt *Default) Name() string {
