@@ -1,0 +1,15 @@
+language: go
+
+go:
+  - 1.6
+  - 1.7
+  - 1.8
+  - master
+
+install:
+- go get -u github.com/alecthomas/gometalinter
+- gometalinter -u -i -f
+
+script:
+- go test ./...
+- gometalinter --config=./gometalinter.json ./...
