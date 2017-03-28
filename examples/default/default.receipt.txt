@@ -1,0 +1,12 @@
+Hi Jon Snow,
+Your order has been processed successfully.
+
+ 
+You can check the status of your order and more in your dashboard:
+https://hermes-example.com/dashboard
+
+
+Yours truly,
+Hermes
+
+Copyright © 2017 Hermes. All rights reserved.

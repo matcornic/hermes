@@ -1,25 +1,11 @@
-package hermes
 
-// Default is the theme by default
-type Default struct {
-	name string
-}
-
-// Name returns the name of the default theme
-func (dt *Default) Name() string {
-	return "default"
-}
-
-// HTMLTemplate returns a Golang template that will generate an HTML email.
-func (dt *Default) HTMLTemplate() string {
-	return `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <style type="text/css" rel="stylesheet" media="all">
-    /* Base ------------------------------ */
+     
     *:not(br):not(tr):not(html) {
       font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
       -webkit-box-sizing: border-box;
@@ -37,7 +23,7 @@ func (dt *Default) HTMLTemplate() string {
     a {
       color: #3869D4;
     }
-    /* Layout ------------------------------ */
+     
     .email-wrapper {
       width: 100%;
       margin: 0;
@@ -49,7 +35,7 @@ func (dt *Default) HTMLTemplate() string {
       margin: 0;
       padding: 0;
     }
-    /* Masthead ----------------------- */
+     
     .email-masthead {
       padding: 25px 0;
       text-align: center;
@@ -68,7 +54,7 @@ func (dt *Default) HTMLTemplate() string {
     .email-logo {
       max-height: 50px;
     }
-    /* Body ------------------------------ */
+     
     .email-body {
       width: 100%;
       margin: 0;
@@ -126,7 +112,7 @@ func (dt *Default) HTMLTemplate() string {
     .align-right {
       text-align: right;
     }
-    /* Type ------------------------------ */
+     
     h1 {
       margin-top: 0;
       color: #2F3133;
@@ -157,7 +143,7 @@ func (dt *Default) HTMLTemplate() string {
     p.center {
       text-align: center;
     }
-    /* Data table ------------------------------ */
+     
     .data-wrapper {
       width: 100%;
       margin: 0;
@@ -184,7 +170,7 @@ func (dt *Default) HTMLTemplate() string {
       font-size: 15px;
       line-height: 18px;
     }
-    /* Buttons ------------------------------ */
+     
     .button {
       display: inline-block;
       width: 200px;
@@ -198,7 +184,7 @@ func (dt *Default) HTMLTemplate() string {
       -webkit-text-size-adjust: none;
       mso-hide: all;
     }
-    /*Media Queries ------------------------------ */
+     
     @media only screen and (max-width: 600px) {
       .email-body_inner,
       .email-footer {
@@ -212,146 +198,91 @@ func (dt *Default) HTMLTemplate() string {
     }
   </style>
 </head>
-<body dir="{{.Hermes.TextDirection}}">
+<body dir="ltr">
   <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0">
     <tr>
       <td align="center">
         <table class="email-content" width="100%" cellpadding="0" cellspacing="0">
-          <!-- Logo -->
+          
           <tr>
             <td class="email-masthead">
-              <a class="email-masthead_name" href="{{.Hermes.Product.Link}}" target="_blank">
-                {{ if .Hermes.Product.Logo }}
-                  <img src="{{.Hermes.Product.Logo}}" class="email-logo" />
-                {{ else }}
-                  {{ .Hermes.Product.Name }}
-                {{ end }}
+              <a class="email-masthead_name" href="https://example-hermes.com/" target="_blank">
+                
+                  <img src="http://www.duchess-france.org/wp-content/uploads/2016/01/gopher.png" class="email-logo" />
+                
                 </a>
             </td>
           </tr>
-          <!-- Email Body -->
+          
           <tr>
             <td class="email-body" width="100%">
               <table class="email-body_inner" align="center" width="570" cellpadding="0" cellspacing="0">
-                <!-- Body content -->
+                
                 <tr>
                   <td class="content-cell">
-                    <h1>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }},{{ end }}</h1>
-					{{ with .Email.Body.Intros }}
-					{{ if gt (len .) 0 }}
-					{{ range $line := . }}
-					<p>{{ $line }}</p>
-					{{ end }}
-					{{ end }}
-					{{ end }}
+                    <h1>Hi Jon Snow,</h1>
+					
+					
+					
+					<p>Welcome to Hermes! We&#39;re very excited to have you on board.</p>
+					
+					
+					
 
-					{{ with .Email.Body.Dictionary }} 
-					{{ if gt (len .) 0 }}
-					<dl class="body-dictionary">
-					{{ range $entry := . }}
-						<dt>{{ $entry.Key }}:</dt>
-                        <dd>{{ $entry.Value }}</dd>
-					{{ end }}
-					 </dl>
-					{{ end }}
-					{{ end }}
+					
 
-					<!-- Table -->
-					{{ with .Email.Body.Table }}
-					{{ $data := .Data }}
-					{{ $columns := .Columns }}
-					{{ if gt (len $data) 0 }}
-					<table class="data-wrapper" width="100%" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td colspan="2">
-                          <table class="data-table" width="100%" cellpadding="0" cellspacing="0">
-                            <tr>
-								{{ $col := index $data 0 }}
-								{{ range $entry := $col }}
-                                <th
-									{{ with $columns }}
-										{{ $width := index .CustomWidth $entry.Key }}
-										{{ with $width }}
-										width="{{ . }}"
-										{{ end }}
-										{{ $align := index .CustomAlignement $entry.Key }}
-										{{ with $align }}
-										style="text-align:{{ . }}"
-										{{ end }}
-									{{ end }}
-								>
-                                  <p>{{ $entry.Key }}</p>
-                                </th>
-                              	{{ end }}
-                            </tr>
-							{{ range $row := $data }}
-                            <tr>
-                              {{ range $cell := $row }}
-                                <td
-									{{ with $columns }}
-										{{ $align := index .CustomAlignement $cell.Key }}
-										{{ with $align }}
-										style="text-align:{{ . }}"
-										{{ end }}
-									{{ end }}
-								>
-                                {{ $cell.Value }}
-                                </td>
-                              {{ end }}
-                            </tr>
-                            {{ end }}
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-					{{ end }}
-					{{ end }}
+					
+					
+					
+					
+					
+					
 
-					<!-- Action -->
-					{{ with .Email.Body.Actions }}
-					{{ if gt (len .) 0 }}
-					{{ range $action := . }}
-					<p>{{ $action.Instructions }}</p>
+					
+					
+					
+					
+					<p>To get started with Hermes, please click here:</p>
 					<table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
 						<tr>
 							<td align="center">
 							<div>
-								<a href="{{ $action.Button.Link }}" class="button" style="background-color: {{ $action.Button.Color }}" target="_blank">{{ $action.Button.Text }}</a>
+								<a href="https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010" class="button" style="background-color: #22BC66" target="_blank">Confirm your account</a>
 							</div>
 							</td>
 						</tr>
                     </table>
-					{{ end }}
-					{{ end }}
-					{{ end }}
+					
+					
+					
 
-					{{ with .Email.Body.Outros }} 
-					{{ if gt (len .) 0 }}
-					{{ range $line := . }}
-					<p>{{ $line }}</p>
-					{{ end }}
-					{{ end }}
-					{{ end }}
+					 
+					
+					
+					<p>Need help, or have questions? Just reply to this email, we&#39;d love to help.</p>
+					
+					
+					
 
                     <p>
-                      {{.Email.Body.Signature}},
+                      Yours truly,
                       <br>
-                      {{.Hermes.Product.Name}}
+                      Hermes
                     </p>
 
-					{{ with .Email.Body.Actions }} 
+					 
 					<table class="body-sub">
                       <tbody><tr>
-					  {{ range $action := . }}
+					  
 					  <td>
-                            <p class="sub">If you’re having trouble with the button '{{ $action.Button.Text }}', copy and paste the URL below into your web browser.</p>
-                            <p class="sub"><a href="{{ $action.Button.Link }}">{{ $action.Button.Link }}</a></p>
+                            <p class="sub">If you’re having trouble with the button 'Confirm your account', copy and paste the URL below into your web browser.</p>
+                            <p class="sub"><a href="https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010">https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010</a></p>
                       </td>
-					  {{ end }}
+					  
 					  </tr>
 					  </tbody>
 					</table>
-					{{ end }}
+					
                   </td>
                 </tr>
               </table>
@@ -363,7 +294,7 @@ func (dt *Default) HTMLTemplate() string {
                 <tr>
                   <td class="content-cell">
                     <p class="sub center">
-                      {{.Hermes.Product.Copyright}}
+                      Copyright © 2017 Hermes. All rights reserved.
                     </p>
                   </td>
                 </tr>
@@ -376,24 +307,3 @@ func (dt *Default) HTMLTemplate() string {
   </table>
 </body>
 </html>
-`
-}
-
-// PlainTextTemplate returns a Golang template that will generate an plain text email.
-func (dt *Default) PlainTextTemplate() string {
-	return `{{.Email.Body.Greeting}} {{.Email.Body.Name}},
-{{ with .Email.Body.Intros }}{{ range $line := . }}{{ $line }}{{ end }}{{ end }}
-{{ with .Email.Body.Dictionary }}{{ range $entry := . }}
-{{ $entry.Key }}: {{ $entry.Value }}{{ end }}{{ end }}
-{{ with .Email.Body.Actions }} {{ range $action := . }}
-{{ $action.Instructions }}
-{{ $action.Button.Link }}{{ end }}{{ end }}
-{{ with .Email.Body.Outros }} {{ range $line := . }}
-{{ $line }}{{ end }}{{ end }}
-
-{{.Email.Body.Signature}},
-{{.Hermes.Product.Name}}
-
-{{.Hermes.Product.Copyright}}
-`
-}
