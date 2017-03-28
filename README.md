@@ -1,5 +1,7 @@
 # Hermes
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/matcornic/hermes)](https://goreportcard.com/report/github.com/matcornic/hermes)
+
 Hermes is the Go port of the great [mailgen](https://github.com/eladnava/mailgen) engine for Node.js. Check their work, it's awesome !
 It's a package that generates clean, responsive HTML e-mails for sending transactional e-mails (welcome e-mail, reset password e-mails, receipt e-mails and so on).
 

@@ -4,14 +4,14 @@ import (
 	"github.com/matcornic/hermes"
 )
 
-type Reset struct {
+type reset struct {
 }
 
-func (r *Reset) Name() string {
+func (r *reset) Name() string {
 	return "reset"
 }
 
-func (r *Reset) Email() hermes.Email {
+func (r *reset) Email() hermes.Email {
 	return hermes.Email{
 		Body: hermes.Body{
 			Name: "Jon Snow",

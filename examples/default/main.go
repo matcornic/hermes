@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 )
 
-type Example interface {
+type example interface {
 	Email() hermes.Email
 	Name() string
 }
@@ -20,7 +20,7 @@ func main() {
 		},
 	}
 
-	examples := []Example{
+	examples := []example{
 		new(Welcome),
 		new(Reset),
 		new(Receipt),

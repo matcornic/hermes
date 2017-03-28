@@ -4,14 +4,14 @@ import (
 	"github.com/matcornic/hermes"
 )
 
-type Receipt struct {
+type receipt struct {
 }
 
-func (r *Receipt) Name() string {
+func (r *receipt) Name() string {
 	return "receipt"
 }
 
-func (r *Receipt) Email() hermes.Email {
+func (r *receipt) Email() hermes.Email {
 	return hermes.Email{
 		Body: hermes.Body{
 			Name: "Jon Snow",
