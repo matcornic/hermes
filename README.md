@@ -5,11 +5,11 @@ It's a package that generates clean, responsive HTML e-mails for sending transac
 
 # Demo
 
-![Welcome](screens/default/welcome.png)
+<img src="https://raw.github.com/matcornic/hermes/master/screens/default/welcome.png" height="400" />
 
-![Reset](screens/default/reset.png)
+<img src="https://raw.github.com/matcornic/hermes/master/screens/default/reset.png" height="400" />
 
-![Receipt](screens/default/receipt.png)
+<img src="https://raw.github.com/matcornic/hermes/master/screens/default/receipt.png" height="400" />
 
 # Usage
 
@@ -40,26 +40,26 @@ Next, generate an e-mail using the following code:
 
 ```go
 email := hermes.Email{
-		Body: hermes.Body{
-			Name: "Jon Snow",
-			Intros: []string{
-				"Welcome to Hermes! We're very excited to have you on board.",
-			},
-			Actions: []hermes.Action{
-				{
-					Instructions: "To get started with Hermes, please click here:",
-					Button: hermes.Button{
-						Color: "#22BC66", // Optional action button color
-						Text:  "Confirm your account",
-						Link:  "https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010",
-					},
-				},
-			},
-			Outros: []string{
-				"Need help, or have questions? Just reply to this email, we'd love to help.",
-			},
-		},
-	}
+    Body: hermes.Body{
+        Name: "Jon Snow",
+        Intros: []string{
+            "Welcome to Hermes! We're very excited to have you on board.",
+        },
+        Actions: []hermes.Action{
+            {
+                Instructions: "To get started with Hermes, please click here:",
+                Button: hermes.Button{
+                    Color: "#22BC66", // Optional action button color
+                    Text:  "Confirm your account",
+                    Link:  "https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010",
+                },
+            },
+        },
+        Outros: []string{
+            "Need help, or have questions? Just reply to this email, we'd love to help.",
+        },
+    },
+}
 
 // Generate an HTML email with the provided contents(for modern clients)
 emailBody, err := h.GenerateHTML(email)
