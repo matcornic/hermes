@@ -204,13 +204,13 @@ email := hermes.Email{
                 {   
                     // Key is the column name, Value is the cell value
                     // First object defines what columns will be displayed
-                    {Key: "Item", Value: "Node.js"},
-                    {Key: "Description", Value: "Event-driven I/O server-side JavaScript environment based on V8"},
+                    {Key: "Item", Value: "Golang"},
+                    {Key: "Description", Value: "Open source programming language that makes it easy to build simple, reliable, and efficient software"},
                     {Key: "Price", Value: "$10.99"},
                 },
                 {
-                    {Key: "Item", Value: "Mailgen"},
-                    {Key: "Description", Value: "Programmatically create beautiful e-mails using plain old JavaScript."},
+                    {Key: "Item", Value: "Hermes"},
+                    {Key: "Description", Value: "Programmatically create beautiful e-mails using Golang."},
                     {Key: "Price", Value: "$1.99"},
                 },
             },
