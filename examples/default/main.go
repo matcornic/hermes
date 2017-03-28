@@ -21,9 +21,9 @@ func main() {
 	}
 
 	examples := []example{
-		new(Welcome),
-		new(Reset),
-		new(Receipt),
+		new(welcome),
+		new(reset),
+		new(receipt),
 	}
 
 	for _, e := range examples {

@@ -7,7 +7,8 @@ go:
   - master
 
 install:
-- go get
+- go get ./...
+- go get -t ./...
 - go get -u github.com/alecthomas/gometalinter
 - gometalinter -u -i -f
 
