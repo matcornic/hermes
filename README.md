@@ -83,7 +83,7 @@ This code would output the following HTML template:
 
 <img src="https://raw.github.com/matcornic/hermes/master/screens/demo.png" height="400" />
 
-> Theme templates will be incorporated in your application binary. If you want to use external templates (for configuration), use your own theme by implementing `hermes.Theme` interface with code searching for your files.
+> Theme templates will be embedded in your application binary. If you want to use external templates (for configuration), use your own theme by implementing `hermes.Theme` interface with code searching for your files.
 
 ## More Examples
 
