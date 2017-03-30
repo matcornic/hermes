@@ -13,7 +13,7 @@ install:
 - gometalinter -u -i -f
 
 script:
-- go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+- go test -race -coverprofile=coverage.txt -covermode=atomic
 - gometalinter --config=./gometalinter.json ./...
 
 after_success:
