@@ -331,11 +331,11 @@ func (dt *Default) HTMLTemplate() string {
 					{{ end }}
 					{{ end }}
 
-                    <p>
-                      {{.Email.Body.Signature}},
-                      <br>
-                      {{.Hermes.Product.Name}}
-                    </p>
+          <p>
+            {{.Email.Body.Signature}},
+            <br>
+            {{.Hermes.Product.Name}}
+          </p>
 
 					{{ with .Email.Body.Actions }} 
 					<table class="body-sub">
