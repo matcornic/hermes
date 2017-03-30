@@ -13,5 +13,8 @@ install:
 - gometalinter -u -i -f
 
 script:
-- go test ./...
+- go test -race -coverprofile=coverage.txt -covermode=atomic ./...
 - gometalinter --config=./gometalinter.json ./...
+
+after_success:
+- bash <(curl -s https://codecov.io/bash)
