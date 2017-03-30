@@ -379,7 +379,7 @@ func (dt *Default) HTMLTemplate() string {
 
 // PlainTextTemplate returns a Golang template that will generate an plain text email.
 func (dt *Default) PlainTextTemplate() string {
-	return `{{.Email.Body.Greeting}} {{.Email.Body.Name}},
+	return `{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }},{{ end }},
 {{ with .Email.Body.Intros }}{{ range $line := . }}{{ $line }}{{ end }}{{ end }}
 {{ with .Email.Body.Dictionary }}{{ range $entry := . }}
 {{ $entry.Key }}: {{ $entry.Value }}{{ end }}{{ end }}
@@ -390,7 +390,7 @@ func (dt *Default) PlainTextTemplate() string {
 {{ $line }}{{ end }}{{ end }}
 
 {{.Email.Body.Signature}},
-{{.Hermes.Product.Name}}
+{{.Hermes.Product.Name}} - {{.Hermes.Product.Link}}
 
 {{.Hermes.Product.Copyright}}
 `

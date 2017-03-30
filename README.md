@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/matcornic/hermes.svg?branch=master)](https://travis-ci.org/matcornic/hermes)
 [![Go Report Card](https://goreportcard.com/badge/github.com/matcornic/hermes)](https://goreportcard.com/report/github.com/matcornic/hermes)
+[![Go Coverage](http://gocover.io/_badge/github.com/matcornic/hermes/)](http://gocover.io/github.com/matcornic/hermes/)
+[![Godoc](https://godoc.org/github.com/matcornic/hermes?status.svg)](https://godoc.org/github.com/matcornic/hermes)
 
 Hermes is the Go port of the great [mailgen](https://github.com/eladnava/mailgen) engine for Node.js. Check their work, it's awesome !
 It's a package that generates clean, responsive HTML e-mails for sending transactional e-mails (welcome e-mail, reset password e-mails, receipt e-mails and so on).
@@ -257,17 +259,7 @@ email := hermes.Email{
 
 ## Contributing
 
-Thanks so much for wanting to help! We really appreciate it.
-
-* Have an idea for a new feature?
-* Want to add a new built-in theme?
-
-Excellent! You've come to the right place.
-
-1. If you find a bug or wish to suggest a new feature, please create an issue first
-2. Make sure your code & comment conventions are in-line with the project's style
-3. Make your commits and PRs as tiny as possible - one feature or bugfix at a time
-4. Write detailed commit messages, in-line with the project's commit naming conventions
+See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
 
