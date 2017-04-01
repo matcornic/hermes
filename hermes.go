@@ -124,7 +124,7 @@ func setDefaultHermesValues(h *Hermes) error {
 			Copyright: "Copyright © 2017 Hermes. All rights reserved.",
 		},
 	}
-	// Merge the given hermes engine coniguration with default one
+	// Merge the given hermes engine configuration with default one
 	// Default one overrides all zero values
 	err := mergo.Merge(h, defaultHermes)
 	if err != nil {
