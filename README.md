@@ -31,8 +31,8 @@ h := hermes.Hermes{
         // Appears in header & footer of e-mails
         Name: "Hermes",
         Link: "https://example-hermes.com/",
-        // Option product logo
-        // Logo: "http://www.duchess-france.org/wp-content/uploads/2016/01/gopher.png",
+        // Optional product logo
+        Logo: "http://www.duchess-france.org/wp-content/uploads/2016/01/gopher.png",
     },
 }
 ```
