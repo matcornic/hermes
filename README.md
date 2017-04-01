@@ -10,7 +10,7 @@ It's a package that generates clean, responsive HTML e-mails for sending transac
 
 # Demo
 
-<img src="https://raw.github.com/matcornic/hermes/master/screens/default/welcome.png" height="400" /> <img src="https://raw.github.com/matcornic/hermes/master/screens/default/reset.png" height="400" /> <img src="https://raw.github.com/matcornic/hermes/master/screens/default/receipt.png" height="400" />
+<img src="screens/default/welcome.png" height="400" /> <img src="screens/default/reset.png" height="400" /> <img src="screens/default/receipt.png" height="400" />
 
 # Usage
 
@@ -83,7 +83,7 @@ if err != nil {
 
 This code would output the following HTML template:
 
-<img src="https://raw.github.com/matcornic/hermes/master/screens/demo.png" height="400" />
+<img src="screens/demo.png" height="400" />
 
 > Theme templates will be embedded in your application binary. If you want to use external templates (for configuration), use your own theme by implementing `hermes.Theme` interface with code searching for your files.
 
@@ -113,7 +113,7 @@ The following open-source themes are bundled with this package:
 
 * `default` by [Postmark Transactional Email Templates](https://github.com/wildbit/postmark-templates)
 
-<img src="https://raw.github.com/matcornic/hermes/master/screens/default/welcome.png" height="200" /> <img src="https://raw.github.com/matcornic/hermes/master/screens/default/reset.png" height="200" /> <img src="https://raw.github.com/matcornic/hermes/master/screens/default/receipt.png" height="200" />
+<img src="screens/default/welcome.png" height="200" /> <img src="screens/default/reset.png" height="200" /> <img src="screens/default/receipt.png" height="200" />
 
 ## RTL Support
 
