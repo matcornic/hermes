@@ -14,7 +14,7 @@ Excellent! You've come to the right place.
 
 ## Theming Instructions
 
-This file contains instructions on adding themes to Mailgen:
+This file contains instructions on adding themes to Hermes:
 
 * [Using a Custom Theme](#using-a-custom-theme)
 * [Creating a Built-In Theme](#creating-a-built-in-theme)
@@ -26,7 +26,7 @@ This file contains instructions on adding themes to Mailgen:
 
 ### Using a Custom Theme
 
-If you want to supply your own **custom theme** for Hermes to use (but don't want it included with Mailgen):
+If you want to supply your own **custom theme** for Hermes to use (but don't want it included with Hermes):
 
 1. Create a new struct implementing `Theme` interface ([hermes.go](hermes.go)). A real-life example is in [default.go](default.go)
 2. Supply your new theme at hermes creation
@@ -68,7 +68,7 @@ h := hermes.Hermes{
 
 ### Creating a Built-In Theme
 
-If you want to create a new **built-in** Mailgen theme:
+If you want to create a new **built-in** Hermes theme:
 
 1. Fork the repository to your GitHub account and clone it to your computer
 2. Create a new Go file named after your new theme

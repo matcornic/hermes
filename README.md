@@ -5,12 +5,12 @@
 [![Go Coverage](https://codecov.io/github/matcornic/hermes/coverage.svg)](https://codecov.io/github/matcornic/hermes/)
 [![Godoc](https://godoc.org/github.com/matcornic/hermes?status.svg)](https://godoc.org/github.com/matcornic/hermes)
 
-Hermes is the Go port of the great [mailgen](https://github.com/eladnava/mailgen) engine for Node.js. Check their work, it's awesome !
-It's a package that generates clean, responsive HTML e-mails for sending transactional e-mails (welcome e-mail, reset password e-mails, receipt e-mails and so on).
+Hermes is the Go port of the great [mailgen](https://github.com/eladnava/mailgen) engine for Node.js. Check their work, it's awesome!
+It's a package that generates clean, responsive HTML e-mails for sending transactional e-mails (welcome e-mails, reset password e-mails, receipt e-mails and so on).
 
 # Demo
 
-<img src="https://raw.github.com/matcornic/hermes/master/screens/default/welcome.png" height="400" /> <img src="https://raw.github.com/matcornic/hermes/master/screens/default/reset.png" height="400" /> <img src="https://raw.github.com/matcornic/hermes/master/screens/default/receipt.png" height="400" />
+<img src="screens/default/welcome.png" height="400" /> <img src="screens/default/reset.png" height="400" /> <img src="screens/default/receipt.png" height="400" />
 
 # Usage
 
@@ -31,8 +31,8 @@ h := hermes.Hermes{
         // Appears in header & footer of e-mails
         Name: "Hermes",
         Link: "https://example-hermes.com/",
-        //Option product logo
-        //Logo: "http://www.duchess-france.org/wp-content/uploads/2016/01/gopher.png",
+        // Option product logo
+        // Logo: "http://www.duchess-france.org/wp-content/uploads/2016/01/gopher.png",
     },
 }
 ```
@@ -62,7 +62,7 @@ email := hermes.Email{
     },
 }
 
-// Generate an HTML email with the provided contents(for modern clients)
+// Generate an HTML email with the provided contents (for modern clients)
 emailBody, err := h.GenerateHTML(email)
 if err != nil {
     panic(err) // Tip: Handle error with something else than a panic ;)
@@ -74,7 +74,7 @@ if err != nil {
     panic(err) // Tip: Handle error with something else than a panic ;)
 }
 
-// Optionnaly, preview the generated HTML e-mail by writing it to a local file
+// Optionally, preview the generated HTML e-mail by writing it to a local file
 err = ioutil.WriteFile("preview.html", []byte(emailBody), 0644)
 if err != nil {
     panic(err) // Tip: Handle error with something else than a panic ;)
@@ -83,7 +83,7 @@ if err != nil {
 
 This code would output the following HTML template:
 
-<img src="https://raw.github.com/matcornic/hermes/master/screens/demo.png" height="400" />
+<img src="screens/demo.png" height="400" />
 
 > Theme templates will be embedded in your application binary. If you want to use external templates (for configuration), use your own theme by implementing `hermes.Theme` interface with code searching for your files.
 
@@ -113,7 +113,7 @@ The following open-source themes are bundled with this package:
 
 * `default` by [Postmark Transactional Email Templates](https://github.com/wildbit/postmark-templates)
 
-<img src="https://raw.github.com/matcornic/hermes/master/screens/default/welcome.png" height="200" /> <img src="https://raw.github.com/matcornic/hermes/master/screens/default/reset.png" height="200" /> <img src="https://raw.github.com/matcornic/hermes/master/screens/default/receipt.png" height="200" />
+<img src="screens/default/welcome.png" height="200" /> <img src="screens/default/reset.png" height="200" /> <img src="screens/default/receipt.png" height="200" />
 
 ## RTL Support
 
@@ -129,13 +129,13 @@ h := hermes.Hermes {
 
 ## Language Customizations
 
-To customize the e-mail greeting (Hi) or signature (Yours truly), supply custom strings within the e-mail `Body`:
+To customize the e-mail's greeting ("Hi") or signature ("Yours truly"), supply custom strings within the e-mail's `Body`:
 
 ```go
 email := hermes.Email{
     Body: hermes.Body{
         Greeting: "Dear",
-        Signature: "Sincerly",
+        Signature: "Sincerely",
     },
 }
 ```
@@ -146,7 +146,7 @@ To use a custom title string rather than a greeting/name introduction, provide i
 email := hermes.Email{
     Body: hermes.Body{
         // Title will override `Name`
-        Title: "Welcome to Mailgen",
+        Title: "Welcome to Hermes",
     },
 }
 ```
@@ -175,7 +175,6 @@ Hermes supports injecting custom elements such as dictionaries, tables and actio
 ### Action
 
 To inject an action button in to the e-mail, supply the `Actions` object as follows:
-
 
 ```go
 email := hermes.Email{
