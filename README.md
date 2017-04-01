@@ -170,7 +170,7 @@ h := hermes.Hermes{
 
 ## Elements
 
-Mailgen supports injecting custom elements such as dictionaries, tables and action buttons into e-mails.
+Hermes supports injecting custom elements such as dictionaries, tables and action buttons into e-mails.
 
 ### Action
 
