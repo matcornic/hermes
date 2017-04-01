@@ -146,7 +146,7 @@ To use a custom title string rather than a greeting/name introduction, provide i
 email := hermes.Email{
     Body: hermes.Body{
         // Title will override `Name`
-        Title: "Welcome to Mailgen",
+        Title: "Welcome to Hermes",
     },
 }
 ```
