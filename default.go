@@ -343,14 +343,14 @@ func (dt *Default) HTMLTemplate() string {
                     {{ with .Email.Body.Actions }} 
                       <table class="body-sub">
                         <tbody>
-                          <tr>
                             {{ range $action := . }}
-                              <td>
-                                <p class="sub">If you’re having trouble with the button '{{ $action.Button.Text }}', copy and paste the URL below into your web browser.</p>
-                                <p class="sub"><a href="{{ $action.Button.Link }}">{{ $action.Button.Link }}</a></p>
-                              </td>
+			      <tr>
+                                <td>
+                                  <p class="sub">If you’re having trouble with the button '{{ $action.Button.Text }}', copy and paste the URL below into your web browser.</p>
+                                  <p class="sub"><a href="{{ $action.Button.Link }}">{{ $action.Button.Link }}</a></p>
+                                </td>
+			      </tr>
                             {{ end }}
-                          </tr>
                         </tbody>
                       </table>
                     {{ end }}
