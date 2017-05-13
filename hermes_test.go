@@ -102,7 +102,7 @@ func (ed *SimpleExample) assertHTMLContent(t *testing.T, r string) {
 	assert.Contains(t, r, "http://hermes-link.com", "Product: Should find the link of the product in email")
 	assert.Contains(t, r, "Copyright © Hermes-Test", "Product: Should find the Copyright of the product in email")
 	assert.Contains(t, r, "http://www.duchess-france.org/wp-content/uploads/2016/01/gopher.png", "Product: Should find the logo of the product in email")
-
+	assert.Contains(t, r, "If you’re having trouble with the button &#39;Confirm your account&#39;, copy and paste the URL below into your web browser.", "Product: Should find the trouble text in email")
 	// Assert on email body
 	assert.Contains(t, r, "Hi Jon Snow", "Name: Should find the name of the person")
 	assert.Contains(t, r, "Welcome to Hermes", "Intro: Should have intro")
