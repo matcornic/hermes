@@ -346,7 +346,7 @@ func (dt *Default) HTMLTemplate() string {
                             {{ range $action := . }}
 			      <tr>
                                 <td>
-                                  <p class="sub">{{printf $.Hermes.Product.TroubleText $action.Button.Text}}</p>
+                                  <p class="sub">{{$.Hermes.Product.TroubleText | replace "{ACTION}" $action.Button.Text}}</p>
                                   <p class="sub"><a href="{{ $action.Button.Link }}">{{ $action.Button.Link }}</a></p>
                                 </td>
 			      </tr>

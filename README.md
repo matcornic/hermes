@@ -168,6 +168,20 @@ h := hermes.Hermes{
 }
 ```
 
+To use a custom fallback text at the end of the email, change the `TroubleText` field of the `hermes.Product` struct. The default value is `If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.`. The `{ACTION}` placeholder will be replaced with the corresponding text of the supplied action button:
+
+```go
+// Configure hermes by setting a theme and your product info
+h := hermes.Hermes{
+    // Optional Theme
+    // Theme: new(Default)
+    Product: hermes.Product{
+        // Custom trouble text
+        Copyright: "If the {ACTION}-button is not working for you, just copy and paste the URL below into your web browser."
+    },
+}
+```
+
 ## Elements
 
 Hermes supports injecting custom elements such as dictionaries, tables and action buttons into e-mails.
