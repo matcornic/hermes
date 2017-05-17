@@ -346,7 +346,7 @@ func (dt *Default) HTMLTemplate() string {
                             {{ range $action := . }}
 			      <tr>
                                 <td>
-                                  <p class="sub">If you’re having trouble with the button '{{ $action.Button.Text }}', copy and paste the URL below into your web browser.</p>
+                                  <p class="sub">{{$.Hermes.Product.TroubleText | replace "{ACTION}" $action.Button.Text}}</p>
                                   <p class="sub"><a href="{{ $action.Button.Link }}">{{ $action.Button.Link }}</a></p>
                                 </td>
 			      </tr>

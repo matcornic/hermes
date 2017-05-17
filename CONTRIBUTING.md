@@ -276,15 +276,15 @@ The following will inject the action link (or button) into the e-mail:
 {{ end }}
 ```
 
-A good practice is to describe action in footer in case of problem when displaying button and CSS
+A good practice is to describe action in footer in case of problem when displaying button and CSS. The text for the description is provided through the `TroubleText` field of the `Product` struct. The text may contain a placeholder `{ACTION}` which is expected to be replaced with the text of the button. The default value of `TroubleText` is `If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.`
 
 ```html
-{{ with .Email.Body.Actions }} 
+{{ with .Email.Body.Actions }}
 <table class="body-sub">
     <tbody><tr>
     {{ range $action := . }}
     <td>
-        <p class="sub">If you’re having trouble with the button '{{ $action.Button.Text }}', copy and paste the URL below into your web browser.</p>
+        <p class="sub">{{$.Hermes.Product.TroubleText | replace "{ACTION}" $action.Button.Text}}</p>
         <p class="sub"><a href="{{ $action.Button.Link }}">{{ $action.Button.Link }}</a></p>
     </td>
     {{ end }}
