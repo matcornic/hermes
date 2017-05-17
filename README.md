@@ -157,7 +157,7 @@ To customize the `Copyright`, override it when initializing `Hermes` within your
 // Configure hermes by setting a theme and your product info
 h := hermes.Hermes{
     // Optional Theme
-    // Theme: new(Default) 
+    // Theme: new(Default)
     Product: hermes.Product{
         // Appears in header & footer of e-mails
         Name: "Hermes",
@@ -177,7 +177,7 @@ h := hermes.Hermes{
     // Theme: new(Default)
     Product: hermes.Product{
         // Custom trouble text
-        Copyright: "If the {ACTION}-button is not working for you, just copy and paste the URL below into your web browser."
+        TroubleText: "If the {ACTION}-button is not working for you, just copy and paste the URL below into your web browser."
     },
 }
 ```
