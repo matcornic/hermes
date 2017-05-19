@@ -76,12 +76,12 @@ func (dt *Default) HTMLTemplate() string {
       background-color: #FFF;
     }
     .email-body_inner {
-      width: 570px;
+      width: 670px;
       margin: 0 auto;
       padding: 0;
     }
     .email-footer {
-      width: 570px;
+      width: 670px;
       margin: 0 auto;
       padding: 0;
       text-align: center;
@@ -143,6 +143,28 @@ func (dt *Default) HTMLTemplate() string {
       font-size: 14px;
       font-weight: bold;
     }
+    blockquote {
+      margin: 1.7rem 0;
+      padding-left: 0.85rem;
+      border-left: 10px solid #F0F2F4;
+    }
+    blockquote p {
+        font-size: 1.1rem;
+        color: #999;
+    }
+    blockquote cite {
+        display: block;
+        text-align: right;
+        color: #666;
+        font-size: 1.2rem;
+    }
+    cite {
+      display: block;
+      font-size: 0.925rem; 
+    }
+    cite:before {
+      content: "\2014 \0020";
+    }
     p {
       margin-top: 0;
       color: #74787E;
@@ -154,6 +176,29 @@ func (dt *Default) HTMLTemplate() string {
     }
     p.center {
       text-align: center;
+    }
+    table {
+      width: 100%;
+    }
+    th {
+      padding: 0px 5px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #EDEFF2;
+    }
+    th p {
+      margin: 0;
+      color: #9BA2AB;
+      font-size: 12px;
+    }
+    td {
+      padding: 10px 5px;
+      color: #74787E;
+      font-size: 15px;
+      line-height: 18px;
+    }
+    .content {
+      align: center;
+      padding: 0;
     }
     /* Data table ------------------------------ */
     .data-wrapper {
@@ -213,7 +258,7 @@ func (dt *Default) HTMLTemplate() string {
 <body dir="{{.Hermes.TextDirection}}">
   <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0">
     <tr>
-      <td align="center">
+      <td class="content">
         <table class="email-content" width="100%" cellpadding="0" cellspacing="0">
           <!-- Logo -->
           <tr>
@@ -236,103 +281,108 @@ func (dt *Default) HTMLTemplate() string {
                 <tr>
                   <td class="content-cell">
                     <h1>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }},{{ end }}</h1>
-                    {{ with .Email.Body.Intros }}
-                      {{ if gt (len .) 0 }}
-                        {{ range $line := . }}
-                          <p>{{ $line }}</p>
+                    {{ if (ne .Email.Body.FreeMarkdown "") }}
+                      {{ .Email.Body.FreeMarkdown.ToHTML }}
+                    {{ else }}
+                      {{ with .Email.Body.Intros }}
+                        {{ if gt (len .) 0 }}
+                          {{ range $line := . }}
+                            <p>{{ $line }}</p>
+                          {{ end }}
                         {{ end }}
                       {{ end }}
-                    {{ end }}
 
-                    {{ with .Email.Body.Dictionary }} 
-                      {{ if gt (len .) 0 }}
-                        <dl class="body-dictionary">
-                          {{ range $entry := . }}
-                            <dt>{{ $entry.Key }}:</dt>
-                            <dd>{{ $entry.Value }}</dd>
-                          {{ end }}
-                        </dl>
+                      {{ with .Email.Body.Dictionary }} 
+                        {{ if gt (len .) 0 }}
+                          <dl class="body-dictionary">
+                            {{ range $entry := . }}
+                              <dt>{{ $entry.Key }}:</dt>
+                              <dd>{{ $entry.Value }}</dd>
+                            {{ end }}
+                          </dl>
+                        {{ end }}
                       {{ end }}
-                    {{ end }}
 
-                    <!-- Table -->
-                    {{ with .Email.Body.Table }}
-                      {{ $data := .Data }}
-                      {{ $columns := .Columns }}
-                      {{ if gt (len $data) 0 }}
-                        <table class="data-wrapper" width="100%" cellpadding="0" cellspacing="0">
-                          <tr>
-                            <td colspan="2">
-                              <table class="data-table" width="100%" cellpadding="0" cellspacing="0">
-                                <tr>
-                                  {{ $col := index $data 0 }}
-                                  {{ range $entry := $col }}
-                                    <th
-                                      {{ with $columns }}
-                                        {{ $width := index .CustomWidth $entry.Key }}
-                                        {{ with $width }}
-                                          width="{{ . }}"
-                                        {{ end }}
-                                        {{ $align := index .CustomAlignement $entry.Key }}
-                                        {{ with $align }}
-                                          style="text-align:{{ . }}"
-                                        {{ end }}
-                                      {{ end }}
-                                    >
-                                      <p>{{ $entry.Key }}</p>
-                                    </th>
-                                  {{ end }}
-                                </tr>
-                                {{ range $row := $data }}
+                      <!-- Table -->
+                      {{ with .Email.Body.Table }}
+                        {{ $data := .Data }}
+                        {{ $columns := .Columns }}
+                        {{ if gt (len $data) 0 }}
+                          <table class="data-wrapper" width="100%" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td colspan="2">
+                                <table class="data-table" width="100%" cellpadding="0" cellspacing="0">
                                   <tr>
-                                    {{ range $cell := $row }}
-                                      <td
+                                    {{ $col := index $data 0 }}
+                                    {{ range $entry := $col }}
+                                      <th
                                         {{ with $columns }}
-                                          {{ $align := index .CustomAlignement $cell.Key }}
+                                          {{ $width := index .CustomWidth $entry.Key }}
+                                          {{ with $width }}
+                                            width="{{ . }}"
+                                          {{ end }}
+                                          {{ $align := index .CustomAlignement $entry.Key }}
                                           {{ with $align }}
                                             style="text-align:{{ . }}"
                                           {{ end }}
                                         {{ end }}
                                       >
-                                        {{ $cell.Value }}
-                                      </td>
+                                        <p>{{ $entry.Key }}</p>
+                                      </th>
                                     {{ end }}
                                   </tr>
-                                {{ end }}
-                              </table>
-                            </td>
-                          </tr>
-                        </table>
-                      {{ end }}
-                    {{ end }}
-
-                    <!-- Action -->
-                    {{ with .Email.Body.Actions }}
-                      {{ if gt (len .) 0 }}
-                        {{ range $action := . }}
-                          <p>{{ $action.Instructions }}</p>
-                          <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
-                            <tr>
-                              <td align="center">
-                                <div>
-                                  <a href="{{ $action.Button.Link }}" class="button" style="background-color: {{ $action.Button.Color }}" target="_blank">
-                                    {{ $action.Button.Text }}
-                                  </a>
-                                </div>
+                                  {{ range $row := $data }}
+                                    <tr>
+                                      {{ range $cell := $row }}
+                                        <td
+                                          {{ with $columns }}
+                                            {{ $align := index .CustomAlignement $cell.Key }}
+                                            {{ with $align }}
+                                              style="text-align:{{ . }}"
+                                            {{ end }}
+                                          {{ end }}
+                                        >
+                                          {{ $cell.Value }}
+                                        </td>
+                                      {{ end }}
+                                    </tr>
+                                  {{ end }}
+                                </table>
                               </td>
                             </tr>
                           </table>
                         {{ end }}
                       {{ end }}
-                    {{ end }}
 
-                    {{ with .Email.Body.Outros }} 
-                      {{ if gt (len .) 0 }}
-                        {{ range $line := . }}
-                          <p>{{ $line }}</p>
+                      <!-- Action -->
+                      {{ with .Email.Body.Actions }}
+                        {{ if gt (len .) 0 }}
+                          {{ range $action := . }}
+                            <p>{{ $action.Instructions }}</p>
+                            <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td align="center">
+                                  <div>
+                                    <a href="{{ $action.Button.Link }}" class="button" style="background-color: {{ $action.Button.Color }}" target="_blank">
+                                      {{ $action.Button.Text }}
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+                          {{ end }}
+                        {{ end }}
+                      {{ end }}
+
+                      {{ with .Email.Body.Outros }} 
+                        {{ if gt (len .) 0 }}
+                          {{ range $line := . }}
+                            <p>{{ $line }}</p>
+                          {{ end }}
                         {{ end }}
                       {{ end }}
                     {{ end }}
+                    
 
                     <p>
                       {{.Email.Body.Signature}},
@@ -340,19 +390,21 @@ func (dt *Default) HTMLTemplate() string {
                       {{.Hermes.Product.Name}}
                     </p>
 
-                    {{ with .Email.Body.Actions }} 
-                      <table class="body-sub">
-                        <tbody>
-                            {{ range $action := . }}
-			      <tr>
-                                <td>
-                                  <p class="sub">{{$.Hermes.Product.TroubleText | replace "{ACTION}" $action.Button.Text}}</p>
-                                  <p class="sub"><a href="{{ $action.Button.Link }}">{{ $action.Button.Link }}</a></p>
-                                </td>
-			      </tr>
-                            {{ end }}
-                        </tbody>
-                      </table>
+                    {{ if (eq .Email.Body.FreeMarkdown "") }}
+                      {{ with .Email.Body.Actions }} 
+                        <table class="body-sub">
+                          <tbody>
+                              {{ range $action := . }}
+                                <tr>
+                                  <td>
+                                    <p class="sub">{{$.Hermes.Product.TroubleText | replace "{ACTION}" $action.Button.Text}}</p>
+                                    <p class="sub"><a href="{{ $action.Button.Link }}">{{ $action.Button.Link }}</a></p>
+                                  </td>
+                                </tr>
+                              {{ end }}
+                          </tbody>
+                        </table>
+                      {{ end }}
                     {{ end }}
                   </td>
                 </tr>

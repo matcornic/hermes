@@ -1,4 +1,4 @@
-Hi Jon Snow,
+Hi Jon Snow,,
 Welcome to Hermes! We&#39;re very excited to have you on board.
 
 Firstname: Jon
@@ -11,6 +11,6 @@ https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010
 Need help, or have questions? Just reply to this email, we&#39;d love to help.
 
 Yours truly,
-Hermes
+Hermes - https://example-hermes.com/
 
 Copyright © 2017 Hermes. All rights reserved.

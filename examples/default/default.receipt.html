@@ -64,12 +64,12 @@
       background-color: #FFF;
     }
     .email-body_inner {
-      width: 570px;
+      width: 670px;
       margin: 0 auto;
       padding: 0;
     }
     .email-footer {
-      width: 570px;
+      width: 670px;
       margin: 0 auto;
       padding: 0;
       text-align: center;
@@ -131,6 +131,28 @@
       font-size: 14px;
       font-weight: bold;
     }
+    blockquote {
+      margin: 1.7rem 0;
+      padding-left: 0.85rem;
+      border-left: 10px solid #F0F2F4;
+    }
+    blockquote p {
+        font-size: 1.1rem;
+        color: #999;
+    }
+    blockquote cite {
+        display: block;
+        text-align: right;
+        color: #666;
+        font-size: 1.2rem;
+    }
+    cite {
+      display: block;
+      font-size: 0.925rem; 
+    }
+    cite:before {
+      content: "\2014 \0020";
+    }
     p {
       margin-top: 0;
       color: #74787E;
@@ -142,6 +164,29 @@
     }
     p.center {
       text-align: center;
+    }
+    table {
+      width: 100%;
+    }
+    th {
+      padding: 0px 5px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #EDEFF2;
+    }
+    th p {
+      margin: 0;
+      color: #9BA2AB;
+      font-size: 12px;
+    }
+    td {
+      padding: 10px 5px;
+      color: #74787E;
+      font-size: 15px;
+      line-height: 18px;
+    }
+    .content {
+      align: center;
+      padding: 0;
     }
      
     .data-wrapper {
@@ -201,7 +246,7 @@
 <body dir="ltr">
   <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0">
     <tr>
-      <td align="center">
+      <td class="content">
         <table class="email-content" width="100%" cellpadding="0" cellspacing="0">
           
           <tr>
@@ -213,6 +258,7 @@
                 </a>
             </td>
           </tr>
+
           
           <tr>
             <td class="email-body" width="100%">
@@ -221,181 +267,189 @@
                 <tr>
                   <td class="content-cell">
                     <h1>Hi Jon Snow,</h1>
-					
-					
-					
-					<p>Your order has been processed successfully.</p>
-					
-					
-					
+                    
+                      
+                        
+                          
+                            <p>Your order has been processed successfully.</p>
+                          
+                        
+                      
 
-					
+                      
 
-					
-					
-					
-					
-					
-					<table class="data-wrapper" width="100%" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td colspan="2">
-                          <table class="data-table" width="100%" cellpadding="0" cellspacing="0">
+                      
+                      
+                        
+                        
+                        
+                          <table class="data-wrapper" width="100%" cellpadding="0" cellspacing="0">
                             <tr>
-								
-								
-                                <th
-									
-										
-										
-										width="20%"
-										
-										
-										
-									
-								>
-                                  <p>Item</p>
-                                </th>
-                              	
-                                <th
-									
-										
-										
-										
-										
-									
-								>
-                                  <p>Description</p>
-                                </th>
-                              	
-                                <th
-									
-										
-										
-										width="15%"
-										
-										
-										
-										style="text-align:right"
-										
-									
-								>
-                                  <p>Price</p>
-                                </th>
-                              	
+                              <td colspan="2">
+                                <table class="data-table" width="100%" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                    
+                                    
+                                      <th
+                                        
+                                          
+                                          
+                                            width="20%"
+                                          
+                                          
+                                          
+                                        
+                                      >
+                                        <p>Item</p>
+                                      </th>
+                                    
+                                      <th
+                                        
+                                          
+                                          
+                                          
+                                          
+                                        
+                                      >
+                                        <p>Description</p>
+                                      </th>
+                                    
+                                      <th
+                                        
+                                          
+                                          
+                                            width="15%"
+                                          
+                                          
+                                          
+                                            style="text-align:right"
+                                          
+                                        
+                                      >
+                                        <p>Price</p>
+                                      </th>
+                                    
+                                  </tr>
+                                  
+                                    <tr>
+                                      
+                                        <td
+                                          
+                                            
+                                            
+                                          
+                                        >
+                                          Golang
+                                        </td>
+                                      
+                                        <td
+                                          
+                                            
+                                            
+                                          
+                                        >
+                                          Open source programming language that makes it easy to build simple, reliable, and efficient software
+                                        </td>
+                                      
+                                        <td
+                                          
+                                            
+                                            
+                                              style="text-align:right"
+                                            
+                                          
+                                        >
+                                          $10.99
+                                        </td>
+                                      
+                                    </tr>
+                                  
+                                    <tr>
+                                      
+                                        <td
+                                          
+                                            
+                                            
+                                          
+                                        >
+                                          Hermes
+                                        </td>
+                                      
+                                        <td
+                                          
+                                            
+                                            
+                                          
+                                        >
+                                          Programmatically create beautiful e-mails using Golang.
+                                        </td>
+                                      
+                                        <td
+                                          
+                                            
+                                            
+                                              style="text-align:right"
+                                            
+                                          
+                                        >
+                                          $1.99
+                                        </td>
+                                      
+                                    </tr>
+                                  
+                                </table>
+                              </td>
                             </tr>
-							
-                            <tr>
-                              
-                                <td
-									
-										
-										
-									
-								>
-                                Golang
-                                </td>
-                              
-                                <td
-									
-										
-										
-									
-								>
-                                Open source programming language that makes it easy to build simple, reliable, and efficient software
-                                </td>
-                              
-                                <td
-									
-										
-										
-										style="text-align:right"
-										
-									
-								>
-                                $10.99
-                                </td>
-                              
-                            </tr>
-                            
-                            <tr>
-                              
-                                <td
-									
-										
-										
-									
-								>
-                                Hermes
-                                </td>
-                              
-                                <td
-									
-										
-										
-									
-								>
-                                Programmatically create beautiful e-mails using Golang.
-                                </td>
-                              
-                                <td
-									
-										
-										
-										style="text-align:right"
-										
-									
-								>
-                                $1.99
-                                </td>
-                              
-                            </tr>
-                            
                           </table>
-                        </td>
-                      </tr>
-                    </table>
-					
-					
+                        
+                      
 
-					
-					
-					
-					
-					<p>You can check the status of your order and more in your dashboard:</p>
-					<table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
-						<tr>
-							<td align="center">
-							<div>
-								<a href="https://hermes-example.com/dashboard" class="button" style="background-color: " target="_blank">Go to Dashboard</a>
-							</div>
-							</td>
-						</tr>
-                    </table>
-					
-					
-					
+                      
+                      
+                        
+                          
+                            <p>You can check the status of your order and more in your dashboard:</p>
+                            <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
+                              <tr>
+                                <td align="center">
+                                  <div>
+                                    <a href="https://hermes-example.com/dashboard" class="button" style="background-color: " target="_blank">
+                                      Go to Dashboard
+                                    </a>
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+                          
+                        
+                      
 
-					
+                      
+                    
+                    
 
                     <p>
                       Yours truly,
-                      <br>
+                      <br />
                       Hermes
                     </p>
 
-					 
-					<table class="body-sub">
-                      <tbody><tr>
-					  
-					  <td>
-                            <p class="sub">If you’re having trouble with the button 'Go to Dashboard', copy and paste the URL below into your web browser.</p>
-                            <p class="sub"><a href="https://hermes-example.com/dashboard">https://hermes-example.com/dashboard</a></p>
-                      </td>
-					  
-					  </tr>
-					  </tbody>
-					</table>
-					
+                    
+                       
+                        <table class="body-sub">
+                          <tbody>
+                              
+                                <tr>
+                                  <td>
+                                    <p class="sub">If you’re having trouble with the button &#39;Go to Dashboard&#39;, copy and paste the URL below into your web browser.</p>
+                                    <p class="sub"><a href="https://hermes-example.com/dashboard">https://hermes-example.com/dashboard</a></p>
+                                  </td>
+                                </tr>
+                              
+                          </tbody>
+                        </table>
+                      
+                    
                   </td>
                 </tr>
               </table>

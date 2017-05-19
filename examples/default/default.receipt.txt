@@ -1,4 +1,4 @@
-Hi Jon Snow,
+Hi Jon Snow,,
 Your order has been processed successfully.
 
  
@@ -7,6 +7,6 @@ https://hermes-example.com/dashboard
 
 
 Yours truly,
-Hermes
+Hermes - https://example-hermes.com/
 
 Copyright © 2017 Hermes. All rights reserved.

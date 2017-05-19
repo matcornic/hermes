@@ -24,6 +24,7 @@ func main() {
 		new(welcome),
 		new(reset),
 		new(receipt),
+		new(maintenance),
 	}
 
 	for _, e := range examples {
