@@ -76,12 +76,12 @@ func (dt *Default) HTMLTemplate() string {
       background-color: #FFF;
     }
     .email-body_inner {
-      width: 670px;
+      width: 570px;
       margin: 0 auto;
       padding: 0;
     }
     .email-footer {
-      width: 670px;
+      width: 570px;
       margin: 0 auto;
       padding: 0;
       text-align: center;
@@ -117,6 +117,8 @@ func (dt *Default) HTMLTemplate() string {
       margin-top: 25px;
       padding-top: 25px;
       border-top: 1px solid #EDEFF2;
+      word-wrap: break-word;
+      table-layout: fixed;
     }
     .content-cell {
       padding: 35px;
