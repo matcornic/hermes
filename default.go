@@ -117,7 +117,7 @@ func (dt *Default) HTMLTemplate() string {
       margin-top: 25px;
       padding-top: 25px;
       border-top: 1px solid #EDEFF2;
-      word-wrap: break-word;
+      word-break: break-all;
       table-layout: fixed;
     }
     .content-cell {
