@@ -6,7 +6,7 @@
 [![Godoc](https://godoc.org/github.com/matcornic/hermes?status.svg)](https://godoc.org/github.com/matcornic/hermes)
 
 Hermes is the Go port of the great [mailgen](https://github.com/eladnava/mailgen) engine for Node.js. Check their work, it's awesome!
-It's a package that generates clean, responsive HTML e-mails for sending transactional e-mails (welcome e-mails, reset password e-mails, receipt e-mails and so on).
+It's a package that generates clean, responsive HTML e-mails for sending transactional e-mails (welcome e-mails, reset password e-mails, receipt e-mails and so on), and associated plain text fallback.
 
 # Demo
 
@@ -85,6 +85,25 @@ This code would output the following HTML template:
 
 <img src="screens/demo.png" height="400" />
 
+And the following plain text:
+
+```
+------------
+Hi Jon Snow,
+------------
+
+Welcome to Hermes! We're very excited to have you on board.
+
+To get started with Hermes, please click here: https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010
+
+Need help, or have questions? Just reply to this email, we'd love to help.
+
+Yours truly,
+Hermes - https://example-hermes.com/
+
+Copyright © 2017 Hermes. All rights reserved.
+```
+
 > Theme templates will be embedded in your application binary. If you want to use external templates (for configuration), use your own theme by implementing `hermes.Theme` interface with code searching for your files.
 
 ## More Examples
@@ -92,6 +111,7 @@ This code would output the following HTML template:
 * [Welcome](examples/default/welcome.go)
 * [Receipt](examples/default/receipt.go)
 * [Password Reset](examples/default/reset.go)
+* [Maintenance](examples/default/maintenance.go)
 
 To run the examples, go to `examples/<theme>/`, then run `go run *.go`. HTML and Plaintext example should be created in the folder.
 
@@ -247,13 +267,11 @@ email := hermes.Email{
 }
 ```
 
-> Note: Tables are currently not supported in plaintext versions of e-mails.
-
 ### Dictionary
 
- To inject key-value pairs of data into the e-mail, supply the `dictionary` object as follows:
+To inject key-value pairs of data into the e-mail, supply the `Dictionary` object as follows:
 
- ```go
+```go
 email := hermes.Email{
     Body: hermes.Body{
         Dictionary: []hermes.Entry{
@@ -263,6 +281,40 @@ email := hermes.Email{
     },
 }
 ```
+
+### Free Markdown
+
+If you need more flexibility in the content of your generated e-mail, while keeping the same format than any other e-mail, use Markdown content. Supply the `FreeMarkdown` object as follows:
+
+```go
+email := hermes.Email{
+		Body: hermes.Body{
+			FreeMarkdown: `
+> _Hermes_ service will shutdown the **1st August 2017** for maintenance operations. 
+
+Services will be unavailable based on the following schedule:
+
+| Services | Downtime |
+| :------:| :-----------: |
+| Service A | 2AM to 3AM |
+| Service B | 4AM to 5AM |
+| Service C | 5AM to 6AM |
+
+---
+
+Feel free to contact us for any question regarding this matter at [support@hermes-example.com](mailto:support@hermes-example.com) or in our [Gitter](https://gitter.im/)
+
+`,
+		},
+	}
+}
+```
+
+Be aware that this content will replace existing tables, dictionnary and actions. Only intros, outros, header and footer will be kept.
+
+This is helpful when your application needs sending e-mails, wrote on-the-fly by adminstrators.
+
+> Markdown is rendered with [Blackfriday](https://github.com/russross/blackfriday), so every thing Blackfriday can do, Hermes can do it as well.
 
 ## Troubleshooting
 

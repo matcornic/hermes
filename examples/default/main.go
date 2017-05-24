@@ -12,6 +12,7 @@ type example interface {
 }
 
 func main() {
+
 	h := hermes.Hermes{
 		Product: hermes.Product{
 			Name: "Hermes",

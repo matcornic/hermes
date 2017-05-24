@@ -130,10 +130,20 @@ func (ed *SimpleExample) assertPlainTextContent(t *testing.T, r string) {
 	assert.Contains(t, r, "Hi Jon Snow", "Name: Should find the name of the person")
 	assert.Contains(t, r, "Welcome to Hermes", "Intro: Should have intro")
 	assert.Contains(t, r, "Birthday", "Dictionary: Should have dictionary")
-	assert.NotContains(t, r, "Open source programming language", "Table: Not possible to have table in plain text")
-	assert.NotContains(t, r, "Programmatically create beautiful e-mails using Golang", "Table: Not possible to have table in plain text")
-	assert.NotContains(t, r, "$10.99", "Table: Not possible to have table in plain text")
-	assert.NotContains(t, r, "$1.99", "Table: Not possible to have table in plain text")
+	assert.Contains(t, r, "Open source", "Table: Should have table content")
+	assert.Contains(t, r, `+--------+--------------------------------+--------+
+|  ITEM  |          DESCRIPTION           | PRICE  |
++--------+--------------------------------+--------+
+| Golang | Open source programming        | $10.99 |
+|        | language that makes it easy    |        |
+|        | to build simple, reliable, and |        |
+|        | efficient software             |        |
+| Hermes | Programmatically create        | $1.99  |
+|        | beautiful e-mails using        |        |
+|        | Golang.                        |        |
++--------+--------------------------------+--------`, "Table: Should have pretty table content")
+	assert.Contains(t, r, "$10.99", "Table: Should have table content")
+	assert.Contains(t, r, "$1.99", "Table: Should have table content")
 	assert.Contains(t, r, "started with Hermes", "Action: Should have instruction")
 	assert.NotContains(t, r, "Confirm your account", "Action: Should not have button of action in plain text")
 	assert.NotContains(t, r, "#22BC66", "Action: Button should not have color in plain text")
@@ -237,6 +247,103 @@ func (ed *WithSignatureDifferentThanDefault) assertPlainTextContent(t *testing.T
 	assert.Contains(t, r, "Best regards", "Should have greeting with Dear")
 }
 
+type WithFreeMarkdownContent struct {
+	theme Theme
+}
+
+func (ed *WithFreeMarkdownContent) getExample() (Hermes, Email) {
+	h := Hermes{
+		Theme: ed.theme,
+		Product: Product{
+			Name: "Hermes",
+			Link: "http://hermes.com",
+		},
+	}
+
+	email := Email{
+		Body{
+			Name: "Jon Snow",
+			FreeMarkdown: `
+> _Hermes_ service will shutdown the **1st August 2017** for maintenance operations. 
+
+Services will be unavailable based on the following schedule:
+
+| Services | Downtime |
+| :------:| :-----------: |
+| Service A | 2AM to 3AM |
+| Service B | 4AM to 5AM |
+| Service C | 5AM to 6AM |
+
+---
+
+Feel free to contact us for any question regarding this matter at [support@hermes-example.com](mailto:support@hermes-example.com) or in our [Gitter](https://gitter.im/)
+
+`,
+			Intros: []string{
+				"An intro that should be kept even with FreeMarkdown",
+			},
+			Dictionary: []Entry{
+				{"Dictionnary that should not displayed", "Because of FreeMarkdown"},
+			},
+			Table: Table{
+				Data: [][]Entry{
+					{
+						{Key: "Item", Value: "Golang"},
+					},
+					{
+						{Key: "Item", Value: "Hermes"},
+					},
+				},
+			},
+			Actions: []Action{
+				{
+					Instructions: "Action that should not be displayed, because of FreeMarkdown:",
+					Button: Button{
+						Color: "#22BC66",
+						Text:  "Button",
+						Link:  "https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010",
+					},
+				},
+			},
+			Outros: []string{
+				"An outro that should be kept even with FreeMarkdown",
+			},
+		},
+	}
+	return h, email
+}
+
+func (ed *WithFreeMarkdownContent) assertHTMLContent(t *testing.T, r string) {
+	assert.Contains(t, r, "Yours truly", "Should find signature with 'Yours truly' which is default")
+	assert.Contains(t, r, "Jon Snow", "Should find title with 'Jon Snow'")
+	assert.Contains(t, r, "<em>Hermes</em> service will shutdown", "Should find quote as HTML formatted content")
+	assert.Contains(t, r, "<td align=\"center\">2AM to 3AM</td>", "Should find cell content as HTML formatted content")
+	assert.Contains(t, r, "<a href=\"mailto:support@hermes-example.com\">support@hermes-example.com</a>", "Should find link of mailto as HTML formatted content")
+	assert.Contains(t, r, "An intro that should be kept even with FreeMarkdown", "Should find intro even with FreeMarkdown")
+	assert.Contains(t, r, "An outro that should be kept even with FreeMarkdown", "Should find outro even with FreeMarkdown")
+	assert.NotContains(t, r, "should not be displayed", "Should find any other content that the one from FreeMarkdown object")
+}
+
+func (ed *WithFreeMarkdownContent) assertPlainTextContent(t *testing.T, r string) {
+	assert.Contains(t, r, "Yours truly", "Should find signature with 'Yours truly' which is default")
+	assert.Contains(t, r, "Jon Snow", "Should find title with 'Jon Snow'")
+	assert.Contains(t, r, "> Hermes service will shutdown", "Should find quote as plain text with quote emphaze on sentence")
+	assert.Contains(t, r, "2AM to 3AM", "Should find cell content as plain text")
+	assert.Contains(t, r, `+-----------+------------+
+| SERVICES  |  DOWNTIME  |
++-----------+------------+
+| Service A | 2AM to 3AM |
+| Service B | 4AM to 5AM |
+| Service C | 5AM to 6AM |
++-----------+------------+`, "Should find pretty table as plain text")
+	assert.Contains(t, r, "support@hermes-example.com", "Should find link of mailto as plain text")
+	assert.NotContains(t, r, "<table>", "Should not find html table tags")
+	assert.NotContains(t, r, "<tr>", "Should not find html tr tags")
+	assert.NotContains(t, r, "<a>", "Should not find html link tags")
+	assert.NotContains(t, r, "should not be displayed", "Should find any other content that the one from FreeMarkdown object")
+
+}
+
 // Test all the themes for the features
 
 func TestThemeSimple(t *testing.T) {
@@ -260,6 +367,12 @@ func TestThemeWithGreetingDifferentThanDefault(t *testing.T) {
 func TestThemeWithGreetingDiffrentThanDefault(t *testing.T) {
 	for _, theme := range testedThemes {
 		checkExample(t, &WithSignatureDifferentThanDefault{theme})
+	}
+}
+
+func TestThemeWithFreeMarkdownContent(t *testing.T) {
+	for _, theme := range testedThemes {
+		checkExample(t, &WithFreeMarkdownContent{theme})
 	}
 }
 
@@ -346,6 +459,7 @@ func TestHermes_Default(t *testing.T) {
 	assert.Empty(t, email.Body.Table.Data)
 	assert.Empty(t, email.Body.Table.Columns.CustomWidth)
 	assert.Empty(t, email.Body.Table.Columns.CustomAlignement)
+	assert.Empty(t, string(email.Body.FreeMarkdown))
 
 	assert.Equal(t, email.Body.Greeting, "Hi")
 	assert.Equal(t, email.Body.Signature, "Yours truly")

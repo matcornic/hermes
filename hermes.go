@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"github.com/Masterminds/sprig"
 	"github.com/imdario/mergo"
+	"github.com/matcornic/html2text"
 	"github.com/russross/blackfriday"
 	"html/template"
 )
@@ -164,7 +165,11 @@ func (h *Hermes) GeneratePlainText(email Email) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return h.generateTemplate(email, h.Theme.PlainTextTemplate())
+	template, err := h.generateTemplate(email, h.Theme.PlainTextTemplate())
+	if err != nil {
+		return "", err
+	}
+	return html2text.FromString(template)
 }
 
 func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {

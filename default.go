@@ -281,16 +281,16 @@ func (dt *Default) HTMLTemplate() string {
                 <tr>
                   <td class="content-cell">
                     <h1>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }},{{ end }}</h1>
-                    {{ if (ne .Email.Body.FreeMarkdown "") }}
-                      {{ .Email.Body.FreeMarkdown.ToHTML }}
-                    {{ else }}
-                      {{ with .Email.Body.Intros }}
+                    {{ with .Email.Body.Intros }}
                         {{ if gt (len .) 0 }}
                           {{ range $line := . }}
                             <p>{{ $line }}</p>
                           {{ end }}
                         {{ end }}
-                      {{ end }}
+                    {{ end }}
+                    {{ if (ne .Email.Body.FreeMarkdown "") }}
+                      {{ .Email.Body.FreeMarkdown.ToHTML }}
+                    {{ else }}
 
                       {{ with .Email.Body.Dictionary }} 
                         {{ if gt (len .) 0 }}
@@ -374,15 +374,14 @@ func (dt *Default) HTMLTemplate() string {
                         {{ end }}
                       {{ end }}
 
-                      {{ with .Email.Body.Outros }} 
+                    {{ end }}
+                    {{ with .Email.Body.Outros }} 
                         {{ if gt (len .) 0 }}
                           {{ range $line := . }}
                             <p>{{ $line }}</p>
                           {{ end }}
                         {{ end }}
                       {{ end }}
-                    {{ end }}
-                    
 
                     <p>
                       {{.Email.Body.Signature}},
@@ -435,19 +434,58 @@ func (dt *Default) HTMLTemplate() string {
 
 // PlainTextTemplate returns a Golang template that will generate an plain text email.
 func (dt *Default) PlainTextTemplate() string {
-	return `{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }},{{ end }},
-{{ with .Email.Body.Intros }}{{ range $line := . }}{{ $line }}{{ end }}{{ end }}
-{{ with .Email.Body.Dictionary }}{{ range $entry := . }}
-{{ $entry.Key }}: {{ $entry.Value }}{{ end }}{{ end }}
-{{ with .Email.Body.Actions }} {{ range $action := . }}
-{{ $action.Instructions }}
-{{ $action.Button.Link }}{{ end }}{{ end }}
-{{ with .Email.Body.Outros }} {{ range $line := . }}
-{{ $line }}{{ end }}{{ end }}
+	return `<h2>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }}{{ end }},</h2>
+{{ with .Email.Body.Intros }}
+  {{ range $line := . }}
+    <p>{{ $line }}</p>
+  {{ end }}
+{{ end }}
+{{ if (ne .Email.Body.FreeMarkdown "") }}
+  {{ .Email.Body.FreeMarkdown.ToHTML }}
+{{ else }}
+  {{ with .Email.Body.Dictionary }}
+    <ul>
+    {{ range $entry := . }}
+      <li>{{ $entry.Key }}: {{ $entry.Value }}</li>
+    {{ end }}
+    </ul>
+  {{ end }}
+  {{ with .Email.Body.Table }}
+    {{ $data := .Data }}
+    {{ $columns := .Columns }}
+    {{ if gt (len $data) 0 }}
+      <table class="data-table" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          {{ $col := index $data 0 }}
+          {{ range $entry := $col }}
+            <th>{{ $entry.Key }} </th>
+          {{ end }}
+        </tr>
+        {{ range $row := $data }}
+          <tr>
+            {{ range $cell := $row }}
+              <td>
+                {{ $cell.Value }}
+              </td>
+            {{ end }}
+          </tr>
+        {{ end }}
+      </table>
+    {{ end }}
+  {{ end }}
+  {{ with .Email.Body.Actions }} 
+    {{ range $action := . }}
+      <p>{{ $action.Instructions }} {{ $action.Button.Link }}</p> 
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ with .Email.Body.Outros }} 
+  {{ range $line := . }}
+    <p>{{ $line }}<p>
+  {{ end }}
+{{ end }}
+<p>{{.Email.Body.Signature}},<br>{{.Hermes.Product.Name}} - {{.Hermes.Product.Link}}</p>
 
-{{.Email.Body.Signature}},
-{{.Hermes.Product.Name}} - {{.Hermes.Product.Link}}
-
-{{.Hermes.Product.Copyright}}
+<p>{{.Hermes.Product.Copyright}}</p>
 `
 }
