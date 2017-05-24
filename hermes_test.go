@@ -283,7 +283,7 @@ Feel free to contact us for any question regarding this matter at [support@herme
 				"An intro that should be kept even with FreeMarkdown",
 			},
 			Dictionary: []Entry{
-				{"Dictionnary that should not displayed", "Because of FreeMarkdown"},
+				{"Dictionary that should not be displayed", "Because of FreeMarkdown"},
 			},
 			Table: Table{
 				Data: [][]Entry{

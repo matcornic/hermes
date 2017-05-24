@@ -47,6 +47,8 @@ type Email struct {
 	Body Body
 }
 
+// Markdown is a HTML template (a string) representing Markdown content
+// https://en.wikipedia.org/wiki/Markdown
 type Markdown template.HTML
 
 // Body is the body of the email, containing all interesting data
@@ -63,6 +65,7 @@ type Body struct {
 	FreeMarkdown Markdown // Free markdown content that replaces all content other than header and footer
 }
 
+// ToHTML converts Markdown to HTML
 func (c Markdown) ToHTML() template.HTML {
 	return template.HTML(blackfriday.MarkdownCommon([]byte(string(c))))
 }

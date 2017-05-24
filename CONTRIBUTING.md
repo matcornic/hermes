@@ -334,3 +334,14 @@ In order to support generating RTL e-mails, inject the `textDirection` variable 
 <body dir="{{.Hermes.TextDirection}}">
 ```
 
+## FreeMarkdown Injection
+
+In order to support Markdown free content, inject the following code:
+
+````html
+{{ if (ne .Email.Body.FreeMarkdown "") }}
+    {{ .Email.Body.FreeMarkdown.ToHTML }}
+{{ else }}
+    [... Here is the templating for dictionary, table and actions]
+{{ end }}
+```
