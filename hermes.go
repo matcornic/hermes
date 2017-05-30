@@ -178,7 +178,7 @@ func (h *Hermes) GeneratePlainText(email Email) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return html2text.FromString(template, html2text.Options{PrettyTables: true})
+	return html2text.FromString(template)
 }
 
 func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {
