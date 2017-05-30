@@ -314,6 +314,8 @@ Feel free to contact us for any question regarding this matter at [support@herme
 }
 ```
 
+This code would output the following HTML template:
+
 <img src="screens/free-markdown.png" height="400" />
 
 Be aware that this content will replace existing tables, dictionnary and actions. Only intros, outros, header and footer will be kept.
