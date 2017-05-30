@@ -1,0 +1,14 @@
+------------
+Hi Jon Snow,
+------------
+
+You have received this email because a password reset request for Hermes account was received.
+
+Click the button below to reset your password: https://hermes-example.com/reset-password?token=d9729feb74992cc3482b350163a1a010
+
+If you did not request a password reset, no further action is required on your part.
+
+Thanks,
+Hermes - https://example-hermes.com/
+
+Copyright © 2017 Hermes. All rights reserved.

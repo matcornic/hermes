@@ -27,9 +27,8 @@ func (w *welcome) Email() hermes.Email {
 				{
 					Instructions: "To get started with Hermes, please click here:",
 					Button: hermes.Button{
-						Color: "#22BC66",
-						Text:  "Confirm your account",
-						Link:  "https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010",
+						Text: "Confirm your account",
+						Link: "https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010",
 					},
 				},
 			},

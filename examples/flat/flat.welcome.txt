@@ -1,0 +1,18 @@
+------------
+Hi Jon Snow,
+------------
+
+Welcome to Hermes! We're very excited to have you on board.
+
+* Firstname: Jon
+* Lastname: Snow
+* Birthday: 01/01/283
+
+To get started with Hermes, please click here: https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010
+
+Need help, or have questions? Just reply to this email, we'd love to help.
+
+Yours truly,
+Hermes - https://example-hermes.com/
+
+Copyright © 2017 Hermes. All rights reserved.

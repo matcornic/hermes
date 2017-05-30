@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/matcornic/hermes"
 	"io/ioutil"
+	"os"
 )
 
 type example interface {
@@ -28,8 +29,16 @@ func main() {
 		new(maintenance),
 	}
 
-	for _, e := range examples {
-		generateEmails(h, e.Email(), e.Name())
+	themes := []hermes.Theme{
+		new(hermes.Default),
+		new(hermes.Flat),
+	}
+
+	for _, theme := range themes {
+		h.Theme = theme
+		for _, e := range examples {
+			generateEmails(h, e.Email(), e.Name())
+		}
 	}
 
 }
@@ -40,7 +49,11 @@ func generateEmails(h hermes.Hermes, email hermes.Email, example string) {
 	if err != nil {
 		panic(err)
 	}
-	err = ioutil.WriteFile(fmt.Sprintf("%v.%v.html", h.Theme.Name(), example), []byte(res), 0644)
+	err = os.MkdirAll(h.Theme.Name(), 0744)
+	if err != nil {
+		panic(err)
+	}
+	err = ioutil.WriteFile(fmt.Sprintf("%v/%v.%v.html", h.Theme.Name(), h.Theme.Name(), example), []byte(res), 0644)
 	if err != nil {
 		panic(err)
 	}
@@ -50,7 +63,7 @@ func generateEmails(h hermes.Hermes, email hermes.Email, example string) {
 	if err != nil {
 		panic(err)
 	}
-	err = ioutil.WriteFile(fmt.Sprintf("%v.%v.txt", h.Theme.Name(), example), []byte(res), 0644)
+	err = ioutil.WriteFile(fmt.Sprintf("%v/%v.%v.txt", h.Theme.Name(), h.Theme.Name(), example), []byte(res), 0644)
 	if err != nil {
 		panic(err)
 	}

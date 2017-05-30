@@ -1,0 +1,24 @@
+------------
+Hi Jon Snow,
+------------
+
+Your order has been processed successfully.
+
++--------+--------------------------------+--------+
+|  ITEM  |          DESCRIPTION           | PRICE  |
++--------+--------------------------------+--------+
+| Golang | Open source programming        | $10.99 |
+|        | language that makes it easy    |        |
+|        | to build simple, reliable, and |        |
+|        | efficient software             |        |
+| Hermes | Programmatically create        | $1.99  |
+|        | beautiful e-mails using        |        |
+|        | Golang.                        |        |
++--------+--------------------------------+--------+
+
+You can check the status of your order and more in your dashboard: https://hermes-example.com/dashboard
+
+Yours truly,
+Hermes - https://example-hermes.com/
+
+Copyright © 2017 Hermes. All rights reserved.

@@ -1,15 +1,15 @@
 package hermes
 
-// Default is the theme by default
-type Default struct{}
+// Flat is a theme
+type Flat struct{}
 
-// Name returns the name of the default theme
-func (dt *Default) Name() string {
-	return "default"
+// Name returns the name of the flat theme
+func (dt *Flat) Name() string {
+	return "flat"
 }
 
 // HTMLTemplate returns a Golang template that will generate an HTML email.
-func (dt *Default) HTMLTemplate() string {
+func (dt *Flat) HTMLTemplate() string {
 	return `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -28,19 +28,20 @@ func (dt *Default) HTMLTemplate() string {
       height: 100%;
       margin: 0;
       line-height: 1.4;
-      background-color: #F2F4F6;
+      background-color: #2c3e50;
       color: #74787E;
       -webkit-text-size-adjust: none;
     }
     a {
       color: #3869D4;
     }
+
     /* Layout ------------------------------ */
     .email-wrapper {
       width: 100%;
       margin: 0;
       padding: 0;
-      background-color: #F2F4F6;
+      background-color: #2c3e50;
     }
     .email-content {
       width: 100%;
@@ -87,7 +88,7 @@ func (dt *Default) HTMLTemplate() string {
       text-align: center;
     }
     .email-footer p {
-      color: #AEAEAE;
+      color: #eaeaea;
     }
     .body-action {
       width: 100%;
@@ -95,23 +96,28 @@ func (dt *Default) HTMLTemplate() string {
       padding: 0;
       text-align: center;
     }
+
     .body-dictionary {
       width: 100%;
       overflow: hidden;
-      margin: 20px auto 10px;
+      margin: 20px auto 20px;
       padding: 0;
-    }
-    .body-dictionary dd {
-      margin: 0 0 10px 0;
     }
     .body-dictionary dt {
       clear: both;
       color: #000;
       font-weight: bold;
+      float: left;
+      width: 50%;
+      padding: 0;
+      margin: 0;
+      margin-bottom: 0.3em;
     }
     .body-dictionary dd {
-      margin-left: 0;
-      margin-bottom: 10px;
+      float: left;
+      width: 50%;
+      padding: 0;
+      margin: 0;
     }
     .body-sub {
       margin-top: 25px;
@@ -234,9 +240,8 @@ func (dt *Default) HTMLTemplate() string {
     /* Buttons ------------------------------ */
     .button {
       display: inline-block;
-      width: 200px;
-      background-color: #3869D4;
-      border-radius: 3px;
+      width: 100%;
+      background-color: #00948d;
       color: #ffffff;
       font-size: 15px;
       line-height: 45px;
@@ -249,11 +254,6 @@ func (dt *Default) HTMLTemplate() string {
     @media only screen and (max-width: 600px) {
       .email-body_inner,
       .email-footer {
-        width: 100% !important;
-      }
-    }
-    @media only screen and (max-width: 500px) {
-      .button {
         width: 100% !important;
       }
     }
@@ -437,7 +437,7 @@ func (dt *Default) HTMLTemplate() string {
 }
 
 // PlainTextTemplate returns a Golang template that will generate an plain text email.
-func (dt *Default) PlainTextTemplate() string {
+func (dt *Flat) PlainTextTemplate() string {
 	return `<h2>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }}{{ end }},</h2>
 {{ with .Email.Body.Intros }}
   {{ range $line := . }}

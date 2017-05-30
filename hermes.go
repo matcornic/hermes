@@ -23,8 +23,14 @@ type Theme interface {
 	PlainTextTemplate() string // The golang templte for plain text emails (can be basic HTML)
 }
 
-// TextDirection of the text in HTML email@
+// TextDirection of the text in HTML email
 type TextDirection string
+
+var templateFuncs = template.FuncMap{
+	"url": func(s string) template.URL {
+		return template.URL(s)
+	},
+}
 
 // TDLeftToRight is the text direction from left to right (default)
 const TDLeftToRight TextDirection = "ltr"
@@ -172,7 +178,7 @@ func (h *Hermes) GeneratePlainText(email Email) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return html2text.FromString(template)
+	return html2text.FromString(template, html2text.Options{PrettyTables: true})
 }
 
 func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {
@@ -184,7 +190,7 @@ func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {
 
 	// Generate the email from Golang template
 	// Allow usage of simple function from sprig : https://github.com/Masterminds/sprig
-	t, err := template.New("hermes").Funcs(sprig.FuncMap()).Parse(tplt)
+	t, err := template.New("hermes").Funcs(sprig.FuncMap()).Funcs(templateFuncs).Parse(tplt)
 	if err != nil {
 		return "", err
 	}

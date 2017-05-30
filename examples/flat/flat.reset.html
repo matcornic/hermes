@@ -16,19 +16,20 @@
       height: 100%;
       margin: 0;
       line-height: 1.4;
-      background-color: #F2F4F6;
+      background-color: #2c3e50;
       color: #74787E;
       -webkit-text-size-adjust: none;
     }
     a {
       color: #3869D4;
     }
+
      
     .email-wrapper {
       width: 100%;
       margin: 0;
       padding: 0;
-      background-color: #F2F4F6;
+      background-color: #2c3e50;
     }
     .email-content {
       width: 100%;
@@ -75,7 +76,7 @@
       text-align: center;
     }
     .email-footer p {
-      color: #AEAEAE;
+      color: #eaeaea;
     }
     .body-action {
       width: 100%;
@@ -83,23 +84,28 @@
       padding: 0;
       text-align: center;
     }
+
     .body-dictionary {
       width: 100%;
       overflow: hidden;
-      margin: 20px auto 10px;
+      margin: 20px auto 20px;
       padding: 0;
-    }
-    .body-dictionary dd {
-      margin: 0 0 10px 0;
     }
     .body-dictionary dt {
       clear: both;
       color: #000;
       font-weight: bold;
+      float: left;
+      width: 50%;
+      padding: 0;
+      margin: 0;
+      margin-bottom: 0.3em;
     }
     .body-dictionary dd {
-      margin-left: 0;
-      margin-bottom: 10px;
+      float: left;
+      width: 50%;
+      padding: 0;
+      margin: 0;
     }
     .body-sub {
       margin-top: 25px;
@@ -222,9 +228,8 @@
      
     .button {
       display: inline-block;
-      width: 200px;
-      background-color: #3869D4;
-      border-radius: 3px;
+      width: 100%;
+      background-color: #00948d;
       color: #ffffff;
       font-size: 15px;
       line-height: 45px;
@@ -237,11 +242,6 @@
     @media only screen and (max-width: 600px) {
       .email-body_inner,
       .email-footer {
-        width: 100% !important;
-      }
-    }
-    @media only screen and (max-width: 500px) {
-      .button {
         width: 100% !important;
       }
     }
@@ -274,27 +274,12 @@
                     
                         
                           
-                            <p>Welcome to Hermes! We&#39;re very excited to have you on board.</p>
+                            <p>You have received this email because a password reset request for Hermes account was received.</p>
                           
                         
                     
                     
 
-                       
-                        
-                          <dl class="body-dictionary">
-                            
-                              <dt>Firstname:</dt>
-                              <dd>Jon</dd>
-                            
-                              <dt>Lastname:</dt>
-                              <dd>Snow</dd>
-                            
-                              <dt>Birthday:</dt>
-                              <dd>01/01/283</dd>
-                            
-                          </dl>
-                        
                       
 
                       
@@ -308,13 +293,13 @@
                       
                         
                           
-                            <p>To get started with Hermes, please click here:</p>
+                            <p>Click the button below to reset your password:</p>
                             <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                               <tr>
                                 <td align="center">
                                   <div>
-                                    <a href="https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010" class="button" style="background-color: " target="_blank">
-                                      Confirm your account
+                                    <a href="https://hermes-example.com/reset-password?token=d9729feb74992cc3482b350163a1a010" class="button" style="background-color: #DC4D2F" target="_blank">
+                                      Reset your password
                                     </a>
                                   </div>
                                 </td>
@@ -328,13 +313,13 @@
                      
                         
                           
-                            <p>Need help, or have questions? Just reply to this email, we&#39;d love to help.</p>
+                            <p>If you did not request a password reset, no further action is required on your part.</p>
                           
                         
                       
 
                     <p>
-                      Yours truly,
+                      Thanks,
                       <br />
                       Hermes
                     </p>
@@ -346,8 +331,8 @@
                               
                                 <tr>
                                   <td>
-                                    <p class="sub">If you’re having trouble with the button &#39;Confirm your account&#39;, copy and paste the URL below into your web browser.</p>
-                                    <p class="sub"><a href="https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010">https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010</a></p>
+                                    <p class="sub">If you’re having trouble with the button &#39;Reset your password&#39;, copy and paste the URL below into your web browser.</p>
+                                    <p class="sub"><a href="https://hermes-example.com/reset-password?token=d9729feb74992cc3482b350163a1a010">https://hermes-example.com/reset-password?token=d9729feb74992cc3482b350163a1a010</a></p>
                                   </td>
                                 </tr>
                               
