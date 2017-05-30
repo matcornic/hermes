@@ -113,7 +113,7 @@ Copyright © 2017 Hermes. All rights reserved.
 * [Password Reset](examples/default/reset.go)
 * [Maintenance](examples/default/maintenance.go)
 
-To run the examples, go to `examples/<theme>/`, then run `go run *.go`. HTML and Plaintext example should be created in the folder.
+To run the examples, go to `examples` folder, then run `go run *.go`. HTML and Plaintext example should be created in given theme folders.
 
 ## Plaintext E-mails
 
@@ -134,6 +134,10 @@ The following open-source themes are bundled with this package:
 * `default` by [Postmark Transactional Email Templates](https://github.com/wildbit/postmark-templates)
 
 <img src="screens/default/welcome.png" height="200" /> <img src="screens/default/reset.png" height="200" /> <img src="screens/default/receipt.png" height="200" />
+
+* `flat`, slightly modified from [Postmark Transactional Email Templates](https://github.com/wildbit/postmark-templates)
+
+<img src="screens/flat/welcome.png" height="200" /> <img src="screens/flat/reset.png" height="200" /> <img src="screens/flat/receipt.png" height="200" />
 
 ## RTL Support
 
