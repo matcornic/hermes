@@ -318,6 +318,39 @@ This code would output the following HTML template:
 
 <img src="screens/free-markdown.png" height="400" />
 
+And the following plaintext:
+
+```
+------------
+Hi Jon Snow,
+------------
+
+> 
+> 
+> 
+> Hermes service will shutdown the *1st August 2017* for maintenance
+> operations.
+> 
+> 
+
+Services will be unavailable based on the following schedule:
+
++-----------+------------+
+| SERVICES  |  DOWNTIME  |
++-----------+------------+
+| Service A | 2AM to 3AM |
+| Service B | 4AM to 5AM |
+| Service C | 5AM to 6AM |
++-----------+------------+
+
+Feel free to contact us for any question regarding this matter at support@hermes-example.com ( support@hermes-example.com ) or in our Gitter ( https://gitter.im/ )
+
+Yours truly,
+Hermes - https://example-hermes.com/
+
+Copyright © 2017 Hermes. All rights reserved.
+```
+
 Be aware that this content will replace existing tables, dictionnary and actions. Only intros, outros, header and footer will be kept.
 
 This is helpful when your application needs sending e-mails, wrote on-the-fly by adminstrators.
