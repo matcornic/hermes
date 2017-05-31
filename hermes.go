@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"github.com/Masterminds/sprig"
 	"github.com/imdario/mergo"
-	"github.com/matcornic/html2text"
+	"github.com/jaytaylor/html2text"
 	"github.com/russross/blackfriday"
 	"html/template"
 )
@@ -178,7 +178,7 @@ func (h *Hermes) GeneratePlainText(email Email) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return html2text.FromString(template)
+	return html2text.FromString(template, html2text.Options{PrettyTables: true})
 }
 
 func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {
