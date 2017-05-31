@@ -143,8 +143,6 @@ func (ed *SimpleExample) assertPlainTextContent(t *testing.T, r string) {
 |        | beautiful e-mails using        |        |
 |        | Golang.                        |        |
 +--------+--------------------------------+--------`, "Table: Should have pretty table content")
-	assert.Contains(t, r, "$10.99", "Table: Should have table content")
-	assert.Contains(t, r, "$1.99", "Table: Should have table content")
 	assert.Contains(t, r, "started with Hermes", "Action: Should have instruction")
 	assert.NotContains(t, r, "Confirm your account", "Action: Should not have button of action in plain text")
 	assert.NotContains(t, r, "#22BC66", "Action: Button should not have color in plain text")
