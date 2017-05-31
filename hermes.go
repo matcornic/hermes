@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"github.com/Masterminds/sprig"
 	"github.com/imdario/mergo"
+	"github.com/jaytaylor/html2text"
+	"github.com/russross/blackfriday"
 	"html/template"
 )
 
@@ -21,8 +23,14 @@ type Theme interface {
 	PlainTextTemplate() string // The golang templte for plain text emails (can be basic HTML)
 }
 
-// TextDirection of the text in HTML email@
+// TextDirection of the text in HTML email
 type TextDirection string
+
+var templateFuncs = template.FuncMap{
+	"url": func(s string) template.URL {
+		return template.URL(s)
+	},
+}
 
 // TDLeftToRight is the text direction from left to right (default)
 const TDLeftToRight TextDirection = "ltr"
@@ -45,17 +53,27 @@ type Email struct {
 	Body Body
 }
 
+// Markdown is a HTML template (a string) representing Markdown content
+// https://en.wikipedia.org/wiki/Markdown
+type Markdown template.HTML
+
 // Body is the body of the email, containing all interesting data
 type Body struct {
-	Name       string   // The name of the contacted person
-	Intros     []string // Intro sentences, first displayed in the email
-	Dictionary []Entry  // A list of key+value (useful for displaying parameters/settings/personal info)
-	Table      Table    // Table is an table where you can put data (pricing grid, a bill, and so on)
-	Actions    []Action // Actions are a list of actions that the user will be able to execute via a button click
-	Outros     []string // Outro sentences, last displayed in the email
-	Greeting   string   // Greeting for the contacted person (default to 'Hi')
-	Signature  string   // Signature for the contacted person (default to 'Yours truly')
-	Title      string   // Title replaces the greeting+name when set
+	Name         string   // The name of the contacted person
+	Intros       []string // Intro sentences, first displayed in the email
+	Dictionary   []Entry  // A list of key+value (useful for displaying parameters/settings/personal info)
+	Table        Table    // Table is an table where you can put data (pricing grid, a bill, and so on)
+	Actions      []Action // Actions are a list of actions that the user will be able to execute via a button click
+	Outros       []string // Outro sentences, last displayed in the email
+	Greeting     string   // Greeting for the contacted person (default to 'Hi')
+	Signature    string   // Signature for the contacted person (default to 'Yours truly')
+	Title        string   // Title replaces the greeting+name when set
+	FreeMarkdown Markdown // Free markdown content that replaces all content other than header and footer
+}
+
+// ToHTML converts Markdown to HTML
+func (c Markdown) ToHTML() template.HTML {
+	return template.HTML(blackfriday.MarkdownCommon([]byte(string(c))))
 }
 
 // Entry is a simple entry of a map
@@ -156,7 +174,11 @@ func (h *Hermes) GeneratePlainText(email Email) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return h.generateTemplate(email, h.Theme.PlainTextTemplate())
+	template, err := h.generateTemplate(email, h.Theme.PlainTextTemplate())
+	if err != nil {
+		return "", err
+	}
+	return html2text.FromString(template, html2text.Options{PrettyTables: true})
 }
 
 func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {
@@ -168,7 +190,7 @@ func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {
 
 	// Generate the email from Golang template
 	// Allow usage of simple function from sprig : https://github.com/Masterminds/sprig
-	t, err := template.New("hermes").Funcs(sprig.FuncMap()).Parse(tplt)
+	t, err := template.New("hermes").Funcs(sprig.FuncMap()).Funcs(templateFuncs).Parse(tplt)
 	if err != nil {
 		return "", err
 	}
