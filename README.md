@@ -108,10 +108,10 @@ Copyright © 2017 Hermes. All rights reserved.
 
 ## More Examples
 
-* [Welcome](examples/default/welcome.go)
-* [Receipt](examples/default/receipt.go)
-* [Password Reset](examples/default/reset.go)
-* [Maintenance](examples/default/maintenance.go)
+* [Welcome](examples/welcome.go)
+* [Receipt](examples/receipt.go)
+* [Password Reset](examples/reset.go)
+* [Maintenance](examples/maintenance.go)
 
 To run the examples, go to `examples` folder, then run `go run *.go`. HTML and Plaintext example should be created in given theme folders.
 
