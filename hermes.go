@@ -168,7 +168,6 @@ func (h *Hermes) GenerateHTML(email Email) (string, error) {
 
 // GeneratePlainText generates the email body from data
 // This is for old email clients
-// Note : this mode is not able to print Tables
 func (h *Hermes) GeneratePlainText(email Email) (string, error) {
 	err := setDefaultHermesValues(h)
 	if err != nil {
