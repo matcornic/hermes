@@ -1,0 +1,14 @@
+package: github.com/matcornic/hermes
+import:
+- package: github.com/Masterminds/sprig
+  version: ~2.12.0
+- package: github.com/imdario/mergo
+  version: ~0.2.2
+- package: github.com/jaytaylor/html2text
+- package: github.com/russross/blackfriday
+  version: ~1.4.0
+testImport:
+- package: github.com/stretchr/testify
+  version: ~1.1.4
+  subpackages:
+  - assert

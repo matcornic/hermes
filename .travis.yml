@@ -1,4 +1,5 @@
 language: go
+go_import_path: github.com/matcornic/hermes
 
 go:
   - 1.6
@@ -7,14 +8,15 @@ go:
   - master
 
 install:
-- go get ./...
-- go get -t ./...
+- sudo add-apt-repository ppa:masterminds/glide -y && sudo apt-get update
+- sudo apt-get install glide
+- glide install
 - go get -u github.com/alecthomas/gometalinter
 - gometalinter -u -i -f
 
 script:
 - go test -race -coverprofile=coverage.txt -covermode=atomic
-- gometalinter --config=./gometalinter.json ./...
+- gometalinter --vendor --config=./gometalinter.json ./...
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
