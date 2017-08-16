@@ -45,7 +45,7 @@ func (dt *MyCustomTheme) HTMLTemplate() string {
     return "<A go html template with wanted information>" 
 }
 
-func (dt *Default) PlainTextTemplate() string {
+func (dt *MyCustomTheme) PlainTextTemplate() string {
     // Get the template from a file (if you want to be able to change the template live without retstarting your application)
     // Or write the template by returning pure string here (if you want embbeded template and do not bother with external dependencies)
     return "<A go plaintext template with wanter information>"
