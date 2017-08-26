@@ -1,7 +1,6 @@
 language: go
 
 go:
-  - 1.6
   - 1.7
   - 1.8
   - master
@@ -14,7 +13,7 @@ install:
 
 script:
 - go test -race -coverprofile=coverage.txt -covermode=atomic
-- gometalinter --config=./gometalinter.json ./...
+- gometalinter --vendor --config=./gometalinter.json ./...
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
