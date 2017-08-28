@@ -351,7 +351,7 @@ Hermes - https://example-hermes.com/
 Copyright © 2017 Hermes. All rights reserved.
 ```
 
-Be aware that this content will replace existing tables, dictionnary and actions. Only intros, outros, header and footer will be kept.
+Be aware that this content will replace existing tables, dictionary and actions. Only intros, outros, header and footer will be kept.
 
 This is helpful when your application needs sending e-mails, wrote on-the-fly by adminstrators.
 
