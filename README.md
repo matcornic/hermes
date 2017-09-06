@@ -8,6 +8,9 @@
 Hermes is the Go port of the great [mailgen](https://github.com/eladnava/mailgen) engine for Node.js. Check their work, it's awesome!
 It's a package that generates clean, responsive HTML e-mails for sending transactional e-mails (welcome e-mails, reset password e-mails, receipt e-mails and so on), and associated plain text fallback.
 
+*Trying code sponsoring*
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/KqR2jKgYCNe5K227eRCExuFb/matcornic/hermes'>  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/KqR2jKgYCNe5K227eRCExuFb/matcornic/hermes.svg' /></a>
+
 # Demo
 
 <img src="screens/default/welcome.png" height="400" /> <img src="screens/default/reset.png" height="400" /> <img src="screens/default/receipt.png" height="400" />
