@@ -207,8 +207,11 @@ func (dt *Default) HTMLTemplate() string {
     /* Data table ------------------------------ */
     .data-wrapper {
       width: 100%;
-      margin: 0;
-      padding: 35px 0;
+      margin: 25px 0 25px 15px;
+      padding-top: 15px;
+    }
+    .data-wrapper caption {
+      text-align: left;
     }
     .data-table {
       width: 100%;
@@ -307,54 +310,59 @@ func (dt *Default) HTMLTemplate() string {
                         {{ end }}
                       {{ end }}
 
-                      <!-- Table -->
-                      {{ with .Email.Body.Table }}
-                        {{ $data := .Data }}
-                        {{ $columns := .Columns }}
-                        {{ if gt (len $data) 0 }}
-                          <table class="data-wrapper" width="100%" cellpadding="0" cellspacing="0">
-                            <tr>
-                              <td colspan="2">
-                                <table class="data-table" width="100%" cellpadding="0" cellspacing="0">
-                                  <tr>
-                                    {{ $col := index $data 0 }}
-                                    {{ range $entry := $col }}
-                                      <th
-                                        {{ with $columns }}
-                                          {{ $width := index .CustomWidth $entry.Key }}
-                                          {{ with $width }}
-                                            width="{{ . }}"
-                                          {{ end }}
-                                          {{ $align := index .CustomAlignement $entry.Key }}
-                                          {{ with $align }}
-                                            style="text-align:{{ . }}"
-                                          {{ end }}
-                                        {{ end }}
-                                      >
-                                        <p>{{ $entry.Key }}</p>
-                                      </th>
-                                    {{ end }}
-                                  </tr>
-                                  {{ range $row := $data }}
+                      <!-- Tables -->
+                      {{ with .Email.Body.Tables }}
+                        {{ range $table := . }}
+                          {{ $data := .Data }}
+                          {{ $columns := .Columns }}
+                          {{ if gt (len $data) 0 }}
+                            <table class="data-wrapper" width="100%" cellpadding="0" cellspacing="0">
+                              {{ if $table.Title }}
+                                <caption>{{ $table.Title }}</caption>
+                              {{ end }}
+                              <tr>
+                                <td colspan="2">
+                                  <table class="data-table" width="100%" cellpadding="0" cellspacing="0">
                                     <tr>
-                                      {{ range $cell := $row }}
-                                        <td
+                                      {{ $col := index $data 0 }}
+                                      {{ range $entry := $col }}
+                                        <th
                                           {{ with $columns }}
-                                            {{ $align := index .CustomAlignement $cell.Key }}
+                                            {{ $width := index .CustomWidth $entry.Key }}
+                                            {{ with $width }}
+                                              width="{{ . }}"
+                                            {{ end }}
+                                            {{ $align := index .CustomAlignement $entry.Key }}
                                             {{ with $align }}
                                               style="text-align:{{ . }}"
                                             {{ end }}
                                           {{ end }}
                                         >
-                                          {{ $cell.Value }}
-                                        </td>
+                                          <p>{{ $entry.Key }}</p>
+                                        </th>
                                       {{ end }}
                                     </tr>
-                                  {{ end }}
-                                </table>
-                              </td>
-                            </tr>
-                          </table>
+                                    {{ range $row := $data }}
+                                      <tr>
+                                        {{ range $cell := $row }}
+                                          <td
+                                            {{ with $columns }}
+                                              {{ $align := index .CustomAlignement $cell.Key }}
+                                              {{ with $align }}
+                                                style="text-align:{{ . }}"
+                                              {{ end }}
+                                            {{ end }}
+                                          >
+                                            {{ $cell.Value }}
+                                          </td>
+                                        {{ end }}
+                                      </tr>
+                                    {{ end }}
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                          {{ end }}
                         {{ end }}
                       {{ end }}
 
@@ -454,27 +462,32 @@ func (dt *Default) PlainTextTemplate() string {
     {{ end }}
     </ul>
   {{ end }}
-  {{ with .Email.Body.Table }}
-    {{ $data := .Data }}
-    {{ $columns := .Columns }}
-    {{ if gt (len $data) 0 }}
-      <table class="data-table" width="100%" cellpadding="0" cellspacing="0">
-        <tr>
-          {{ $col := index $data 0 }}
-          {{ range $entry := $col }}
-            <th>{{ $entry.Key }} </th>
-          {{ end }}
-        </tr>
-        {{ range $row := $data }}
+  {{ with .Email.Body.Tables }}
+    {{ range $table := . }}
+      {{ $data := .Data }}
+      {{ $columns := .Columns }}
+      {{ if gt (len $data) 0 }}
+        {{ if $table.Title }}
+          <span>{{ $table.Title }}</span>
+        {{ end }}
+        <table class="data-table" width="100%" cellpadding="0" cellspacing="0">
           <tr>
-            {{ range $cell := $row }}
-              <td>
-                {{ $cell.Value }}
-              </td>
+            {{ $col := index $data 0 }}
+            {{ range $entry := $col }}
+              <th>{{ $entry.Key }} </th>
             {{ end }}
           </tr>
-        {{ end }}
-      </table>
+          {{ range $row := $data }}
+            <tr>
+              {{ range $cell := $row }}
+                <td>
+                  {{ $cell.Value }}
+                </td>
+              {{ end }}
+            </tr>
+          {{ end }}
+        </table>
+      {{ end }}
     {{ end }}
   {{ end }}
   {{ with .Email.Body.Actions }} 
