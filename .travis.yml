@@ -6,8 +6,8 @@ go:
   - master
 
 install:
-- go get -u github.com/golang/dep/cmd/dep
-- dep ensure
+- curl -L https://github.com/golang/dep/releases/download/v0.3.2/dep-linux-amd64 -o dep
+- chmod u+x dep && ./dep ensure
 - go get -u github.com/alecthomas/gometalinter
 - gometalinter -u -i -f
 
