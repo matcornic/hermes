@@ -7,10 +7,8 @@ go:
   - 1.9
 
 install:
-- wget https://github.com/golang/dep/releases/download/v0.3.0/dep-linux-amd64.zip
-- unzip dep-linux-amd64.zip
-- chmod +x dep
-- ./dep ensure
+- curl -L https://github.com/golang/dep/releases/download/v0.3.2/dep-linux-amd64 -o dep
+- chmod u+x dep && ./dep ensure
 - go get -u github.com/alecthomas/gometalinter
 - gometalinter -u -i -f
 

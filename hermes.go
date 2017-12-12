@@ -73,7 +73,7 @@ type Body struct {
 
 // ToHTML converts Markdown to HTML
 func (c Markdown) ToHTML() template.HTML {
-	return template.HTML(blackfriday.MarkdownCommon([]byte(string(c))))
+	return template.HTML(blackfriday.Run([]byte(string(c))))
 }
 
 // Entry is a simple entry of a map
