@@ -2,11 +2,12 @@ package hermes
 
 import (
 	"bytes"
+	"html/template"
+
 	"github.com/Masterminds/sprig"
 	"github.com/imdario/mergo"
 	"github.com/jaytaylor/html2text"
-	"github.com/russross/blackfriday"
-	"html/template"
+	blackfriday "gopkg.in/russross/blackfriday.v2"
 )
 
 // Hermes is an instance of the hermes email generator
