@@ -34,9 +34,9 @@
   name = "github.com/jaytaylor/html2text"
 
 [[constraint]]
-  name = "github.com/russross/blackfriday"
-  version = "2.0.0"
-
-[[constraint]]
   name = "github.com/stretchr/testify"
   version = "1.1.4"
+
+[[constraint]]
+  name = "gopkg.in/russross/blackfriday.v2"
+  version = "2.0.0"
