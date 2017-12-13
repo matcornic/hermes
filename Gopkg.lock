@@ -41,7 +41,7 @@
   branch = "master"
   name = "github.com/jaytaylor/html2text"
   packages = ["."]
-  revision = "0ee88d3006305456b84cad14a24b2576f9411965"
+  revision = "63248bc9adbcc063665823c90e39eaf58aca7a8b"
 
 [[projects]]
   name = "github.com/mattn/go-runewidth"
@@ -60,12 +60,6 @@
   packages = ["difflib"]
   revision = "792786c7400a136282c1664665ae0a8db921c6c2"
   version = "v1.0.0"
-
-[[projects]]
-  name = "github.com/russross/blackfriday"
-  packages = ["."]
-  revision = "cadec560ec52d93835bf2f15bd794700d3a2473b"
-  version = "v2.0.0"
 
 [[projects]]
   name = "github.com/satori/go.uuid"
@@ -103,9 +97,15 @@
   packages = ["html","html/atom"]
   revision = "d866cfc389cec985d6fda2859936a575a55a3ab6"
 
+[[projects]]
+  name = "gopkg.in/russross/blackfriday.v2"
+  packages = ["."]
+  revision = "cadec560ec52d93835bf2f15bd794700d3a2473b"
+  version = "v2.0.0"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "936b042897ce8e2126fd38e5f3b757eb564a83800341f0ad7ef55b27181e8770"
+  inputs-digest = "74f494e631dfdf63c96d26579f7f802e52dfe70480f1b3cfc03ef331eb223dea"
   solver-name = "gps-cdcl"
   solver-version = 1
