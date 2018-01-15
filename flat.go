@@ -285,13 +285,17 @@ func (dt *Flat) HTMLTemplate() string {
                 <tr>
                   <td class="content-cell">
                     <h1>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }},{{ end }}</h1>
-                    {{ with .Email.Body.Intros }}
+					{{ if (ne .Email.Body.IntrosMarkdown "") }}
+					  {{ .Email.Body.IntrosMarkdown.ToHTML }}
+					{{ else }}
+                      {{ with .Email.Body.Intros }}
                         {{ if gt (len .) 0 }}
                           {{ range $line := . }}
                             <p>{{ $line }}</p>
                           {{ end }}
                         {{ end }}
-                    {{ end }}
+                      {{ end }}
+					{{ end }}
                     {{ if (ne .Email.Body.FreeMarkdown "") }}
                       {{ .Email.Body.FreeMarkdown.ToHTML }}
                     {{ else }}
@@ -379,13 +383,17 @@ func (dt *Flat) HTMLTemplate() string {
                       {{ end }}
 
                     {{ end }}
-                    {{ with .Email.Body.Outros }} 
+					{{ if (ne .Email.Body.OutrosMarkdown "") }}
+					  {{ .Email.Body.OutrosMarkdown.ToHTML }}
+					{{ else }}
+                      {{ with .Email.Body.Outros }}
                         {{ if gt (len .) 0 }}
                           {{ range $line := . }}
                             <p>{{ $line }}</p>
                           {{ end }}
                         {{ end }}
                       {{ end }}
+					{{ end }}
 
                     <p>
                       {{.Email.Body.Signature}},
