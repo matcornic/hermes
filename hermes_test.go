@@ -73,7 +73,7 @@ func (ed *SimpleExample) getExample() (Hermes, Email) {
 						"Item":  "20%",
 						"Price": "15%",
 					},
-					CustomAlignement: map[string]string{
+					CustomAlignment: map[string]string{
 						"Price": "right",
 					},
 				},
@@ -457,7 +457,7 @@ func TestHermes_Default(t *testing.T) {
 	assert.Empty(t, email.Body.Outros)
 	assert.Empty(t, email.Body.Table.Data)
 	assert.Empty(t, email.Body.Table.Columns.CustomWidth)
-	assert.Empty(t, email.Body.Table.Columns.CustomAlignement)
+	assert.Empty(t, email.Body.Table.Columns.CustomAlignment)
 	assert.Empty(t, string(email.Body.FreeMarkdown))
 
 	assert.Equal(t, email.Body.Greeting, "Hi")
