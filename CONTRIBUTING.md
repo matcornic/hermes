@@ -188,7 +188,7 @@ The following will inject the table into the e-mail:
                         {{ with $width }}
                         width="{{ . }}"
                         {{ end }}
-                        {{ $align := index .CustomAlignement $entry.Key }}
+                        {{ $align := index .CustomAlignment $entry.Key }}
                         {{ with $align }}
                         style="text-align:{{ . }}"
                         {{ end }}
@@ -203,7 +203,7 @@ The following will inject the table into the e-mail:
                 {{ range $cell := $row }}
                 <td
                     {{ with $columns }}
-                        {{ $align := index .CustomAlignement $cell.Key }}
+                        {{ $align := index .CustomAlignment $cell.Key }}
                         {{ with $align }}
                         style="text-align:{{ . }}"
                         {{ end }}

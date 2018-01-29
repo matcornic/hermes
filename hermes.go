@@ -92,8 +92,8 @@ type Table struct {
 
 // Columns contains meta-data for the different columns
 type Columns struct {
-	CustomWidth      map[string]string
-	CustomAlignement map[string]string
+	CustomWidth     map[string]string
+	CustomAlignment map[string]string
 }
 
 // Action is an action the user can do on the email (click on a button)

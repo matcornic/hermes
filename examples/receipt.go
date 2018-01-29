@@ -36,7 +36,7 @@ func (r *receipt) Email() hermes.Email {
 						"Item":  "20%",
 						"Price": "15%",
 					},
-					CustomAlignement: map[string]string{
+					CustomAlignment: map[string]string{
 						"Price": "right",
 					},
 				},
