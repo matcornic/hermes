@@ -30,6 +30,9 @@ var templateFuncs = template.FuncMap{
 	"url": func(s string) template.URL {
 		return template.URL(s)
 	},
+	"safeURL": func(s string) template.URL {
+		return template.URL(s)
+	},
 }
 
 // TDLeftToRight is the text direction from left to right (default)
