@@ -69,6 +69,7 @@ type Body struct {
 	OutrosMarkdown Markdown // Outro in markdown, will override Outros
 	Greeting       string   // Greeting for the contacted person (default to 'Hi')
 	Signature      string   // Signature for the contacted person (default to 'Yours truly')
+	SignatureName  string   // Contact person name
 	Title          string   // Title replaces the greeting+name when set
 	FreeMarkdown   Markdown // Free markdown content that replaces all content other than header and footer
 }
