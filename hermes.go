@@ -2,11 +2,12 @@ package hermes
 
 import (
 	"bytes"
+	"html/template"
+
 	"github.com/Masterminds/sprig"
 	"github.com/imdario/mergo"
 	"github.com/jaytaylor/html2text"
 	"gopkg.in/russross/blackfriday.v2"
-	"html/template"
 )
 
 // Hermes is an instance of the hermes email generator
@@ -29,6 +30,9 @@ type TextDirection string
 var templateFuncs = template.FuncMap{
 	"url": func(s string) template.URL {
 		return template.URL(s)
+	},
+	"html": func(s string) template.HTML {
+		return template.HTML(s)
 	},
 }
 
