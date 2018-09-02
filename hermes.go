@@ -104,9 +104,10 @@ type Action struct {
 
 // Button defines an action to launch
 type Button struct {
-	Color string
-	Text  string
-	Link  string
+	Color     string
+	TextColor string
+	Text      string
+	Link      string
 }
 
 // Template is the struct given to Golang templating
