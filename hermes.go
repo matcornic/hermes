@@ -5,7 +5,7 @@ import (
 	"github.com/Masterminds/sprig"
 	"github.com/imdario/mergo"
 	"github.com/jaytaylor/html2text"
-	"github.com/russross/blackfriday"
+	"github.com/russross/blackfriday/v2"
 	"html/template"
 )
 
