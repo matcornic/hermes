@@ -8,7 +8,7 @@ install:
 
 script:
 - go test -race -coverprofile=coverage.txt -covermode=atomic
-- golangci-lint run --fast
+- golangci-lint run
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
