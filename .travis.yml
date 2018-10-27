@@ -3,12 +3,8 @@ language: go
 go:
   - 1.11
 
-install:
-- curl -sfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $GOPATH/bin v1.10.2
-
 script:
 - go test -race -coverprofile=coverage.txt -covermode=atomic
-- golangci-lint run
 
 after_success:
 - bash <(curl -s https://codecov.io/bash)
