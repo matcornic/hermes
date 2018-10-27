@@ -5,7 +5,7 @@ import (
 	"github.com/Masterminds/sprig"
 	"github.com/imdario/mergo"
 	"github.com/jaytaylor/html2text"
-	"gopkg.in/russross/blackfriday.v2"
+	"github.com/russross/blackfriday/v2"
 	"html/template"
 )
 
@@ -104,9 +104,10 @@ type Action struct {
 
 // Button defines an action to launch
 type Button struct {
-	Color string
-	Text  string
-	Link  string
+	Color     string
+	TextColor string
+	Text      string
+	Link      string
 }
 
 // Template is the struct given to Golang templating
