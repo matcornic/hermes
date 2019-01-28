@@ -363,6 +363,15 @@ func (dt *Default) HTMLTemplate() string {
                         {{ if gt (len .) 0 }}
                           {{ range $action := . }}
                             <p>{{ $action.Instructions }}</p>
+                            {{"<!--[if mso]>" | html}}
+                              <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{ $action.Button.Link }}" style="height:40px;v-text-anchor:middle;width:300px;" arcsize="10%" stroke="f" fillcolor="{{ $action.Button.Color }}">
+                                <w:anchorlock/>
+                                <center style="color:{{ $action.Button.TextColor }};font-family:sans-serif;font-size:16px;font-weight:bold;">
+                                  {{ $action.Button.Text }}
+                                </center>
+                              </v:roundrect>
+                            {{"<![endif]-->" | html}}
+                            {{"<!--[if !mso]><!-- -->" | html}}
                             <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                               <tr>
                                 <td align="center">
@@ -374,6 +383,7 @@ func (dt *Default) HTMLTemplate() string {
                                 </td>
                               </tr>
                             </table>
+                            {{"<!--<![endif]-->" | html}}
                           {{ end }}
                         {{ end }}
                       {{ end }}
