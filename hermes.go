@@ -42,11 +42,12 @@ const TDRightToLeft TextDirection = "rtl"
 // Product represents your company product (brand)
 // Appears in header & footer of e-mails
 type Product struct {
-	Name        string
-	Link        string // e.g. https://matcornic.github.io
-	Logo        string // e.g. https://matcornic.github.io/img/logo.png
-	Copyright   string // Copyright © 2017 Hermes. All rights reserved.
-	TroubleText string // TroubleText is the sentence at the end of the email for users having trouble with the button (default to `If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.`)
+	Name           string
+	Link           string // e.g. https://matcornic.github.io
+	Logo           string // e.g. https://matcornic.github.io/img/logo.png
+	Copyright      string // Copyright © 2017 Hermes. All rights reserved.
+	TroubleText    string // TroubleText is the sentence at the end of the email for users having trouble with the button (default to `If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.`)
+	UnsubscribeURL string // e.g. https://lit-oasis-48240.herokuapp.com/unsubscribe?email=example@example.com
 }
 
 // Email is the email containing a body
