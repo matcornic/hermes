@@ -25,5 +25,3 @@ require (
 	gopkg.in/russross/blackfriday.v2 v2.0.1 // indirect
 	gopkg.in/yaml.v2 v2.2.1 // indirect
 )
-
-replace gopkg.in/russross/blackfriday.v2 v2.0.1 => github.com/russross/blackfriday/v2 v2.0.1

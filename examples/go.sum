@@ -18,8 +18,6 @@ github.com/jaytaylor/html2text v0.0.0-20180606194806-57d518f124b0/go.mod h1:CVKl
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=
 github.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=
 github.com/kr/text v0.1.0/go.mod h1:4Jbv+DJW3UT/LiOwJeYQe1efqtUx/iVham/4vfdArNI=
-github.com/matcornic/hermes v1.2.0 h1:AuqZpYcTOtTB7cahdevLfnhIpfzmpqw5Czv8vpdnFDU=
-github.com/matcornic/hermes v1.2.0/go.mod h1:lujJomb016Xjv8wBnWlNvUdtmvowjjfkqri5J/+1hYc=
 github.com/matcornic/hermes/v2 v2.0.2 h1:au/C9liIetFg0c8Zv+woDrFPkWk7UGLi9QQuO013/00=
 github.com/matcornic/hermes/v2 v2.0.2/go.mod h1:iVsJWSIS4NtMNtgan22sy6lt7pImok7bATGPWCoaKNY=
 github.com/mattn/go-runewidth v0.0.3 h1:a+kO+98RDGEfo6asOGMmpodZq4FNtnGP54yps8BzLR4=

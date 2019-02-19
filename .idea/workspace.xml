@@ -2,17 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1feed6eb-b7a5-42fe-9320-c8944247a6eb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/default.go" beforeDir="false" afterPath="$PROJECT_DIR$/default.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/default/default.receipt.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/default/default.receipt.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/default/default.reset.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/default/default.reset.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/default/default.welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/default/default.welcome.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/flat/flat.receipt.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/flat/flat.receipt.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/flat/flat.reset.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/flat/flat.reset.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/flat/flat.welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/flat/flat.welcome.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/examples/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flat.go" beforeDir="false" afterPath="$PROJECT_DIR$/flat.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/go.mod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/go.sum" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,20 +42,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/go.sum">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/go.mod">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="80" selection-start-line="19" selection-start-column="80" selection-end-line="19" selection-end-column="80" />
+            <state relative-caret-position="327">
+              <caret line="26" column="1" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/go.mod">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
+              <caret line="4" column="71" selection-start-line="4" selection-start-column="71" selection-end-line="4" selection-end-column="71" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/go.sum">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="28" column="33" selection-start-line="28" selection-end-line="29" />
             </state>
           </provider>
         </entry>
@@ -113,11 +115,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/examples/go.sum" />
         <option value="$PROJECT_DIR$/examples/main.go" />
         <option value="$PROJECT_DIR$/default.go" />
         <option value="$PROJECT_DIR$/flat.go" />
+        <option value="$PROJECT_DIR$/examples/go.sum" />
         <option value="$PROJECT_DIR$/examples/go.mod" />
+        <option value="$PROJECT_DIR$/go.mod" />
       </list>
     </option>
   </component>
@@ -271,15 +274,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/go.sum">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="80" selection-start-line="19" selection-start-column="80" selection-end-line="19" selection-end-column="80" />
+        <state relative-caret-position="119">
+          <caret line="28" column="33" selection-start-line="28" selection-end-line="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/go.mod">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <caret line="4" column="71" selection-start-line="4" selection-start-column="71" selection-end-line="4" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/go.mod">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="26" column="1" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
         </state>
       </provider>
     </entry>
