@@ -237,7 +237,7 @@ func (dt *Default) HTMLTemplate() string {
       width: 200px;
       background-color: #3869D4;
       border-radius: 3px;
-      color: #ffffff;
+      color: #ffffff !important;
       font-size: 15px;
       line-height: 45px;
       text-align: center;

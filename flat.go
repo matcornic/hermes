@@ -242,7 +242,7 @@ func (dt *Flat) HTMLTemplate() string {
       display: inline-block;
       width: 100%;
       background-color: #00948d;
-      color: #ffffff;
+      color: #ffffff  !important;
       font-size: 15px;
       line-height: 45px;
       text-align: center;
