@@ -117,7 +117,7 @@ Copyright © 2017 Hermes. All rights reserved.
 * [Password Reset](examples/reset.go)
 * [Maintenance](examples/maintenance.go)
 
-To run the examples, go to `examples` folder, then run `go run *.go`. HTML and Plaintext example should be created in given theme folders.
+To run the examples, go to `examples` folder, then run `go run -a *.go`. HTML and Plaintext example should be created in given theme folders.
 
 ## Plaintext E-mails
 
