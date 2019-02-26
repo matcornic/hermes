@@ -21,4 +21,4 @@ You can check the status of your order and more in your dashboard: https://herme
 Yours truly,
 Hermes - https://example-hermes.com/
 
-Copyright © 2017 Hermes. All rights reserved.
+Copyright © 2019 Hermes. All rights reserved.

@@ -11,4 +11,4 @@ If you did not request a password reset, no further action is required on your p
 Thanks,
 Hermes - https://example-hermes.com/
 
-Copyright © 2017 Hermes. All rights reserved.
+Copyright © 2019 Hermes. All rights reserved.

@@ -449,7 +449,7 @@ func TestHermes_Default(t *testing.T) {
 	assert.Equal(t, h.TextDirection, TDLeftToRight)
 	assert.Equal(t, h.Theme, new(Default))
 	assert.Equal(t, h.Product.Name, "Hermes")
-	assert.Equal(t, h.Product.Copyright, "Copyright © 2017 Hermes. All rights reserved.")
+	assert.Equal(t, h.Product.Copyright, "Copyright © 2019 Hermes. All rights reserved.")
 
 	assert.Empty(t, email.Body.Actions)
 	assert.Empty(t, email.Body.Dictionary)

@@ -92,6 +92,7 @@ This code would output the following HTML template:
 And the following plain text:
 
 ```
+
 ------------
 Hi Jon Snow,
 ------------
@@ -118,6 +119,18 @@ Copyright © 2017 Hermes. All rights reserved.
 * [Maintenance](examples/maintenance.go)
 
 To run the examples, go to `examples` folder, then run `go run -a *.go`. HTML and Plaintext example should be created in given theme folders.
+
+Optionaly you can set the following variables to send automatically the emails to one your mailbox. Nice for testing template in real email clients.
+
+* `HERMES_SEND_EMAILS=true`
+* `HERMES_SMTP_SERVER=<smtp_server>` : for Gmail it's `smtp.gmail.com`
+* `HERMES_SMTP_PORT=<smtp_port>` : for Gmail it's `465`
+* `HERMES_SENDER_EMAIL=<your_sender_email>`
+* `HERMES_SENDER_IDENTITY=<the sender name>`
+* `HERMES_SMTP_USER=<smtp user>` : usually the same than `HERMES_SENDER_EMAIL`
+* `HERMES_TO=<recipients emails>`: split by commas like `myadress@test.com,somethingelse@gmail.com`
+
+The program will ask for your SMTP password. If needed, you can set it with `HERMES_SMTP_PASSWORD` variable (but be careful where you put this information !)
 
 ## Plaintext E-mails
 
