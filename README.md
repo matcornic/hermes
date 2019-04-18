@@ -18,7 +18,7 @@ It's a package that generates clean, responsive HTML e-mails for sending transac
 First install the package:
 
 ```
-go get -u github.com/matcornic/hermes/v2
+go get -u github.com/matcornic/hermes
 ```
 
 > Starting from release *v2.0.0*, Hermes uses [Go modules](https://github.com/golang/go/wiki/Modules). The latest version of Hermes requires Go 1.11 with gomodules enabled.

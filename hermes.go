@@ -7,7 +7,7 @@ import (
 	"github.com/Masterminds/sprig"
 	"github.com/imdario/mergo"
 	"github.com/jaytaylor/html2text"
-	"github.com/russross/blackfriday/v2"
+	"gopkg.in/russross/blackfriday.v2"
 )
 
 // Hermes is an instance of the hermes email generator
