@@ -1,5 +1,3 @@
-module github.com/matcornic/hermes/v2
-
 require (
 	github.com/Masterminds/semver v1.4.2 // indirect
 	github.com/Masterminds/sprig v2.16.0+incompatible
@@ -25,3 +23,5 @@ require (
 )
 
 replace gopkg.in/russross/blackfriday.v2 v2.0.1 => github.com/russross/blackfriday/v2 v2.0.1
+
+module github.com/arxdsilva/hermes
