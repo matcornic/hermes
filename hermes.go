@@ -97,10 +97,11 @@ type Columns struct {
 	CustomAlignment map[string]string
 }
 
-// Action is an action the user can do on the email (click on a button)
+// Action is anything the user can act on (i.e., click on a button, view an invite code)
 type Action struct {
 	Instructions string
 	Button       Button
+	InviteCode   string
 }
 
 // Button defines an action to launch

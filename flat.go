@@ -237,6 +237,18 @@ func (dt *Flat) HTMLTemplate() string {
       font-size: 15px;
       line-height: 18px;
     }
+    /* Invite Code ------------------------------ */
+    .invite-code {
+      display: inline-block;
+      padding: 20px 36px 16px 36px;
+      border-radius: 3px;
+      font-family: Consolas, monaco, monospace;
+      font-size: 28px;
+      text-align: center;
+      letter-spacing: 8px;
+      color: #555;
+      background-color: #eee;
+    }
     /* Buttons ------------------------------ */
     .button {
       display: inline-block;
@@ -367,9 +379,14 @@ func (dt *Flat) HTMLTemplate() string {
                               <tr>
                                 <td align="center">
                                   <div>
-                                    <a href="{{ $action.Button.Link }}" class="button" style="{{ with $action.Button.Color }}background-color: {{ . }};{{ end }} {{ with $action.Button.TextColor }}color: {{ . }};{{ end }}" target="_blank">
-                                      {{ $action.Button.Text }}
-                                    </a>
+                                    {{ if $action.InviteCode }}
+                                      <span class="invite-code">{{ $action.InviteCode }}</span>
+                                    {{ end }}
+                                    {{ if $action.Button.Text }}
+                                      <a href="{{ $action.Button.Link }}" class="button" style="{{ with $action.Button.Color }}background-color: {{ . }};{{ end }} {{ with $action.Button.TextColor }}color: {{ . }};{{ end }}" target="_blank">
+                                        {{ $action.Button.Text }}
+                                      </a>
+                                    {{ end }}
                                   </div>
                                 </td>
                               </tr>
@@ -479,7 +496,15 @@ func (dt *Flat) PlainTextTemplate() string {
   {{ end }}
   {{ with .Email.Body.Actions }} 
     {{ range $action := . }}
-      <p>{{ $action.Instructions }} {{ $action.Button.Link }}</p> 
+      <p>
+        {{ $action.Instructions }} 
+        {{ if $action.InviteCode }}
+          {{ $action.InviteCode }}
+        {{ end }}
+        {{ if $action.Button.Link }}
+          {{ $action.Button.Link }}
+        {{ end }}
+      </p> 
     {{ end }}
   {{ end }}
 {{ end }}
