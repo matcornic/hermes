@@ -142,7 +142,7 @@ func setDefaultHermesValues(h *Hermes) error {
 		TextDirection: defaultTextDirection,
 		Product: Product{
 			Name:        "Hermes",
-			Copyright:   "Copyright © 2019 Hermes. All rights reserved.",
+			Copyright:   "Copyright © 2020 Hermes. All rights reserved.",
 			TroubleText: "If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.",
 		},
 	}
