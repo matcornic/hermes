@@ -8,13 +8,15 @@ import (
 	"github.com/imdario/mergo"
 	"github.com/jaytaylor/html2text"
 	"github.com/russross/blackfriday/v2"
+	"github.com/vanng822/go-premailer/premailer"
 )
 
 // Hermes is an instance of the hermes email generator
 type Hermes struct {
-	Theme         Theme
-	TextDirection TextDirection
-	Product       Product
+	Theme              Theme
+	TextDirection      TextDirection
+	Product            Product
+	DisableCSSInlining bool
 }
 
 // Theme is an interface to implement when creating a new theme
@@ -191,11 +193,31 @@ func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {
 
 	// Generate the email from Golang template
 	// Allow usage of simple function from sprig : https://github.com/Masterminds/sprig
-	t, err := template.New("hermes").Funcs(sprig.FuncMap()).Funcs(templateFuncs).Parse(tplt)
+	t, err := template.New("hermes").Funcs(sprig.FuncMap()).Funcs(templateFuncs).Funcs(template.FuncMap{
+		"safe": func(s string) template.HTML { return template.HTML(s) }, // Used for keeping comments in generated template
+	}).Parse(tplt)
 	if err != nil {
 		return "", err
 	}
 	var b bytes.Buffer
-	t.Execute(&b, Template{*h, email})
-	return b.String(), nil
+	err = t.Execute(&b, Template{*h, email})
+	if err != nil {
+		return "", err
+	}
+
+	res := b.String()
+	if h.DisableCSSInlining {
+		return res, nil
+	}
+
+	// Inlining CSS
+	prem, err := premailer.NewPremailerFromString(res, premailer.NewOptions())
+	if err != nil {
+		return "", err
+	}
+	html, err := prem.Transform()
+	if err != nil {
+		return "", err
+	}
+	return html, nil
 }
