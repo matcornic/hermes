@@ -154,8 +154,8 @@ func (dt *Flat) HTMLTemplate() string {
       font-weight: bold;
     }
     blockquote {
-      margin: 1.7rem 0;
-      padding-left: 0.85rem;
+      margin: 25px 0;
+      padding-left: 10px;
       border-left: 10px solid #F0F2F4;
     }
     blockquote p {
@@ -363,10 +363,27 @@ func (dt *Flat) HTMLTemplate() string {
                         {{ if gt (len .) 0 }}
                           {{ range $action := . }}
                             <p>{{ $action.Instructions }}</p>
+                            {{safe "<!--[if mso]>" }}
+                            <div style="margin: 30px auto">
+                              <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
+                                xmlns:w="urn:schemas-microsoft-com:office:word" 
+                                href="{{ $action.Button.Link }}" 
+                                style="height:45px;v-text-anchor:middle;width:570px;background-color:{{ if $action.Button.Color }}{{ $action.Button.Color }}{{else}}#00948D{{ end }};"
+                                arcsize="0%" 
+                                {{ if $action.Button.Color }}strokecolor="{{ $action.Button.Color }}" fillcolor="{{ $action.Button.Color }}"{{ else }}strokecolor="#00948D" fillcolor="#00948D"{{ end }}
+                                >
+                                <w:anchorlock/>
+                                <center style="color: {{ if $action.Button.TextColor }}{{ $action.Button.TextColor }}{{else}}#FFFFFF{{ end }};font-size: 15px;text-align: center;font-family:sans-serif;font-weight:bold;">
+                                  {{ $action.Button.Text }}
+                                </center>
+                              </v:roundrect>
+                            </div>
+                            {{safe "<![endif]-->" }}
+                            {{safe "<!--[if !mso]><!-- -->"}}
                             <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                               <tr>
                                 <td align="center">
-                                  <div>
+                                  <div>                                    
                                     <a href="{{ $action.Button.Link }}" class="button" style="{{ with $action.Button.Color }}background-color: {{ . }};{{ end }} {{ with $action.Button.TextColor }}color: {{ . }};{{ end }}" target="_blank">
                                       {{ $action.Button.Text }}
                                     </a>
@@ -374,6 +391,7 @@ func (dt *Flat) HTMLTemplate() string {
                                 </td>
                               </tr>
                             </table>
+                            {{safe "<!--<![endif]-->"}}
                           {{ end }}
                         {{ end }}
                       {{ end }}
