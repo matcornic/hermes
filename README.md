@@ -223,7 +223,7 @@ h := hermes.Hermes{
 }
 ```
 
-Since `v2.1.0`, Hermes is automatically inlining all CSS to improve compatibility with email clients, thanks to [Premailer](github.com/vanng822/go-premailer/premailer).
+Since `v2.1.0`, Hermes is automatically inlining all CSS to improve compatibility with email clients, thanks to [Premailer](https://github.com/vanng822/go-premailer/premailer).
 You can disable this feature by setting `DisableCSSInlining` of `Hermes` struct to `true`.
 
 ```go
