@@ -294,6 +294,28 @@ A good practice is to describe action in footer in case of problem when displayi
 {{ end }}
 ```
 
+Be aware that Outlook HTML engine is very old and is not compatible with many CSS features.
+It means, if you want to create a button, the best solution is to create a case only for Outlook. For example, in flat theme, the following code is used to create a button which is a Microsoft VML rectangle. It will not be as perfect as pure CSS interpreted by recent engines, but it will do the work.
+
+```
+{{safe "<!--[if mso]>" }}
+<div style="margin: 30px auto">
+    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
+    xmlns:w="urn:schemas-microsoft-com:office:word" 
+    href="{{ $action.Button.Link }}" 
+    style="height:45px;v-text-anchor:middle;width:570px;background-color:{{ if $action.Button.Color }}{{ $action.Button.Color }}{{else}}#00948D{{ end }};"
+    arcsize="0%" 
+    {{ if $action.Button.Color }}strokecolor="{{ $action.Button.Color }}" fillcolor="{{ $action.Button.Color }}"{{ else }}strokecolor="#00948D" fillcolor="#00948D"{{ end }}
+    >
+    <w:anchorlock/>
+    <center style="color: {{ if $action.Button.TextColor }}{{ $action.Button.TextColor }}{{else}}#FFFFFF{{ end }};font-size: 15px;text-align: center;font-family:sans-serif;font-weight:bold;">
+        {{ $action.Button.Text }}
+    </center>
+    </v:roundrect>
+</div>
+{{safe "<![endif]-->" }}
+```
+
 ## Outro Injection
 
 The following will inject the outro text (string or array) into the e-mail:

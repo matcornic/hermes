@@ -148,8 +148,8 @@ func (dt *Default) HTMLTemplate() string {
       font-weight: bold;
     }
     blockquote {
-      margin: 1.7rem 0;
-      padding-left: 0.85rem;
+      margin: 25px 0;
+      padding-left: 10px;
       border-left: 10px solid #F0F2F4;
     }
     blockquote p {
@@ -234,7 +234,6 @@ func (dt *Default) HTMLTemplate() string {
     /* Buttons ------------------------------ */
     .button {
       display: inline-block;
-      width: 200px;
       background-color: #3869D4;
       border-radius: 3px;
       color: #ffffff !important;
@@ -363,17 +362,38 @@ func (dt *Default) HTMLTemplate() string {
                         {{ if gt (len .) 0 }}
                           {{ range $action := . }}
                             <p>{{ $action.Instructions }}</p>
+                            {{ $length := len $action.Button.Text }}
+                            {{ $width := add (mul $length 9) 20 }}
+                            {{if (lt $width 200)}}{{$width = 200}}{{else if (gt $width 570)}}{{$width = 570}}{{else}}{{end}}
+                            {{safe "<!--[if mso]>" }}
+                            <div style="margin: 30px auto;v-text-anchor:middle;text-align:center">
+                              <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
+                                xmlns:w="urn:schemas-microsoft-com:office:word" 
+                                href="{{ $action.Button.Link }}" 
+                                style="height:45px;v-text-anchor:middle;width:{{$width}}px;background-color:{{ if $action.Button.Color }}{{ $action.Button.Color }}{{ else }}#3869D4{{ end }};"
+                                arcsize="10%" 
+                                {{ if $action.Button.Color }}strokecolor="{{ $action.Button.Color }}" fillcolor="{{ $action.Button.Color }}"{{ else }}strokecolor="#3869D4" fillcolor="#3869D4"{{ end }}
+                                >
+                                <w:anchorlock/>
+                                <center style="color: {{ if $action.Button.TextColor }}{{ $action.Button.TextColor }}{{else}}#FFFFFF{{ end }};font-size: 15px;text-align: center;font-family:sans-serif;font-weight:bold;">
+                                  {{ $action.Button.Text }}
+                                </center>
+                              </v:roundrect>
+                            </div>
+                            {{safe "<![endif]-->" }}
+                            {{safe "<!--[if !mso]><!-- -->"}}
                             <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                               <tr>
                                 <td align="center">
                                   <div>
-                                    <a href="{{ $action.Button.Link }}" class="button" style="{{ with $action.Button.Color }}background-color: {{ . }};{{ end }} {{ with $action.Button.TextColor }}color: {{ . }};{{ end }}" target="_blank">
+                                    <a href="{{ $action.Button.Link }}" class="button" style="{{ with $action.Button.Color }}background-color: {{ . }};{{ end }} {{ with $action.Button.TextColor }}color: {{ . }};{{ end }} width: {{$width}}px;" target="_blank">
                                       {{ $action.Button.Text }}
                                     </a>
                                   </div>
                                 </td>
                               </tr>
                             </table>
+                            {{safe "<![endif]-->" }}
                           {{ end }}
                         {{ end }}
                       {{ end }}

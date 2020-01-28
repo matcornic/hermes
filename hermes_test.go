@@ -41,7 +41,8 @@ func (ed *SimpleExample) getExample() (Hermes, Email) {
 			Copyright: "Copyright © Hermes-Test",
 			Logo:      "http://www.duchess-france.org/wp-content/uploads/2016/01/gopher.png",
 		},
-		TextDirection: TDLeftToRight,
+		TextDirection:      TDLeftToRight,
+		DisableCSSInlining: true,
 	}
 
 	email := Email{
@@ -161,6 +162,7 @@ func (ed *WithTitleInsteadOfNameExample) getExample() (Hermes, Email) {
 			Name: "Hermes",
 			Link: "http://hermes.com",
 		},
+		DisableCSSInlining: true,
 	}
 
 	email := Email{
@@ -193,6 +195,7 @@ func (ed *WithGreetingDifferentThanDefault) getExample() (Hermes, Email) {
 			Name: "Hermes",
 			Link: "http://hermes.com",
 		},
+		DisableCSSInlining: true,
 	}
 
 	email := Email{
@@ -225,6 +228,7 @@ func (ed *WithSignatureDifferentThanDefault) getExample() (Hermes, Email) {
 			Name: "Hermes",
 			Link: "http://hermes.com",
 		},
+		DisableCSSInlining: true,
 	}
 
 	email := Email{
@@ -257,6 +261,7 @@ func (ed *WithFreeMarkdownContent) getExample() (Hermes, Email) {
 			Name: "Hermes",
 			Link: "http://hermes.com",
 		},
+		DisableCSSInlining: true,
 	}
 
 	email := Email{
@@ -409,7 +414,8 @@ func TestHermes_TextDirectionAsDefault(t *testing.T) {
 			Name: "Hermes",
 			Link: "http://hermes.com",
 		},
-		TextDirection: "not-existing", // Wrong text-direction
+		TextDirection:      "not-existing", // Wrong text-direction
+		DisableCSSInlining: true,
 	}
 
 	email := Email{
@@ -449,7 +455,7 @@ func TestHermes_Default(t *testing.T) {
 	assert.Equal(t, h.TextDirection, TDLeftToRight)
 	assert.Equal(t, h.Theme, new(Default))
 	assert.Equal(t, h.Product.Name, "Hermes")
-	assert.Equal(t, h.Product.Copyright, "Copyright © 2019 Hermes. All rights reserved.")
+	assert.Equal(t, h.Product.Copyright, "Copyright © 2020 Hermes. All rights reserved.")
 
 	assert.Empty(t, email.Body.Actions)
 	assert.Empty(t, email.Body.Dictionary)
