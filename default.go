@@ -234,7 +234,10 @@ func (dt *Default) HTMLTemplate() string {
     /* Invite Code ------------------------------ */
     .invite-code {
       display: inline-block;
-      padding: 20px 36px 16px 36px;
+      padding-top: 20px;
+      padding-right: 36px;
+      padding-bottom: 16px;
+      padding-left: 36px;
       border-radius: 3px;
       font-family: Consolas, monaco, monospace;
       font-size: 28px;
@@ -377,40 +380,59 @@ func (dt *Default) HTMLTemplate() string {
                             {{ $length := len $action.Button.Text }}
                             {{ $width := add (mul $length 9) 20 }}
                             {{if (lt $width 200)}}{{$width = 200}}{{else if (gt $width 570)}}{{$width = 570}}{{else}}{{end}}
-                            {{safe "<!--[if mso]>" }}
-                            <div style="margin: 30px auto;v-text-anchor:middle;text-align:center">
-                              <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
-                                xmlns:w="urn:schemas-microsoft-com:office:word" 
-                                href="{{ $action.Button.Link }}" 
-                                style="height:45px;v-text-anchor:middle;width:{{$width}}px;background-color:{{ if $action.Button.Color }}{{ $action.Button.Color }}{{ else }}#3869D4{{ end }};"
-                                arcsize="10%" 
-                                {{ if $action.Button.Color }}strokecolor="{{ $action.Button.Color }}" fillcolor="{{ $action.Button.Color }}"{{ else }}strokecolor="#3869D4" fillcolor="#3869D4"{{ end }}
-                                >
-                                <w:anchorlock/>
-                                <center style="color: {{ if $action.Button.TextColor }}{{ $action.Button.TextColor }}{{else}}#FFFFFF{{ end }};font-size: 15px;text-align: center;font-family:sans-serif;font-weight:bold;">
-                                  {{ $action.Button.Text }}
-                                </center>
-                              </v:roundrect>
-                            </div>
-                            {{safe "<![endif]-->" }}
-                            {{safe "<!--[if !mso]><!-- -->"}}
-                            <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
-                              <tr>
-                                <td align="center">
-                                  <div>
-                                    {{ if $action.InviteCode }}
-                                      <span class="invite-code">{{ $action.InviteCode }}</span>
-                                    {{ end }}
-                                    {{ if $action.Button.Text }}
-                                      <a href="{{ $action.Button.Link }}" class="button" style="{{ with $action.Button.Color }}background-color: {{ . }};{{ end }} {{ with $action.Button.TextColor }}color: {{ . }};{{ end }}" target="_blank">
-                                        {{ $action.Button.Text }}
-                                      </a>
-                                    {{ end }}
-                                  </div>
-                                </td>
-                              </tr>
-                            </table>
-                            {{safe "<![endif]-->" }}
+                              {{safe "<!--[if mso]>" }}
+                              {{ if $action.Button.Text }}
+                                <div style="margin: 30px auto;v-text-anchor:middle;text-align:center">
+                                  <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
+                                    xmlns:w="urn:schemas-microsoft-com:office:word" 
+                                    href="{{ $action.Button.Link }}" 
+                                    style="height:45px;v-text-anchor:middle;width:{{$width}}px;background-color:{{ if $action.Button.Color }}{{ $action.Button.Color }}{{ else }}#3869D4{{ end }};"
+                                    arcsize="10%" 
+                                    {{ if $action.Button.Color }}strokecolor="{{ $action.Button.Color }}" fillcolor="{{ $action.Button.Color }}"{{ else }}strokecolor="#3869D4" fillcolor="#3869D4"{{ end }}
+                                    >
+                                    <w:anchorlock/>
+                                    <center style="color: {{ if $action.Button.TextColor }}{{ $action.Button.TextColor }}{{else}}#FFFFFF{{ end }};font-size: 15px;text-align: center;font-family:sans-serif;font-weight:bold;">
+                                      {{ $action.Button.Text }}
+                                    </center>
+                                  </v:roundrect>
+                                </div>
+                              {{ end }}
+                              {{ if $action.InviteCode }}
+                                <div style="margin-top:30px;margin-bottom:30px">
+                                  <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                      <td align="center">
+                                        <table align="center" cellpadding="0" cellspacing="0" style="padding:0;text-align:center">
+                                          <tr>
+                                            <td style="display:inline-block;border-radius:3px;font-family:Consolas, monaco, monospace;font-size:28px;text-align:center;letter-spacing:8px;color:#555;background-color:#eee;padding:20px">
+                                              {{ $action.InviteCode }}
+                                            </td>
+                                          </tr>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </div>
+                              {{ end }}   
+                              {{safe "<![endif]-->" }}
+                              {{safe "<!--[if !mso]><!-- -->"}}
+                              <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                  <td align="center">
+                                    <div>
+                                      {{ if $action.Button.Text }}
+                                        <a href="{{ $action.Button.Link }}" class="button" style="{{ with $action.Button.Color }}background-color: {{ . }};{{ end }} {{ with $action.Button.TextColor }}color: {{ . }};{{ end }} width: {{$width}}px;" target="_blank">
+                                          {{ $action.Button.Text }}
+                                        </a>
+                                      {{end}}
+                                      {{ if $action.InviteCode }}
+                                        <span class="invite-code">{{ $action.InviteCode }}</span>
+                                      {{end}}
+                                    </div>
+                                  </td>
+                                </tr>
+                              </table>
+                              {{safe "<![endif]-->" }}
                           {{ end }}
                         {{ end }}
                       {{ end }}
@@ -435,12 +457,14 @@ func (dt *Default) HTMLTemplate() string {
                         <table class="body-sub">
                           <tbody>
                               {{ range $action := . }}
+                                {{if $action.Button.Text}}
                                 <tr>
                                   <td>
                                     <p class="sub">{{$.Hermes.Product.TroubleText | replace "{ACTION}" $action.Button.Text}}</p>
                                     <p class="sub"><a href="{{ $action.Button.Link }}">{{ $action.Button.Link }}</a></p>
                                   </td>
                                 </tr>
+                                {{ end }}
                               {{ end }}
                           </tbody>
                         </table>

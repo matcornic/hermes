@@ -240,7 +240,10 @@ func (dt *Flat) HTMLTemplate() string {
     /* Invite Code ------------------------------ */
     .invite-code {
       display: inline-block;
-      padding: 20px 36px 16px 36px;
+      padding-top: 20px;
+      padding-right: 36px;
+      padding-bottom: 16px;
+      padding-left: 36px;
       border-radius: 3px;
       font-family: Consolas, monaco, monospace;
       font-size: 28px;
@@ -376,6 +379,7 @@ func (dt *Flat) HTMLTemplate() string {
                           {{ range $action := . }}
                             <p>{{ $action.Instructions }}</p>
                             {{safe "<!--[if mso]>" }}
+                            {{ if $action.Button.Text }}
                             <div style="margin: 30px auto">
                               <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
                                 xmlns:w="urn:schemas-microsoft-com:office:word" 
@@ -390,26 +394,44 @@ func (dt *Flat) HTMLTemplate() string {
                                 </center>
                               </v:roundrect>
                             </div>
+                            {{ end }}
+                            {{ if $action.InviteCode }}
+                            <div style="margin-top:30px;margin-bottom:30px">
+                              <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                  <td align="center">
+                                    <table align="center" cellpadding="0" cellspacing="0" style="padding:0;text-align:center">
+                                      <tr>
+                                        <td style="display:inline-block;border-radius:3px;font-family:Consolas, monaco, monospace;font-size:28px;text-align:center;letter-spacing:8px;color:#555;background-color:#eee;padding:20px">
+                                          {{ $action.InviteCode }}
+                                        </td>
+                                      </tr>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                            {{ end }} 
                             {{safe "<![endif]-->" }}
                             {{safe "<!--[if !mso]><!-- -->"}}
                             <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                               <tr>
                                 <td align="center">
                                   <div>
-                                    {{ if $action.InviteCode }}
-                                      <span class="invite-code">{{ $action.InviteCode }}</span>
-                                    {{ end }}
                                     {{ if $action.Button.Text }}
                                       <a href="{{ $action.Button.Link }}" class="button" style="{{ with $action.Button.Color }}background-color: {{ . }};{{ end }} {{ with $action.Button.TextColor }}color: {{ . }};{{ end }}" target="_blank">
                                         {{ $action.Button.Text }}
                                       </a>
-                                    {{ end }}
+                                    {{end}}
+                                    {{ if $action.InviteCode }}
+                                      <span class="invite-code">{{ $action.InviteCode }}</span>
+                                    {{end}}
                                   </div>
                                 </td>
                               </tr>
                             </table>
-                            {{safe "<!--<![endif]-->"}}
-                          {{ end }}
+                            {{safe "<![endif]-->" }}
+                            {{ end }}
                         {{ end }}
                       {{ end }}
 
@@ -433,12 +455,14 @@ func (dt *Flat) HTMLTemplate() string {
                         <table class="body-sub">
                           <tbody>
                               {{ range $action := . }}
+                              {{if $action.Button.Text}}
                                 <tr>
                                   <td>
                                     <p class="sub">{{$.Hermes.Product.TroubleText | replace "{ACTION}" $action.Button.Text}}</p>
                                     <p class="sub"><a href="{{ $action.Button.Link }}">{{ $action.Button.Link }}</a></p>
                                   </td>
                                 </tr>
+                              {{ end }}
                               {{ end }}
                           </tbody>
                         </table>

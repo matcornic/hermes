@@ -33,6 +33,7 @@ func main() {
 		new(reset),
 		new(receipt),
 		new(maintenance),
+		new(inviteCode),
 	}
 
 	themes := []hermes.Theme{
