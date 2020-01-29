@@ -21,7 +21,7 @@ First install the package:
 go get -u github.com/matcornic/hermes/v2
 ```
 
-> Starting from release *v2.0.0*, Hermes uses [Go modules](https://github.com/golang/go/wiki/Modules). The latest version of Hermes requires Go 1.11 with gomodules enabled.
+> Starting from release *v2.0.0*, Hermes uses [Go modules](https://github.com/golang/go/wiki/Modules). The latest version of Hermes requires at least Go 1.11 with gomodules enabled.
 > You can still use an Hermes release compatible with prior Go versions by using *v1.2.0* release
 
 Then, start using the package by importing and configuring it:
@@ -113,7 +113,8 @@ Copyright © 2017 Hermes. All rights reserved.
 
 ## More Examples
 
-* [Welcome](examples/welcome.go)
+* [Welcome with button](examples/welcome.go)
+* [Welcome with invite code](examples/invite_code.go)
 * [Receipt](examples/receipt.go)
 * [Password Reset](examples/reset.go)
 * [Maintenance](examples/maintenance.go)
@@ -252,6 +253,21 @@ email := hermes.Email{
                     Text:  "Confirm your account",
                     Link:  "https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010",
                 },
+            },
+        },
+    },
+}
+```
+
+Alternatively, instead of having a button, an action can be an invite code as follows:
+
+```go
+email := hermes.Email{
+    Body: hermes.Body{
+        Actions: []hermes.Action{
+            {
+                Instructions: "To get started with Hermes, please use the invite code:",
+                InviteCode: "123456",
             },
         },
     },

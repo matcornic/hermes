@@ -250,6 +250,44 @@ func (ed *WithSignatureDifferentThanDefault) assertPlainTextContent(t *testing.T
 	assert.Contains(t, r, "Best regards", "Should have greeting with Dear")
 }
 
+type WithInviteCode struct {
+	theme Theme
+}
+
+func (ed *WithInviteCode) getExample() (Hermes, Email) {
+	h := Hermes{
+		Theme: ed.theme,
+		Product: Product{
+			Name: "Hermes",
+			Link: "http://hermes.com",
+		},
+		DisableCSSInlining: true,
+	}
+
+	email := Email{
+		Body{
+			Name:      "Jon Snow",
+			Actions: []Action{
+				{
+					Instructions: "Here is your invite code:",
+					InviteCode: "123456",
+				},
+			},
+		},
+	}
+	return h, email
+}
+
+func (ed *WithInviteCode) assertHTMLContent(t *testing.T, r string) {
+	assert.Contains(t, r, "Here is your invite code", "Should contains the instruction")
+	assert.Contains(t, r, "123456", "Should contain the short code")
+}
+
+func (ed *WithInviteCode) assertPlainTextContent(t *testing.T, r string) {
+	assert.Contains(t, r, "Here is your invite code", "Should contains the instruction")
+	assert.Contains(t, r, "123456", "Should contain the short code")
+}
+
 type WithFreeMarkdownContent struct {
 	theme Theme
 }
@@ -377,6 +415,12 @@ func TestThemeWithGreetingDiffrentThanDefault(t *testing.T) {
 func TestThemeWithFreeMarkdownContent(t *testing.T) {
 	for _, theme := range testedThemes {
 		checkExample(t, &WithFreeMarkdownContent{theme})
+	}
+}
+
+func TestThemeWithInviteCode(t *testing.T) {
+	for _, theme := range testedThemes {
+		checkExample(t, &WithInviteCode{theme})
 	}
 }
 

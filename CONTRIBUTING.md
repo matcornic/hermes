@@ -316,6 +316,28 @@ It means, if you want to create a button, the best solution is to create a case 
 {{safe "<![endif]-->" }}
 ```
 
+When the action is an invite code, use this kind of code:
+
+```html
+{{ if $action.InviteCode }}
+    <div style="margin-top:30px;margin-bottom:30px">
+        <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="center">
+            <table align="center" cellpadding="0" cellspacing="0" style="padding:0;text-align:center">
+                <tr>
+                <td style="display:inline-block;border-radius:3px;font-family:Consolas, monaco, monospace;font-size:28px;text-align:center;letter-spacing:8px;color:#555;background-color:#eee;padding:20px">
+                    {{ $action.InviteCode }}
+                </td>
+                </tr>
+            </table>
+            </td>
+        </tr>
+        </table>
+    </div>
+{{ end }}   
+```
+
 ## Outro Injection
 
 The following will inject the outro text (string or array) into the e-mail:
