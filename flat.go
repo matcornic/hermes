@@ -300,12 +300,16 @@ func (dt *Flat) HTMLTemplate() string {
                 <tr>
                   <td class="content-cell">
                     <h1>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }},{{ end }}</h1>
-                    {{ with .Email.Body.Intros }}
+                    {{ if (ne .Email.Body.IntrosMarkdown "") }}
+                      {{ .Email.Body.IntrosMarkdown.ToHTML }}
+                    {{ else }}
+                      {{ with .Email.Body.Intros }}
                         {{ if gt (len .) 0 }}
                           {{ range $line := . }}
                             <p>{{ $line }}</p>
                           {{ end }}
                         {{ end }}
+                      {{ end }}
                     {{ end }}
                     {{ if (ne .Email.Body.FreeMarkdown "") }}
                       {{ .Email.Body.FreeMarkdown.ToHTML }}
@@ -436,17 +440,24 @@ func (dt *Flat) HTMLTemplate() string {
                       {{ end }}
 
                     {{ end }}
-                    {{ with .Email.Body.Outros }} 
+                    {{ if (ne .Email.Body.OutrosMarkdown "") }}
+                      {{ .Email.Body.OutrosMarkdown.ToHTML }}
+                    {{ else }}
+                      {{ with .Email.Body.Outros }}
                         {{ if gt (len .) 0 }}
                           {{ range $line := . }}
                             <p>{{ $line }}</p>
                           {{ end }}
                         {{ end }}
                       {{ end }}
+                    {{ end }}
 
                     <p>
                       {{.Email.Body.Signature}},
                       <br />
+                      {{ if (ne .Email.Body.SignatureName "") }}
+                      {{.Email.Body.SignatureName}}<br />
+                      {{ end }}
                       {{.Hermes.Product.Name}}
                     </p>
 
@@ -498,9 +509,13 @@ func (dt *Flat) HTMLTemplate() string {
 // PlainTextTemplate returns a Golang template that will generate an plain text email.
 func (dt *Flat) PlainTextTemplate() string {
 	return `<h2>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }}{{ end }},</h2>
-{{ with .Email.Body.Intros }}
-  {{ range $line := . }}
-    <p>{{ $line }}</p>
+{{ if (ne .Email.Body.IntrosMarkdown "") }}
+  {{ .Email.Body.IntrosMarkdown.ToHTML }}
+{{ else }}
+  {{ with .Email.Body.Intros }}
+    {{ range $line := . }}
+      <p>{{ $line }}</p>
+    {{ end }}
   {{ end }}
 {{ end }}
 {{ if (ne .Email.Body.FreeMarkdown "") }}
@@ -550,12 +565,23 @@ func (dt *Flat) PlainTextTemplate() string {
     {{ end }}
   {{ end }}
 {{ end }}
-{{ with .Email.Body.Outros }} 
-  {{ range $line := . }}
-    <p>{{ $line }}<p>
+{{ if (ne .Email.Body.OutrosMarkdown "") }}
+  {{ .Email.Body.OutrosMarkdown.ToHTML }}
+{{ else }}
+  {{ with .Email.Body.Outros }}
+    {{ range $line := . }}
+      <p>{{ $line }}<p>
+    {{ end }}
   {{ end }}
 {{ end }}
-<p>{{.Email.Body.Signature}},<br>{{.Hermes.Product.Name}} - {{.Hermes.Product.Link}}</p>
+<p>
+  {{.Email.Body.Signature}},
+  <br>
+  {{ if (ne .Email.Body.SignatureName "") }}
+    {{.Email.Body.SignatureName}}<br>
+  {{ end }}
+  {{.Hermes.Product.Name}} - {{.Hermes.Product.Link}}
+</p>
 
 <p>{{.Hermes.Product.Copyright}}</p>
 `
