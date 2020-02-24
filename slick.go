@@ -72,14 +72,7 @@ a, a:hover {
 			padding-top: 20px;
 			padding-bottom: 20px;">
 
-			<!-- PREHEADER -->
-			<!-- Set text color to background color -->
-			<div style="display: none; visibility: hidden; overflow: hidden; opacity: 0; font-size: 1px; line-height: 1px; height: 0; max-height: 0; max-width: 0;
-			color: #F0F0F0;" class="preheader">
-				Available on&nbsp;GitHub and&nbsp;CodePen. Highly compatible. Designer friendly. More than 50%&nbsp;of&nbsp;total email opens occurred on&nbsp;a&nbsp;mobile device&nbsp;— a&nbsp;mobile-friendly design is&nbsp;a&nbsp;must for&nbsp;email campaigns.</div>
-
 			<!-- LOGO -->
-			<!-- Image text color should be opposite to background color. Set your url, image src, alt and title. Alt text should fit the image size. Real image size should be x2. URL format: http://domain.com/?utm_source={{Campaign-Source}}&utm_medium=email&utm_content=logo&utm_campaign={{Campaign-Name}} -->
 			<a target="_blank" style="text-decoration: none;" href="{{.Hermes.Product.Link}}">
                 {{ if .Hermes.Product.Logo }}
                   <img border="0" vspace="0" hspace="0"
@@ -114,7 +107,7 @@ a, a:hover {
                 {{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }},{{ end }}
 		</td>
 	</tr>
-	
+
 	<!-- SUBHEADER -->
     {{ with .Email.Body.Intros }}
         {{ if gt (len .) 0 }}
@@ -130,6 +123,7 @@ a, a:hover {
           {{ end }}
         {{ end }}
     {{ end }}
+
     {{ if (ne .Email.Body.FreeMarkdown "") }}
       {{ .Email.Body.FreeMarkdown.ToHTML }}
     {{ else }}
@@ -148,9 +142,9 @@ a, a:hover {
 	</tr>
     {{ end }}
 
-    {{ with .Email.Body.Dictionary }} 
+    {{ with .Email.Body.Dictionary }}
       {{ if gt (len .) 0 }}
-	<tr>	
+	<tr>
 		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
 			padding-top: 25px;" class="paragraph">
         <dl>
@@ -164,11 +158,11 @@ a, a:hover {
       {{ end }}
     {{ end }}
 
-    {{ with .Email.Body.Exploration }} 
+    <!-- Exploration -->
+    {{ with .Email.Body.Exploration }}
       {{ if gt (len .) 0 }}
-	<!-- LINE -->
 	<!-- Set line color -->
-	<tr>	
+	<tr>
 		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
 			padding-top: 25px;" class="line"><hr
 			color="#E0E0E0" align="center" width="100%" size="1" noshade style="margin: 0; padding: 0;" />
@@ -179,12 +173,11 @@ a, a:hover {
 	<!-- LIST -->
 	<tr>
 		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%;" class="list-item"><table align="center" border="0" cellspacing="0" cellpadding="0" style="width: inherit; margin: 0; padding: 0; border-collapse: collapse; border-spacing: 0;">
-			
+
 			<!-- LIST ITEM -->
 			<tr>
 
 				<!-- LIST ITEM IMAGE -->
-				<!-- Image text color should be opposite to background color. Set your url, image src, alt and title. Alt text should fit the image size. Real image size should be x2 -->
 				<td align="left" valign="top" style="border-collapse: collapse; border-spacing: 0;
 					padding-top: 30px;
 					padding-right: 20px;"><img
@@ -195,7 +188,6 @@ a, a:hover {
 					width="{{ $entry.Image.Width }}" height="{{ $entry.Image.Height }}"></td>
 
 				<!-- LIST ITEM TEXT -->
-				<!-- Set text color and font family ("sans-serif" or "Georgia, serif"). Duplicate all text styles in links, including line-height -->
 				<td align="left" valign="top" style="font-size: 17px; font-weight: 400; line-height: 160%; border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
 					padding-top: 25px;
 					color: #000000;
@@ -212,7 +204,7 @@ a, a:hover {
 
 	<!-- LINE -->
 	<!-- Set line color -->
-	<tr>	
+	<tr>
 		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
 			padding-top: 25px;" class="line"><hr
 			color="#E0E0E0" align="center" width="100%" size="1" noshade style="margin: 0; padding: 0;" />
@@ -226,7 +218,7 @@ a, a:hover {
                         {{ $data := .Data }}
                         {{ $columns := .Columns }}
                         {{ if gt (len $data) 0 }}
-	<tr>	
+	<tr>
 		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
 			padding-top: 25px;" class="paragraph">
                           <table width="100%" cellpadding="0" cellspacing="0">
@@ -284,7 +276,7 @@ a, a:hover {
 	<!-- PARAGRAPH -->
 	<tr>
 		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%; font-size: 17px; font-weight: 400; line-height: 160%;
-			padding-top: 25px; 
+			padding-top: 25px;
 			color: #000000;
 			font-family: sans-serif;" class="paragraph">
                 {{ $action.Instructions }}
@@ -323,13 +315,13 @@ a, a:hover {
     {{ end }}
   {{ end }}
 
-    {{ with .Email.Body.Outros }} 
+    {{ with .Email.Body.Outros }}
       {{ if gt (len .) 0 }}
         {{ range $line := . }}
 	<!-- PARAGRAPH -->
 	<tr>
 		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%; font-size: 17px; font-weight: 400; line-height: 160%;
-			padding-top: 25px; 
+			padding-top: 25px;
 			color: #000000;
 			font-family: sans-serif;" class="paragraph">
              {{ $line }}
@@ -337,6 +329,8 @@ a, a:hover {
 	</tr>
         {{ end }}
       {{ end }}
+    {{ end }}
+<!-- MAINBODY -->
     {{ end }}
 
 <!-- End of WRAPPER -->
@@ -350,7 +344,7 @@ a, a:hover {
 
 	<!-- FOOTER -->
                     {{ if (eq .Email.Body.FreeMarkdown "") }}
-                      {{ with .Email.Body.Actions }} 
+                      {{ with .Email.Body.Actions }}
                               {{ range $action := . }}
                                 {{if $action.Button.Text}}
 	<tr>
