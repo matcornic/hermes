@@ -23,7 +23,8 @@ func (dt *Slick) HTMLTemplate() string {
 	<style>
 /* Reset styles */ 
 body { margin: 0; padding: 0; min-width: 100%; width: 100% !important; height: 100% !important;}
-body, table, td, div, p, a { -webkit-font-smoothing: antialiased; text-size-adjust: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; line-height: 100%; }
+body, table, td, div, p, a { -webkit-font-smoothing: antialiased; text-size-adjust: 100%;
+-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; line-height: 100%; }
 table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse !important; border-spacing: 0; }
 img { border: 0; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
 #outlook a { padding: 0; }
@@ -52,7 +53,10 @@ a, a:hover {
 
 <!-- BODY -->
 <!-- Set message background color (twice) and text color (twice) -->
-<body dir="{{.Hermes.TextDirection}}" topmargin="0" rightmargin="0" bottommargin="0" leftmargin="0" marginwidth="0" marginheight="0" width="100%" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; width: 100%; height: 100%; -webkit-font-smoothing: antialiased; text-size-adjust: 100%; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; line-height: 100%;
+<body dir="{{.Hermes.TextDirection}}" topmargin="0" rightmargin="0" bottommargin="0" leftmargin="0" marginwidth="0"
+marginheight="0" width="100%" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
+width: 100%; height: 100%; -webkit-font-smoothing: antialiased; text-size-adjust: 100%; -ms-text-size-adjust: 100%;
+-webkit-text-size-adjust: 100%; line-height: 100%;
 	background-color: #F0F0F0;
 	color: #000000;"
 	bgcolor="#F0F0F0"
@@ -60,7 +64,9 @@ a, a:hover {
 
 <!-- SECTION / BACKGROUND -->
 <!-- Set message background color one again -->
-<table width="100%" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; width: 100%;" class="background"><tr><td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;"
+<table width="100%" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;
+border-spacing: 0; margin: 0; padding: 0; width: 100%;" class="background"><tr><td align="center" valign="top"
+style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;"
 	bgcolor="#F0F0F0">
 
 <!-- WRAPPER -->
@@ -70,7 +76,8 @@ a, a:hover {
 	max-width: 560px;" class="wrapper">
 
 	<tr>
-		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
+		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0;
+		padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
 			padding-top: 20px;
 			padding-bottom: 20px;">
 
@@ -82,7 +89,8 @@ a, a:hover {
                   width="{{ .Hermes.Product.LogoWidth }}" height="{{ .Hermes.Product.LogoHeight }}"
                   alt="Logo" title="Logo" style="
                   color: #000000;
-                  font-size: 10px; margin: 0; padding: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; border: none; display: block;" />
+                  font-size: 10px; margin: 0; padding: 0; outline: none; text-decoration: none;
+				  -ms-interpolation-mode: bicubic; border: none; display: block;" />
                 {{ else }}
                   {{ .Hermes.Product.Name }}
                 {{ end }}
@@ -103,7 +111,9 @@ a, a:hover {
 
 	<!-- HEADER -->
 	<tr>
-		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%; font-size: 24px; font-weight: bold; line-height: 130%;
+		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0;
+		padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%; font-size: 24px;
+		font-weight: bold; line-height: 130%;
 			padding-top: 25px;
 			color: #000000;
 			font-family: sans-serif;" class="header">
@@ -116,7 +126,9 @@ a, a:hover {
         {{ if gt (len .) 0 }}
           {{ range $line := . }}
           <tr>
-              <td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-bottom: 3px; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%; font-size: 18px; font-weight: 300; line-height: 150%;
+              <td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0;
+			  padding: 0; padding-bottom: 3px; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
+			  font-size: 18px; font-weight: 300; line-height: 150%;
                   padding-top: 5px;
                   color: #000000;
                   font-family: sans-serif;" class="subheader">
@@ -141,14 +153,16 @@ a, a:hover {
 			width="{{.Email.Body.Hero.Width}}" height="{{.Email.Body.Hero.Height}}" style="
 			width: 100%;
 			max-width: 560px;
-			color: #000000; font-size: 13px; margin: 0; padding: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; border: none; display: block;"/></a></td>
+			color: #000000; font-size: 13px; margin: 0; padding: 0; outline: none; text-decoration: none;
+			-ms-interpolation-mode: bicubic; border: none; display: block;"/></a></td>
 	</tr>
     {{ end }}
 
     {{ with .Email.Body.Dictionary }}
       {{ if gt (len .) 0 }}
 	<tr>
-		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
+		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
+		padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
 			padding-top: 25px;" class="paragraph">
         <dl>
           {{ range $entry := . }}
@@ -166,7 +180,8 @@ a, a:hover {
       {{ if gt (len .) 0 }}
 	<!-- Set line color -->
 	<tr>
-		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
+		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
+		padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
 			padding-top: 25px;" class="line"><hr
 			color="#E0E0E0" align="center" width="100%" size="1" noshade style="margin: 0; padding: 0;" />
 		</td>
@@ -175,7 +190,9 @@ a, a:hover {
           {{ range $entry := . }}
 	<!-- LIST -->
 	<tr>
-		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%;" class="list-item"><table align="center" border="0" cellspacing="0" cellpadding="0" style="width: inherit; margin: 0; padding: 0; border-collapse: collapse; border-spacing: 0;">
+		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
+		padding-left: 6.25%; padding-right: 6.25%;" class="list-item"><table align="center" border="0" cellspacing="0"
+		cellpadding="0" style="width: inherit; margin: 0; padding: 0; border-collapse: collapse; border-spacing: 0;">
 
 			<!-- LIST ITEM -->
 			<tr>
@@ -184,14 +201,16 @@ a, a:hover {
 				<td align="left" valign="top" style="border-collapse: collapse; border-spacing: 0;
 					padding-top: 30px;
 					padding-right: 20px;"><img
-				border="0" vspace="0" hspace="0" style="border-radius: 50%; padding: 0; margin: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; border: none; display: block;
+				border="0" vspace="0" hspace="0" style="border-radius: 50%; padding: 0; margin: 0; outline: none;
+				text-decoration: none; -ms-interpolation-mode: bicubic; border: none; display: block;
 					color: #000000;"
 					src="{{ $entry.Image.URL }}"
 					alt="H" title="{{ $entry.Image.Title }}"
 					width="{{ $entry.Image.Width }}" height="{{ $entry.Image.Height }}"></td>
 
 				<!-- LIST ITEM TEXT -->
-				<td align="left" valign="top" style="font-size: 17px; font-weight: 400; line-height: 160%; border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
+				<td align="left" valign="top" style="font-size: 17px; font-weight: 400; line-height: 160%;
+				border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
 					padding-top: 25px;
 					color: #000000;
 					font-family: sans-serif;" class="paragraph">
@@ -208,7 +227,8 @@ a, a:hover {
 	<!-- LINE -->
 	<!-- Set line color -->
 	<tr>
-		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
+		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
+		padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
 			padding-top: 25px;" class="line"><hr
 			color="#E0E0E0" align="center" width="100%" size="1" noshade style="margin: 0; padding: 0;" />
 		</td>
@@ -222,7 +242,8 @@ a, a:hover {
                         {{ $columns := .Columns }}
                         {{ if gt (len $data) 0 }}
 	<tr>
-		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
+		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
+		padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
 			padding-top: 25px;" class="paragraph">
                           <table width="100%" cellpadding="0" cellspacing="0">
                             <tr>
@@ -278,7 +299,8 @@ a, a:hover {
       {{ range $action := . }}
 	<!-- PARAGRAPH -->
 	<tr>
-		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%; font-size: 17px; font-weight: 400; line-height: 160%;
+		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
+		padding-left: 6.25%; padding-right: 6.25%; width: 87.5%; font-size: 17px; font-weight: 400; line-height: 160%;
 			padding-top: 25px;
 			color: #000000;
 			font-family: sans-serif;" class="paragraph">
@@ -289,12 +311,18 @@ a, a:hover {
         {{ if $action.Button.Text }}
 	<!-- BUTTON -->
 	<tr>
-		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
+		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
+		padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
 			padding-top: 25px;
 			padding-bottom: 55px;" class="button">
-				<table border="0" cellpadding="0" cellspacing="0" align="center" style="max-width: 240px; min-width: 120px; border-collapse: collapse; border-spacing: 0; padding: 0;"><tr><td align="center" valign="middle" style="padding: 12px 24px; margin: 0; text-decoration: underline; border-collapse: collapse; border-spacing: 0; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px;"
-					bgcolor="{{ if $action.Button.Color }}{{ $action.Button.Color }}{{ else }}#E9703E{{ end }}"><a target="_blank" style="text-decoration: underline;
-					color: {{ if $action.Button.TextColor }}{{ $action.Button.TextColor }}{{else}}#FFFFFF{{ end }}; font-family: sans-serif; font-size: 17px; font-weight: 400; line-height: 120%;"
+				<table border="0" cellpadding="0" cellspacing="0" align="center" style="max-width: 240px; min-width: 120px;
+				border-collapse: collapse; border-spacing: 0; padding: 0;"><tr><td align="center" valign="middle"
+				style="padding: 12px 24px; margin: 0; text-decoration: underline; border-collapse: collapse;
+				border-spacing: 0; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px;"
+					bgcolor="{{ if $action.Button.Color }}{{ $action.Button.Color }}{{ else }}#E9703E{{ end }}">
+					<a target="_blank" style="text-decoration: underline;
+					color: {{ if $action.Button.TextColor }}{{ $action.Button.TextColor }}{{else}}#FFFFFF{{ end }};
+					font-family: sans-serif; font-size: 17px; font-weight: 400; line-height: 120%;"
 					href="{{ $action.Button.Link }}">
                         {{ $action.Button.Text }}
 					</a>
@@ -305,10 +333,15 @@ a, a:hover {
         {{ if $action.InviteCode }}
 	<!-- CODE -->
 	<tr>
-		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
+		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
+		padding-left: 6.25%; padding-right: 6.25%; width: 87.5%;
 			padding-top: 25px;
 			padding-bottom: 55px;" class="button">
-				<table border="0" cellpadding="0" cellspacing="0" align="center" style="max-width: 240px; min-width: 120px; border-collapse: collapse; border-spacing: 0; padding: 0;"><tr><td align="center" valign="middle" style="padding: 12px 24px; margin: 0; text-decoration: underline; border-collapse: collapse; border-spacing: 0; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; color: #555; font-family: sans-serif; font-size: 28px; font-weight: 400; line-height: 120%;" bgcolor="#eee">
+				<table border="0" cellpadding="0" cellspacing="0" align="center" style="max-width: 240px; min-width: 120px;
+				border-collapse: collapse; border-spacing: 0; padding: 0;"><tr><td align="center" valign="middle"
+				style="padding: 12px 24px; margin: 0; text-decoration: underline; border-collapse: collapse; border-spacing: 0;
+				border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; color: #555;
+				font-family: sans-serif; font-size: 28px; font-weight: 400; line-height: 120%;" bgcolor="#eee">
                         {{ $action.InviteCode }}
 			</td></tr></table>
 		</td>
@@ -323,7 +356,8 @@ a, a:hover {
         {{ range $line := . }}
 	<!-- PARAGRAPH -->
 	<tr>
-		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%; font-size: 17px; font-weight: 400; line-height: 160%;
+		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
+		padding-left: 6.25%; padding-right: 6.25%; width: 87.5%; font-size: 17px; font-weight: 400; line-height: 160%;
 			padding-top: 25px;
 			color: #000000;
 			font-family: sans-serif;" class="paragraph">
@@ -351,7 +385,8 @@ a, a:hover {
                               {{ range $action := . }}
                                 {{if $action.Button.Text}}
 	<tr>
-		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%; font-size: 13px; font-weight: 400; line-height: 150%;
+		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
+		padding-left: 6.25%; padding-right: 6.25%; width: 87.5%; font-size: 13px; font-weight: 400; line-height: 150%;
 			padding-top: 20px;
 			padding-bottom: 0px;
 			color: #555;
@@ -369,7 +404,8 @@ a, a:hover {
                     {{ end }}
     {{ if (ne .Email.Body.Unsubscribe.URL "") }}
 	<tr>
-		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0; padding-left: 6.25%; padding-right: 6.25%; width: 87.5%; font-size: 13px; font-weight: 400; line-height: 150%;
+		<td align="center" valign="top" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;
+		padding-left: 6.25%; padding-right: 6.25%; width: 87.5%; font-size: 13px; font-weight: 400; line-height: 150%;
 			padding-top: 20px;
 			padding-bottom: 20px;
 			color: #999999;
