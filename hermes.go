@@ -100,7 +100,7 @@ type Image struct {
 	Height int
 }
 
-// Usubscribe description
+// Unsubscribe description
 type Unsubscribe struct {
 	URL    string
 	Anchor string

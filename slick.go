@@ -1,3 +1,4 @@
+// Package hermes is the Go port of the great mailgen engine
 package hermes
 
 // Slick is the theme by Konstantin Savchenko https://github.com/konsav/email-templates/
