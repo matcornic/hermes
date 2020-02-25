@@ -8,7 +8,8 @@ func (dt *Slick) Name() string {
 	return "slick"
 }
 
-// HTMLTemplate returns a Golang template that will generate an HTML email.
+// HTMLTemplate returns a Golang template that will
+// generate an HTML email.
 func (dt *Slick) HTMLTemplate() string {
 	return `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -77,6 +78,7 @@ a, a:hover {
                 {{ if .Hermes.Product.Logo }}
                   <img border="0" vspace="0" hspace="0"
                   src="{{.Hermes.Product.Logo | url }}"
+                  width="{{ .Hermes.Product.LogoWidth }}" height="{{ .Hermes.Product.LogoHeight }}"
                   alt="Logo" title="Logo" style="
                   color: #000000;
                   font-size: 10px; margin: 0; padding: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; border: none; display: block;" />
@@ -354,7 +356,10 @@ a, a:hover {
 			color: #555;
 			font-family: sans-serif;" class="footer">
                 {{$.Hermes.Product.TroubleText | replace "{ACTION}" $action.Button.Text}}
-				<a href="{{ $action.Button.Link }}" target="_blank" style="text-decoration: underline; color: blue; font-family: sans-serif; font-size: 13px; font-weight: 400; line-height: 150%;">{{ $action.Button.Link }}</a>
+				<a href="{{ $action.Button.Link }}" target="_blank"
+				style="text-decoration: underline; color: blue;
+				font-family: sans-serif; font-size: 13px; font-weight: 400;
+				line-height: 150%;">{{ $action.Button.Link }}</a>
 		</td>
 	</tr>
                                 {{ end }}
@@ -369,7 +374,11 @@ a, a:hover {
 			color: #999999;
 			font-family: sans-serif;" class="footer">
 
-            {{ .Email.Body.Unsubscribe.Text }} <a href="{{ .Email.Body.Unsubscribe.URL }}" target="_blank" style="text-decoration: underline; color: #999999; font-family: sans-serif; font-size: 13px; font-weight: 400; line-height: 150%;">{{ .Email.Body.Unsubscribe.Anchor }}</a>.
+            {{ .Email.Body.Unsubscribe.Text }}
+			<a href="{{ .Email.Body.Unsubscribe.URL }}" target="_blank"
+			style="text-decoration: underline; color: #999999;
+			font-family: sans-serif; font-size: 13px; font-weight: 400;
+			line-height: 150%;">{{ .Email.Body.Unsubscribe.Anchor }}</a>.
 		</td>
 	</tr>
     {{ end }}
@@ -385,7 +394,8 @@ a, a:hover {
 `
 }
 
-// PlainTextTemplate returns a Golang template that will generate an plain text email.
+// PlainTextTemplate returns a Golang template that will
+// generate an plain text email.
 func (dt *Slick) PlainTextTemplate() string {
 	return `<h2>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }},{{ end }}</h2>
 {{ with .Email.Body.Intros }}
