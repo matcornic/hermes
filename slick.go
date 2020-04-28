@@ -84,7 +84,7 @@ style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;"
                   <img border="0" vspace="0" hspace="0"
                   src="{{.Hermes.Product.Logo | url }}"
                   width="{{ .Hermes.Product.LogoWidth }}" height="{{ .Hermes.Product.LogoHeight }}"
-                  alt="Logo" title="Logo" style="
+                  alt="{{ .Hermes.Product.Name }}" title="{{ .Hermes.Product.Name }}" style="
                   color: #000000;
                   font-size: 10px; margin: 0; padding: 0; outline: none; text-decoration: none;
 				  -ms-interpolation-mode: bicubic; border: none; display: block;" />

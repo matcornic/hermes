@@ -9,6 +9,7 @@ var testedThemes = []Theme{
 	// Insert your new theme here
 	new(Default),
 	new(Flat),
+	new(Slick),
 }
 
 /////////////////////////////////////////////////////
@@ -266,11 +267,11 @@ func (ed *WithInviteCode) getExample() (Hermes, Email) {
 
 	email := Email{
 		Body{
-			Name:      "Jon Snow",
+			Name: "Jon Snow",
 			Actions: []Action{
 				{
 					Instructions: "Here is your invite code:",
-					InviteCode: "123456",
+					InviteCode:   "123456",
 				},
 			},
 		},
