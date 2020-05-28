@@ -47,6 +47,8 @@ type Product struct {
 	Name        string
 	Link        string // e.g. https://matcornic.github.io
 	Logo        string // e.g. https://matcornic.github.io/img/logo.png
+	LogoWidth   string
+	LogoHeight  string
 	Copyright   string // Copyright © 2019 Hermes. All rights reserved.
 	TroubleText string // TroubleText is the sentence at the end of the email for users having trouble with the button (default to `If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.`)
 }
@@ -62,16 +64,19 @@ type Markdown template.HTML
 
 // Body is the body of the email, containing all interesting data
 type Body struct {
-	Name         string   // The name of the contacted person
-	Intros       []string // Intro sentences, first displayed in the email
-	Dictionary   []Entry  // A list of key+value (useful for displaying parameters/settings/personal info)
-	Table        Table    // Table is an table where you can put data (pricing grid, a bill, and so on)
-	Actions      []Action // Actions are a list of actions that the user will be able to execute via a button click
-	Outros       []string // Outro sentences, last displayed in the email
-	Greeting     string   // Greeting for the contacted person (default to 'Hi')
-	Signature    string   // Signature for the contacted person (default to 'Yours truly')
-	Title        string   // Title replaces the greeting+name when set
-	FreeMarkdown Markdown // Free markdown content that replaces all content other than header and footer
+	Name         string    // The name of the contacted person
+	Intros       []string  // Intro sentences, first displayed in the email
+	Dictionary   []Entry   // A list of key+value (useful for displaying parameters/settings/personal info)
+	Exploration  []Explore // Exploration list
+	Table        Table     // Table is an table where you can put data (pricing grid, a bill, and so on)
+	Actions      []Action  // Actions are a list of actions that the user will be able to execute via a button click
+	Outros       []string  // Outro sentences, last displayed in the email
+	Greeting     string    // Greeting for the contacted person (default to 'Hi')
+	Signature    string    // Signature for the contacted person (default to 'Yours truly')
+	Title        string    // Title replaces the greeting+name when set
+	Hero         Image     // e.g. https://matcornic.github.io/img/hero.png
+	FreeMarkdown Markdown  // Free markdown content that replaces all content other than header and footer
+	Unsubscribe  Unsubscribe
 }
 
 // ToHTML converts Markdown to HTML
@@ -85,6 +90,28 @@ func (c Markdown) ToHTML() template.HTML {
 type Entry struct {
 	Key   string
 	Value string
+}
+
+// Image representation
+type Image struct {
+	URL    string
+	Title  string
+	Width  int
+	Height int
+}
+
+// Unsubscribe description
+type Unsubscribe struct {
+	URL    string
+	Anchor string
+	Text   string
+}
+
+// Explore is a structure for explorational data
+type Explore struct {
+	Image       Image // e.g. https://matcornic.github.io/img/avatar.png
+	Title       string
+	Description string
 }
 
 // Table is an table where you can put data (pricing grid, a bill, and so on)
