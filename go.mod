@@ -1,4 +1,4 @@
-module github.com/matcornic/hermes/v2
+module github.com/theromis/hermes/v2
 
 require (
 	github.com/Masterminds/semver v1.4.2 // indirect
