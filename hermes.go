@@ -77,6 +77,7 @@ type Body struct {
 
 // ToHTML converts Markdown to HTML
 func (c Markdown) ToHTML() template.HTML {
+	/* #nosec */
 	return template.HTML(blackfriday.Run([]byte(c)))
 }
 
