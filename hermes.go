@@ -30,6 +30,7 @@ type Theme interface {
 type TextDirection string
 
 var templateFuncs = template.FuncMap{
+	/* #nosec */
 	"url": func(s string) template.URL {
 		return template.URL(s)
 	},
@@ -76,7 +77,8 @@ type Body struct {
 
 // ToHTML converts Markdown to HTML
 func (c Markdown) ToHTML() template.HTML {
-	return template.HTML(blackfriday.Run([]byte(string(c))))
+	/* #nosec */
+	return template.HTML(blackfriday.Run([]byte(c)))
 }
 
 // Entry is a simple entry of a map
@@ -194,6 +196,7 @@ func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {
 
 	// Generate the email from Golang template
 	// Allow usage of simple function from sprig : https://github.com/Masterminds/sprig
+	/* #nosec */
 	t, err := template.New("hermes").Funcs(sprig.FuncMap()).Funcs(templateFuncs).Funcs(template.FuncMap{
 		"safe": func(s string) template.HTML { return template.HTML(s) }, // Used for keeping comments in generated template
 	}).Parse(tplt)
