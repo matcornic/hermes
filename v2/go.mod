@@ -1,4 +1,4 @@
-module github.com/rickb777/hermes
+module github.com/rickb777/hermes/v2
 
 require (
 	github.com/Masterminds/goutils v1.1.0 // indirect
