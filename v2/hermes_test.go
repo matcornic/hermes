@@ -41,7 +41,8 @@ func (ed *SimpleExample) getExample() (Hermes, Email) {
 			Copyright: "Copyright © Hermes-Test",
 			Logo:      "http://www.duchess-france.org/wp-content/uploads/2016/01/gopher.png",
 		},
-		TextDirection: TDLeftToRight,
+		TextDirection:      TDLeftToRight,
+		DisableCSSInlining: true,
 	}
 
 	email := Email{
@@ -161,6 +162,7 @@ func (ed *WithTitleInsteadOfNameExample) getExample() (Hermes, Email) {
 			Name: "Hermes",
 			Link: "http://hermes.com",
 		},
+		DisableCSSInlining: true,
 	}
 
 	email := Email{
@@ -193,6 +195,7 @@ func (ed *WithGreetingDifferentThanDefault) getExample() (Hermes, Email) {
 			Name: "Hermes",
 			Link: "http://hermes.com",
 		},
+		DisableCSSInlining: true,
 	}
 
 	email := Email{
@@ -225,6 +228,7 @@ func (ed *WithSignatureDifferentThanDefault) getExample() (Hermes, Email) {
 			Name: "Hermes",
 			Link: "http://hermes.com",
 		},
+		DisableCSSInlining: true,
 	}
 
 	email := Email{
@@ -246,6 +250,44 @@ func (ed *WithSignatureDifferentThanDefault) assertPlainTextContent(t *testing.T
 	assert.Contains(t, r, "Best regards", "Should have greeting with Dear")
 }
 
+type WithInviteCode struct {
+	theme Theme
+}
+
+func (ed *WithInviteCode) getExample() (Hermes, Email) {
+	h := Hermes{
+		Theme: ed.theme,
+		Product: Product{
+			Name: "Hermes",
+			Link: "http://hermes.com",
+		},
+		DisableCSSInlining: true,
+	}
+
+	email := Email{
+		Body{
+			Name: "Jon Snow",
+			Actions: []Action{
+				{
+					Instructions: "Here is your invite code:",
+					InviteCode:   "123456",
+				},
+			},
+		},
+	}
+	return h, email
+}
+
+func (ed *WithInviteCode) assertHTMLContent(t *testing.T, r string) {
+	assert.Contains(t, r, "Here is your invite code", "Should contains the instruction")
+	assert.Contains(t, r, "123456", "Should contain the short code")
+}
+
+func (ed *WithInviteCode) assertPlainTextContent(t *testing.T, r string) {
+	assert.Contains(t, r, "Here is your invite code", "Should contains the instruction")
+	assert.Contains(t, r, "123456", "Should contain the short code")
+}
+
 type WithFreeMarkdownContent struct {
 	theme Theme
 }
@@ -257,6 +299,7 @@ func (ed *WithFreeMarkdownContent) getExample() (Hermes, Email) {
 			Name: "Hermes",
 			Link: "http://hermes.com",
 		},
+		DisableCSSInlining: true,
 	}
 
 	email := Email{
@@ -375,6 +418,12 @@ func TestThemeWithFreeMarkdownContent(t *testing.T) {
 	}
 }
 
+func TestThemeWithInviteCode(t *testing.T) {
+	for _, theme := range testedThemes {
+		checkExample(t, &WithInviteCode{theme})
+	}
+}
+
 func checkExample(t *testing.T, ex Example) {
 	// Given an example
 	h, email := ex.getExample()
@@ -409,7 +458,8 @@ func TestHermes_TextDirectionAsDefault(t *testing.T) {
 			Name: "Hermes",
 			Link: "http://hermes.com",
 		},
-		TextDirection: "not-existing", // Wrong text-direction
+		TextDirection:      "not-existing", // Wrong text-direction
+		DisableCSSInlining: true,
 	}
 
 	email := Email{
@@ -449,7 +499,7 @@ func TestHermes_Default(t *testing.T) {
 	assert.Equal(t, h.TextDirection, TDLeftToRight)
 	assert.Equal(t, h.Theme, new(Default))
 	assert.Equal(t, h.Product.Name, "Hermes")
-	assert.Equal(t, h.Product.Copyright, "Copyright © 2017 Hermes. All rights reserved.")
+	assert.Equal(t, h.Product.Copyright, "Copyright © 2020 Hermes. All rights reserved.")
 
 	assert.Empty(t, email.Body.Actions)
 	assert.Empty(t, email.Body.Dictionary)

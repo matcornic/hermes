@@ -2,18 +2,21 @@ package hermes
 
 import (
 	"bytes"
+	"html/template"
+
 	"github.com/Masterminds/sprig"
 	"github.com/imdario/mergo"
 	"github.com/jaytaylor/html2text"
-	"gopkg.in/russross/blackfriday.v2"
-	"html/template"
+	"github.com/russross/blackfriday/v2"
+	"github.com/vanng822/go-premailer/premailer"
 )
 
 // Hermes is an instance of the hermes email generator
 type Hermes struct {
-	Theme         Theme
-	TextDirection TextDirection
-	Product       Product
+	Theme              Theme
+	TextDirection      TextDirection
+	Product            Product
+	DisableCSSInlining bool
 }
 
 // Theme is an interface to implement when creating a new theme
@@ -44,7 +47,7 @@ type Product struct {
 	Name        string
 	Link        string // e.g. https://matcornic.github.io
 	Logo        string // e.g. https://matcornic.github.io/img/logo.png
-	Copyright   string // Copyright © 2017 Hermes. All rights reserved.
+	Copyright   string // Copyright © 2019 Hermes. All rights reserved.
 	TroubleText string // TroubleText is the sentence at the end of the email for users having trouble with the button (default to `If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.`)
 }
 
@@ -96,10 +99,11 @@ type Columns struct {
 	CustomAlignment map[string]string
 }
 
-// Action is an action the user can do on the email (click on a button)
+// Action is anything the user can act on (i.e., click on a button, view an invite code)
 type Action struct {
 	Instructions string
 	Button       Button
+	InviteCode   string
 }
 
 // Button defines an action to launch
@@ -141,7 +145,7 @@ func setDefaultHermesValues(h *Hermes) error {
 		TextDirection: defaultTextDirection,
 		Product: Product{
 			Name:        "Hermes",
-			Copyright:   "Copyright © 2017 Hermes. All rights reserved.",
+			Copyright:   "Copyright © 2020 Hermes. All rights reserved.",
 			TroubleText: "If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.",
 		},
 	}
@@ -190,11 +194,31 @@ func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {
 
 	// Generate the email from Golang template
 	// Allow usage of simple function from sprig : https://github.com/Masterminds/sprig
-	t, err := template.New("hermes").Funcs(sprig.FuncMap()).Funcs(templateFuncs).Parse(tplt)
+	t, err := template.New("hermes").Funcs(sprig.FuncMap()).Funcs(templateFuncs).Funcs(template.FuncMap{
+		"safe": func(s string) template.HTML { return template.HTML(s) }, // Used for keeping comments in generated template
+	}).Parse(tplt)
 	if err != nil {
 		return "", err
 	}
 	var b bytes.Buffer
-	t.Execute(&b, Template{*h, email})
-	return b.String(), nil
+	err = t.Execute(&b, Template{*h, email})
+	if err != nil {
+		return "", err
+	}
+
+	res := b.String()
+	if h.DisableCSSInlining {
+		return res, nil
+	}
+
+	// Inlining CSS
+	prem, err := premailer.NewPremailerFromString(res, premailer.NewOptions())
+	if err != nil {
+		return "", err
+	}
+	html, err := prem.Transform()
+	if err != nil {
+		return "", err
+	}
+	return html, nil
 }

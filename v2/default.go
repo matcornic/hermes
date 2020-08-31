@@ -1,15 +1,15 @@
 package hermes
 
-// Flat is a theme
-type Flat struct{}
+// Default is the theme by default
+type Default struct{}
 
-// Name returns the name of the flat theme
-func (dt *Flat) Name() string {
-	return "flat"
+// Name returns the name of the default theme
+func (dt *Default) Name() string {
+	return "default"
 }
 
 // HTMLTemplate returns a Golang template that will generate an HTML email.
-func (dt *Flat) HTMLTemplate() string {
+func (dt *Default) HTMLTemplate() string {
 	return `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -28,20 +28,19 @@ func (dt *Flat) HTMLTemplate() string {
       height: 100%;
       margin: 0;
       line-height: 1.4;
-      background-color: #2c3e50;
+      background-color: #F2F4F6;
       color: #74787E;
       -webkit-text-size-adjust: none;
     }
     a {
       color: #3869D4;
     }
-
     /* Layout ------------------------------ */
     .email-wrapper {
       width: 100%;
       margin: 0;
       padding: 0;
-      background-color: #2c3e50;
+      background-color: #F2F4F6;
     }
     .email-content {
       width: 100%;
@@ -88,7 +87,7 @@ func (dt *Flat) HTMLTemplate() string {
       text-align: center;
     }
     .email-footer p {
-      color: #eaeaea;
+      color: #AEAEAE;
     }
     .body-action {
       width: 100%;
@@ -96,28 +95,23 @@ func (dt *Flat) HTMLTemplate() string {
       padding: 0;
       text-align: center;
     }
-
     .body-dictionary {
       width: 100%;
       overflow: hidden;
-      margin: 20px auto 20px;
+      margin: 20px auto 10px;
       padding: 0;
+    }
+    .body-dictionary dd {
+      margin: 0 0 10px 0;
     }
     .body-dictionary dt {
       clear: both;
       color: #000;
       font-weight: bold;
-      float: left;
-      width: 50%;
-      padding: 0;
-      margin: 0;
-      margin-bottom: 0.3em;
     }
     .body-dictionary dd {
-      float: left;
-      width: 50%;
-      padding: 0;
-      margin: 0;
+      margin-left: 0;
+      margin-bottom: 10px;
     }
     .body-sub {
       margin-top: 25px;
@@ -154,8 +148,8 @@ func (dt *Flat) HTMLTemplate() string {
       font-weight: bold;
     }
     blockquote {
-      margin: 1.7rem 0;
-      padding-left: 0.85rem;
+      margin: 25px 0;
+      padding-left: 10px;
       border-left: 10px solid #F0F2F4;
     }
     blockquote p {
@@ -237,12 +231,27 @@ func (dt *Flat) HTMLTemplate() string {
       font-size: 15px;
       line-height: 18px;
     }
+    /* Invite Code ------------------------------ */
+    .invite-code {
+      display: inline-block;
+      padding-top: 20px;
+      padding-right: 36px;
+      padding-bottom: 16px;
+      padding-left: 36px;
+      border-radius: 3px;
+      font-family: Consolas, monaco, monospace;
+      font-size: 28px;
+      text-align: center;
+      letter-spacing: 8px;
+      color: #555;
+      background-color: #eee;
+    }
     /* Buttons ------------------------------ */
     .button {
       display: inline-block;
-      width: 100%;
-      background-color: #00948d;
-      color: #ffffff;
+      background-color: #3869D4;
+      border-radius: 3px;
+      color: #ffffff !important;
       font-size: 15px;
       line-height: 45px;
       text-align: center;
@@ -254,6 +263,11 @@ func (dt *Flat) HTMLTemplate() string {
     @media only screen and (max-width: 600px) {
       .email-body_inner,
       .email-footer {
+        width: 100% !important;
+      }
+    }
+    @media only screen and (max-width: 500px) {
+      .button {
         width: 100% !important;
       }
     }
@@ -363,17 +377,62 @@ func (dt *Flat) HTMLTemplate() string {
                         {{ if gt (len .) 0 }}
                           {{ range $action := . }}
                             <p>{{ $action.Instructions }}</p>
-                            <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
-                              <tr>
-                                <td align="center">
-                                  <div>
-                                    <a href="{{ $action.Button.Link }}" class="button" style="background-color: {{ $action.Button.Color }}; color: {{ $action.Button.TextColor }}" target="_blank">
+                            {{ $length := len $action.Button.Text }}
+                            {{ $width := add (mul $length 9) 20 }}
+                            {{if (lt $width 200)}}{{$width = 200}}{{else if (gt $width 570)}}{{$width = 570}}{{else}}{{end}}
+                              {{safe "<!--[if mso]>" }}
+                              {{ if $action.Button.Text }}
+                                <div style="margin: 30px auto;v-text-anchor:middle;text-align:center">
+                                  <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
+                                    xmlns:w="urn:schemas-microsoft-com:office:word" 
+                                    href="{{ $action.Button.Link }}" 
+                                    style="height:45px;v-text-anchor:middle;width:{{$width}}px;background-color:{{ if $action.Button.Color }}{{ $action.Button.Color }}{{ else }}#3869D4{{ end }};"
+                                    arcsize="10%" 
+                                    {{ if $action.Button.Color }}strokecolor="{{ $action.Button.Color }}" fillcolor="{{ $action.Button.Color }}"{{ else }}strokecolor="#3869D4" fillcolor="#3869D4"{{ end }}
+                                    >
+                                    <w:anchorlock/>
+                                    <center style="color: {{ if $action.Button.TextColor }}{{ $action.Button.TextColor }}{{else}}#FFFFFF{{ end }};font-size: 15px;text-align: center;font-family:sans-serif;font-weight:bold;">
                                       {{ $action.Button.Text }}
-                                    </a>
-                                  </div>
-                                </td>
-                              </tr>
-                            </table>
+                                    </center>
+                                  </v:roundrect>
+                                </div>
+                              {{ end }}
+                              {{ if $action.InviteCode }}
+                                <div style="margin-top:30px;margin-bottom:30px">
+                                  <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                      <td align="center">
+                                        <table align="center" cellpadding="0" cellspacing="0" style="padding:0;text-align:center">
+                                          <tr>
+                                            <td style="display:inline-block;border-radius:3px;font-family:Consolas, monaco, monospace;font-size:28px;text-align:center;letter-spacing:8px;color:#555;background-color:#eee;padding:20px">
+                                              {{ $action.InviteCode }}
+                                            </td>
+                                          </tr>
+                                        </table>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </div>
+                              {{ end }}   
+                              {{safe "<![endif]-->" }}
+                              {{safe "<!--[if !mso]><!-- -->"}}
+                              <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
+                                <tr>
+                                  <td align="center">
+                                    <div>
+                                      {{ if $action.Button.Text }}
+                                        <a href="{{ $action.Button.Link }}" class="button" style="{{ with $action.Button.Color }}background-color: {{ . }};{{ end }} {{ with $action.Button.TextColor }}color: {{ . }};{{ end }} width: {{$width}}px;" target="_blank">
+                                          {{ $action.Button.Text }}
+                                        </a>
+                                      {{end}}
+                                      {{ if $action.InviteCode }}
+                                        <span class="invite-code">{{ $action.InviteCode }}</span>
+                                      {{end}}
+                                    </div>
+                                  </td>
+                                </tr>
+                              </table>
+                              {{safe "<![endif]-->" }}
                           {{ end }}
                         {{ end }}
                       {{ end }}
@@ -398,12 +457,14 @@ func (dt *Flat) HTMLTemplate() string {
                         <table class="body-sub">
                           <tbody>
                               {{ range $action := . }}
+                                {{if $action.Button.Text}}
                                 <tr>
                                   <td>
                                     <p class="sub">{{$.Hermes.Product.TroubleText | replace "{ACTION}" $action.Button.Text}}</p>
                                     <p class="sub"><a href="{{ $action.Button.Link }}">{{ $action.Button.Link }}</a></p>
                                   </td>
                                 </tr>
+                                {{ end }}
                               {{ end }}
                           </tbody>
                         </table>
@@ -437,8 +498,8 @@ func (dt *Flat) HTMLTemplate() string {
 }
 
 // PlainTextTemplate returns a Golang template that will generate an plain text email.
-func (dt *Flat) PlainTextTemplate() string {
-	return `<h2>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }}{{ end }},</h2>
+func (dt *Default) PlainTextTemplate() string {
+	return `<h2>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }},{{ end }}</h2>
 {{ with .Email.Body.Intros }}
   {{ range $line := . }}
     <p>{{ $line }}</p>
@@ -479,7 +540,15 @@ func (dt *Flat) PlainTextTemplate() string {
   {{ end }}
   {{ with .Email.Body.Actions }} 
     {{ range $action := . }}
-      <p>{{ $action.Instructions }} {{ $action.Button.Link }}</p> 
+      <p>
+        {{ $action.Instructions }} 
+        {{ if $action.InviteCode }}
+          {{ $action.InviteCode }}
+        {{ end }}
+        {{ if $action.Button.Link }}
+          {{ $action.Button.Link }}
+        {{ end }}
+      </p> 
     {{ end }}
   {{ end }}
 {{ end }}
