@@ -11,7 +11,7 @@ It's a package that generates clean, responsive HTML e-mails for sending transac
 
 # Demo
 
-<img src="screens/default/welcome.png" height="400" /> <img src="screens/default/reset.png" height="400" /> <img src="screens/default/receipt.png" height="400" />
+<img src="../screens/default/welcome.png" height="400" /> <img src="../screens/default/reset.png" height="400" /> <img src="../screens/default/receipt.png" height="400" />
 
 # Usage
 
@@ -87,7 +87,7 @@ if err != nil {
 
 This code would output the following HTML template:
 
-<img src="screens/demo.png" height="400" />
+<img src="../screens/demo.png" height="400" />
 
 And the following plain text:
 
@@ -151,11 +151,11 @@ The following open-source themes are bundled with this package:
 
 * `default` by [Postmark Transactional Email Templates](https://github.com/wildbit/postmark-templates)
 
-<img src="screens/default/welcome.png" height="200" /> <img src="screens/default/reset.png" height="200" /> <img src="screens/default/receipt.png" height="200" />
+<img src="../screens/default/welcome.png" height="200" /> <img src="../screens/default/reset.png" height="200" /> <img src="../screens/default/receipt.png" height="200" />
 
 * `flat`, slightly modified from [Postmark Transactional Email Templates](https://github.com/wildbit/postmark-templates)
 
-<img src="screens/flat/welcome.png" height="200" /> <img src="screens/flat/reset.png" height="200" /> <img src="screens/flat/receipt.png" height="200" />
+<img src="../screens/flat/welcome.png" height="200" /> <img src="../screens/flat/reset.png" height="200" /> <img src="../screens/flat/receipt.png" height="200" />
 
 ## RTL Support
 
@@ -359,7 +359,7 @@ Feel free to contact us for any question regarding this matter at [support@herme
 
 This code would output the following HTML template:
 
-<img src="screens/free-markdown.png" height="400" />
+<img src="../screens/free-markdown.png" height="400" />
 
 And the following plaintext:
 
