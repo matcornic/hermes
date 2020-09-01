@@ -102,6 +102,7 @@ func generateEmails(h hermes.Hermes, email hermes.Email, example string) {
 	if err != nil {
 		panic(err)
 	}
+	// #nosec
 	err = ioutil.WriteFile(fmt.Sprintf("%v/%v.%v.html", h.Theme.Name(), h.Theme.Name(), example), []byte(res), 0644)
 	if err != nil {
 		panic(err)
