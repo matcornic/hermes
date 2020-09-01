@@ -1,11 +1,8 @@
 name: build
 
 on:
-  push:
-    branch:
-      - master
   pull_request:
-    branches-ignore:
+    branch:
       - master
 
 jobs:
@@ -13,10 +10,10 @@ jobs:
     name: Review code
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Go 1.14
+      - name: Set up Go 1.15
         uses: actions/setup-go@v2-beta
         with:
-          go-version: 1.14
+          go-version: 1.15
         id: go
 
       - name: Check out code
@@ -47,10 +44,10 @@ jobs:
     name: Review security
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Go 1.14
+      - name: Set up Go 1.15
         uses: actions/setup-go@v2-beta
         with:
-          go-version: 1.14
+          go-version: 1.15
         id: go
 
       - name: Check out code
@@ -60,7 +57,7 @@ jobs:
       - name: Scan for security issues (gosec)
         run: |
           export PATH=$PATH:$(go env GOPATH)/bin
-          curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b GOPATH/bin v2.2.0
+          curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b GOPATH/bin v2.4.0
           GOPATH/bin/gosec ./...
 
   vulnerabilities:
@@ -74,7 +71,7 @@ jobs:
       - name: Run Nancy
         run: |
           cd /tmp && mkdir tools && cd -
-          curl -s -L "https://github.com/sonatype-nexus-community/nancy/releases/download/v0.2.6/nancy-linux.amd64-v0.2.6" -o "/tmp/tools/nancy"
+          curl -s -L "https://github.com/sonatype-nexus-community/nancy/releases/download/v0.3.1/nancy-linux.amd64-v0.3.1" -o "/tmp/tools/nancy"
           chmod +x /tmp/tools/nancy
           /tmp/tools/nancy go.sum
 
@@ -83,10 +80,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up Go 1.14
+      - name: Set up Go 1.15
         uses: actions/setup-go@v2-beta
         with:
-          go-version: 1.14
+          go-version: 1.15
         id: go
 
       - name: Check out code
