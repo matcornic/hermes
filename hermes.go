@@ -43,11 +43,11 @@ const TDRightToLeft TextDirection = "rtl"
 
 // Imprint represents your company imprint
 type Imprint struct {
-	Name    string
-	Name2   string
-	Street  string
-	City    string
-	Country string
+	Name    string	// Hermes LLC
+	Name2   string	// Messenger of the gods
+	Street  string	// SomeStreet 11
+	City    string	// 12345 City
+	Country string	// Olymp
 }
 
 // Product represents your company product (brand)
@@ -157,13 +157,6 @@ func setDefaultHermesValues(h *Hermes) error {
 			Name:        "Hermes",
 			Copyright:   "Copyright © 2020 Hermes. All rights reserved.",
 			TroubleText: "If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.",
-			Imprint: Imprint{
-				Name:    "Hermes LLC",
-				Name2:   "Messenger of the gods",
-				Street:  "SomeStreet 11",
-				City:    "12345 City",
-				Country: "Olymp",
-			},
 		},
 	}
 	// Merge the given hermes engine configuration with default one
