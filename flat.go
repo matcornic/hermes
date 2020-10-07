@@ -481,6 +481,15 @@ func (dt *Flat) HTMLTemplate() string {
                     <p class="sub center">
                       {{.Hermes.Product.Copyright}}
                     </p>
+					{{ if .Hermes.Product.Imprint }}
+						<p class="sub center">
+							{{ if .Hermes.Product.Imprint.Name }}{{.Hermes.Product.Imprint.Name}}<br>{{ end }}
+							{{ if .Hermes.Product.Imprint.Name2 }}{{.Hermes.Product.Imprint.Name2}}<br>{{ end }}
+							{{ if .Hermes.Product.Imprint.Street }}{{.Hermes.Product.Imprint.Street}}<br>{{ end }}
+							{{ if .Hermes.Product.Imprint.City }}{{.Hermes.Product.Imprint.City}}<br>{{ end }}
+							{{ if .Hermes.Product.Imprint.Country }}{{.Hermes.Product.Imprint.Country}}{{ end }}
+						</p>
+					{{ end }}
                   </td>
                 </tr>
               </table>
@@ -558,5 +567,14 @@ func (dt *Flat) PlainTextTemplate() string {
 <p>{{.Email.Body.Signature}},<br>{{.Hermes.Product.Name}} - {{.Hermes.Product.Link}}</p>
 
 <p>{{.Hermes.Product.Copyright}}</p>
+{{ if .Hermes.Product.Imprint }}
+<p>
+	{{ if .Hermes.Product.Imprint.Name }}{{.Hermes.Product.Imprint.Name}}<br>{{ end }}
+	{{ if .Hermes.Product.Imprint.Name2 }}{{.Hermes.Product.Imprint.Name2}}<br>{{ end }}
+	{{ if .Hermes.Product.Imprint.Street }}{{.Hermes.Product.Imprint.Street}}<br>{{ end }}
+	{{ if .Hermes.Product.Imprint.City }}{{.Hermes.Product.Imprint.City}}<br>{{ end }}
+	{{ if .Hermes.Product.Imprint.Country }}{{.Hermes.Product.Imprint.Country}}{{ end }}
+</p>
+{{ end }}
 `
 }

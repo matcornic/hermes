@@ -41,6 +41,15 @@ const TDLeftToRight TextDirection = "ltr"
 // TDRightToLeft is the text direction from right to left
 const TDRightToLeft TextDirection = "rtl"
 
+// Imprint represents your company imprint
+type Imprint struct {
+	Name    string	// Hermes LLC
+	Name2   string	// Messenger of the gods
+	Street  string	// SomeStreet 11
+	City    string	// 12345 City
+	Country string	// Olymp
+}
+
 // Product represents your company product (brand)
 // Appears in header & footer of e-mails
 type Product struct {
@@ -49,6 +58,7 @@ type Product struct {
 	Logo        string // e.g. https://matcornic.github.io/img/logo.png
 	Copyright   string // Copyright © 2019 Hermes. All rights reserved.
 	TroubleText string // TroubleText is the sentence at the end of the email for users having trouble with the button (default to `If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.`)
+	Imprint     Imprint
 }
 
 // Email is the email containing a body
