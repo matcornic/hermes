@@ -486,6 +486,7 @@ func (dt *Default) HTMLTemplate() string {
 					{{ if .Hermes.Product.Imprint }}
 						<p class="sub center">
 							{{ if .Hermes.Product.Imprint.Name }}{{.Hermes.Product.Imprint.Name}}<br>{{ end }}
+							{{ if .Hermes.Product.Imprint.Name2 }}{{.Hermes.Product.Imprint.Name2}}<br>{{ end }}
 							{{ if .Hermes.Product.Imprint.Street }}{{.Hermes.Product.Imprint.Street}}<br>{{ end }}
 							{{ if .Hermes.Product.Imprint.City }}{{.Hermes.Product.Imprint.City}}<br>{{ end }}
 							{{ if .Hermes.Product.Imprint.Country }}{{.Hermes.Product.Imprint.Country}}{{ end }}
@@ -571,6 +572,7 @@ func (dt *Default) PlainTextTemplate() string {
 {{ if .Hermes.Product.Imprint }}
 <p>
 	{{ if .Hermes.Product.Imprint.Name }}{{.Hermes.Product.Imprint.Name}}<br>{{ end }}
+	{{ if .Hermes.Product.Imprint.Name2 }}{{.Hermes.Product.Imprint.Name2}}<br>{{ end }}
 	{{ if .Hermes.Product.Imprint.Street }}{{.Hermes.Product.Imprint.Street}}<br>{{ end }}
 	{{ if .Hermes.Product.Imprint.City }}{{.Hermes.Product.Imprint.City}}<br>{{ end }}
 	{{ if .Hermes.Product.Imprint.Country }}{{.Hermes.Product.Imprint.Country}}{{ end }}

@@ -44,6 +44,7 @@ const TDRightToLeft TextDirection = "rtl"
 // Imprint represents your company imprint
 type Imprint struct {
 	Name    string
+	Name2   string
 	Street  string
 	City    string
 	Country string
@@ -158,8 +159,9 @@ func setDefaultHermesValues(h *Hermes) error {
 			TroubleText: "If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.",
 			Imprint: Imprint{
 				Name:    "Hermes LLC",
+				Name2:   "Messenger of the gods",
 				Street:  "SomeStreet 11",
-				City:    "12345 Country",
+				City:    "12345 City",
 				Country: "Olymp",
 			},
 		},
