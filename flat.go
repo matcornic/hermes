@@ -1,5 +1,12 @@
 package hermes
 
+import "html/template"
+
+var (
+	flatHTMLTemplate      = template.Must(TemplateBase().Parse(flatHTML))
+	flatPlainTextTemplate = template.Must(TemplateBase().Parse(flatPlainText))
+)
+
 // Flat is a theme
 type Flat struct{}
 
@@ -10,7 +17,24 @@ func (dt *Flat) Name() string {
 
 // HTMLTemplate returns a Golang template that will generate an HTML email.
 func (dt *Flat) HTMLTemplate() string {
-	return `
+	return flatHTML
+}
+
+func (dt *Flat) ParsedHTMLTemplate(base *template.Template) (*template.Template, error) {
+	return flatHTMLTemplate, nil
+}
+
+// PlainTextTemplate returns a Golang template that will generate an plain text email.
+func (dt *Flat) PlainTextTemplate() string {
+	return flatPlainText
+}
+
+func (dt *Flat) ParsedPlainTextTemplate(base *template.Template) (*template.Template, error) {
+	return flatPlainTextTemplate, nil
+}
+
+const (
+	flatHTML = `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -493,11 +517,8 @@ func (dt *Flat) HTMLTemplate() string {
 </body>
 </html>
 `
-}
 
-// PlainTextTemplate returns a Golang template that will generate an plain text email.
-func (dt *Flat) PlainTextTemplate() string {
-	return `<h2>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }}{{ end }},</h2>
+	flatPlainText = `<h2>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }}{{ end }},</h2>
 {{ with .Email.Body.Intros }}
   {{ range $line := . }}
     <p>{{ $line }}</p>
@@ -559,4 +580,4 @@ func (dt *Flat) PlainTextTemplate() string {
 
 <p>{{.Hermes.Product.Copyright}}</p>
 `
-}
+)
