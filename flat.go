@@ -2,6 +2,12 @@ package hermes
 
 import "html/template"
 
+var _ interface {
+	Theme
+	ParsedHTMLTheme
+	ParsedPlainTextTheme
+} = new(Flat)
+
 var (
 	flatHTMLTemplate      = template.Must(TemplateBase().Parse(flatHTML))
 	flatPlainTextTemplate = template.Must(TemplateBase().Parse(flatPlainText))
@@ -20,7 +26,7 @@ func (dt *Flat) HTMLTemplate() string {
 	return flatHTML
 }
 
-func (dt *Flat) ParsedHTMLTemplate(base *template.Template) (*template.Template, error) {
+func (dt *Flat) ParsedHTMLTemplate() (*template.Template, error) {
 	return flatHTMLTemplate, nil
 }
 
@@ -29,7 +35,7 @@ func (dt *Flat) PlainTextTemplate() string {
 	return flatPlainText
 }
 
-func (dt *Flat) ParsedPlainTextTemplate(base *template.Template) (*template.Template, error) {
+func (dt *Flat) ParsedPlainTextTemplate() (*template.Template, error) {
 	return flatPlainTextTemplate, nil
 }
 
