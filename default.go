@@ -1,5 +1,18 @@
 package hermes
 
+import "html/template"
+
+var _ interface {
+	Theme
+	ParsedHTMLTheme
+	ParsedPlainTextTheme
+} = new(Default)
+
+var (
+	defaultHTMLTemplate      = template.Must(TemplateBase().Parse(defaultHTML))
+	defaultPlainTextTemplate = template.Must(TemplateBase().Parse(defaultPlainText))
+)
+
 // Default is the theme by default
 type Default struct{}
 
@@ -10,7 +23,24 @@ func (dt *Default) Name() string {
 
 // HTMLTemplate returns a Golang template that will generate an HTML email.
 func (dt *Default) HTMLTemplate() string {
-	return `
+	return defaultHTML
+}
+
+func (dt *Default) ParsedHTMLTemplate() (*template.Template, error) {
+	return defaultHTMLTemplate, nil
+}
+
+// PlainTextTemplate returns a Golang template that will generate an plain text email.
+func (dt *Default) PlainTextTemplate() string {
+	return defaultPlainText
+}
+
+func (dt *Default) ParsedPlainTextTemplate() (*template.Template, error) {
+	return defaultPlainTextTemplate, nil
+}
+
+const (
+	defaultHTML = `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -495,11 +525,8 @@ func (dt *Default) HTMLTemplate() string {
 </body>
 </html>
 `
-}
 
-// PlainTextTemplate returns a Golang template that will generate an plain text email.
-func (dt *Default) PlainTextTemplate() string {
-	return `<h2>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }},{{ end }}</h2>
+	defaultPlainText = `<h2>{{if .Email.Body.Title }}{{ .Email.Body.Title }}{{ else }}{{ .Email.Body.Greeting }} {{ .Email.Body.Name }},{{ end }}</h2>
 {{ with .Email.Body.Intros }}
   {{ range $line := . }}
     <p>{{ $line }}</p>
@@ -561,4 +588,4 @@ func (dt *Default) PlainTextTemplate() string {
 
 <p>{{.Hermes.Product.Copyright}}</p>
 `
-}
+)
