@@ -446,7 +446,7 @@ func (dt *Flat) HTMLTemplate() string {
 
                     <p>
                       {{.Email.Body.Signature}},
-                      <br />
+                      <br>
                       {{.Hermes.Product.Name}}
                     </p>
 
