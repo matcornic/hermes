@@ -448,7 +448,7 @@ func (dt *Default) HTMLTemplate() string {
 
                     <p>
                       {{.Email.Body.Signature}},
-                      <br />
+                      <br>
                       {{.Hermes.Product.Name}}
                     </p>
 
