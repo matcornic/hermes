@@ -302,7 +302,7 @@ func (dt *Default) HTMLTemplate() string {
                     {{ with .Email.Body.Intros }}
                         {{ if gt (len .) 0 }}
                           {{ range $line := . }}
-                            <p>{{ $line }}</p>
+							<p>{{ if hasUrl $line }}{{ html $line }}{{ else }}{{ $line }}{{ end }}</p>
                           {{ end }}
                         {{ end }}
                     {{ end }}

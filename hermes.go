@@ -2,22 +2,22 @@ package hermes
 
 import (
 	"bytes"
-	"html"
 	"html/template"
+	"regexp"
 
 	"github.com/Masterminds/sprig"
 	"github.com/imdario/mergo"
 	"github.com/jaytaylor/html2text"
 	"github.com/russross/blackfriday/v2"
+	"github.com/vanng822/go-premailer/premailer"
 )
 
 // Hermes is an instance of the hermes email generator
 type Hermes struct {
-	Theme                     Theme
-	TextDirection             TextDirection
-	Product                   Product
-	DisableCSSInlining        bool
-	DisableHTMLStringEscaping bool
+	Theme              Theme
+	TextDirection      TextDirection
+	Product            Product
+	DisableCSSInlining bool
 }
 
 // Theme is an interface to implement when creating a new theme
@@ -33,6 +33,12 @@ type TextDirection string
 var templateFuncs = template.FuncMap{
 	"url": func(s string) template.URL {
 		return template.URL(s)
+	},
+	"hasUrl": func(s string) bool {
+		return regexp.MustCompile("<a href=\"(.*?)\">(.*?)</a>").MatchString(s)
+	},
+	"html": func(s string) template.HTML {
+		return template.HTML(s)
 	},
 }
 
@@ -209,12 +215,19 @@ func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {
 
 	res := b.String()
 	if h.DisableCSSInlining {
-		if h.DisableHTMLStringEscaping {
-			return res, nil
-		}
-
-		return html.UnescapeString(res), nil
+		return res, nil
 	}
 
-	return res, nil
+	// Inlining CSS
+	prem, err := premailer.NewPremailerFromString(res, premailer.NewOptions())
+	if err != nil {
+		return "", err
+	}
+
+	html, err := prem.Transform()
+	if err != nil {
+		return "", err
+	}
+
+	return html, nil
 }
