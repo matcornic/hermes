@@ -3,7 +3,6 @@ package hermes
 import (
 	"bytes"
 	"html/template"
-	"regexp"
 
 	"github.com/Masterminds/sprig"
 	"github.com/imdario/mergo"
@@ -31,15 +30,8 @@ type Theme interface {
 type TextDirection string
 
 var templateFuncs = template.FuncMap{
-	"url": func(s string) template.URL {
-		return template.URL(s)
-	},
-	"hasUrl": func(s string) bool {
-		return regexp.MustCompile("<a href=\"(.*?)\">(.*?)</a>").MatchString(s)
-	},
-	"html": func(s string) template.HTML {
-		return template.HTML(s)
-	},
+	"url":  func(s string) template.URL { return template.URL(s) },
+	"safe": func(s string) template.HTML { return template.HTML(s) }, // Used for keeping comments in generated template
 }
 
 // TDLeftToRight is the text direction from left to right (default)
@@ -201,9 +193,7 @@ func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {
 
 	// Generate the email from Golang template
 	// Allow usage of simple function from sprig : https://github.com/Masterminds/sprig
-	t, err := template.New("hermes").Funcs(sprig.FuncMap()).Funcs(templateFuncs).Funcs(template.FuncMap{
-		"safe": func(s string) template.HTML { return template.HTML(s) }, // Used for keeping comments in generated template
-	}).Parse(tplt)
+	t, err := template.New("hermes").Funcs(sprig.FuncMap()).Funcs(templateFuncs).Parse(tplt)
 	if err != nil {
 		return "", err
 	}
