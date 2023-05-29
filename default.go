@@ -19,7 +19,7 @@ func (dt *Default) HTMLTemplate() string {
   <style type="text/css" rel="stylesheet" media="all">
     /* Base ------------------------------ */
     *:not(br):not(tr):not(html) {
-      font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+      font-family: PT Root, 'Helvetica Neue', Helvetica, sans-serif;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
     }
@@ -29,7 +29,7 @@ func (dt *Default) HTMLTemplate() string {
       margin: 0;
       line-height: 1.4;
       background-color: #F2F4F6;
-      color: #74787E;
+      color: #F8F7FD;
       -webkit-text-size-adjust: none;
     }
     a {
@@ -171,13 +171,16 @@ func (dt *Default) HTMLTemplate() string {
     }
     p {
       margin-top: 0;
-      color: #74787E;
+      color: #F8F7FD;
       font-size: 16px;
       line-height: 1.5em;
     }
     p.sub {
       font-size: 12px;
     }
+	p.sub a {
+	  color: #7D5BD9;
+	}
     p.center {
       text-align: center;
     }
@@ -196,7 +199,7 @@ func (dt *Default) HTMLTemplate() string {
     }
     td {
       padding: 10px 5px;
-      color: #74787E;
+      color: #F8F7FD;
       font-size: 15px;
       line-height: 18px;
     }
@@ -227,7 +230,7 @@ func (dt *Default) HTMLTemplate() string {
     }
     .data-table td {
       padding: 10px 5px;
-      color: #74787E;
+      color: #F8F7FD;
       font-size: 15px;
       line-height: 18px;
     }
