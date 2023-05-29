@@ -33,7 +33,7 @@ func (dt *Default) HTMLTemplate() string {
       -webkit-text-size-adjust: none;
     }
     a {
-      color: #3869D4;
+      color: #7D5BD9;
     }
     /* Layout ------------------------------ */
     .email-wrapper {
