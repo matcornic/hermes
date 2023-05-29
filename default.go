@@ -171,7 +171,7 @@ func (dt *Default) HTMLTemplate() string {
     }
     p {
       margin-top: 0;
-      color: #F8F7FD;
+      color: #74787E;
       font-size: 16px;
       line-height: 1.5em;
     }
