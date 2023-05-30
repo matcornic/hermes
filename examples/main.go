@@ -97,7 +97,7 @@ func generateEmails(h hermes.Hermes, email hermes.Email, example string) {
 	if err != nil {
 		panic(err)
 	}
-	err = os.MkdirAll(h.Theme.Name(), 0744)
+	err = os.MkdirAll(h.Theme.Name(), 0750)
 	if err != nil {
 		panic(err)
 	}
