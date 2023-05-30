@@ -5,8 +5,7 @@ import (
 	"fmt"
 	"github.com/go-gomail/gomail"
 	"github.com/matcornic/hermes/v2"
-	"golang.org/x/crypto/ssh/terminal"
-	"io/ioutil"
+	"golang.org/x/term"
 	"net/mail"
 	"os"
 	"strconv"
@@ -56,7 +55,7 @@ func main() {
 		SMTPUser := os.Getenv("HERMES_SMTP_USER")
 		if password == "" {
 			fmt.Printf("Enter SMTP password of '%s' account: ", SMTPUser)
-			bytePassword, _ := terminal.ReadPassword(0)
+			bytePassword, _ := term.ReadPassword(0)
 			password = string(bytePassword)
 		}
 		smtpConfig := smtpAuthentication{
@@ -75,11 +74,11 @@ func main() {
 			for _, e := range examples {
 				options.Subject = "Hermes | " + h.Theme.Name() + " | " + e.Name()
 				fmt.Printf("Sending email '%s'...\n", options.Subject)
-				htmlBytes, err := ioutil.ReadFile(fmt.Sprintf("%v/%v.%v.html", h.Theme.Name(), h.Theme.Name(), e.Name()))
+				htmlBytes, err := os.ReadFile(fmt.Sprintf("%v/%v.%v.html", h.Theme.Name(), h.Theme.Name(), e.Name()))
 				if err != nil {
 					panic(err)
 				}
-				txtBytes, err := ioutil.ReadFile(fmt.Sprintf("%v/%v.%v.txt", h.Theme.Name(), h.Theme.Name(), e.Name()))
+				txtBytes, err := os.ReadFile(fmt.Sprintf("%v/%v.%v.txt", h.Theme.Name(), h.Theme.Name(), e.Name()))
 				if err != nil {
 					panic(err)
 				}
@@ -98,12 +97,12 @@ func generateEmails(h hermes.Hermes, email hermes.Email, example string) {
 	if err != nil {
 		panic(err)
 	}
-	err = os.MkdirAll(h.Theme.Name(), 0744)
+	err = os.MkdirAll(h.Theme.Name(), 0750)
 	if err != nil {
 		panic(err)
 	}
 	// #nosec
-	err = ioutil.WriteFile(fmt.Sprintf("%v/%v.%v.html", h.Theme.Name(), h.Theme.Name(), example), []byte(res), 0644)
+	err = os.WriteFile(fmt.Sprintf("%v/%v.%v.html", h.Theme.Name(), h.Theme.Name(), example), []byte(res), 0644)
 	if err != nil {
 		panic(err)
 	}
@@ -114,7 +113,7 @@ func generateEmails(h hermes.Hermes, email hermes.Email, example string) {
 		panic(err)
 	}
 	// #nosec
-	err = ioutil.WriteFile(fmt.Sprintf("%v/%v.%v.txt", h.Theme.Name(), h.Theme.Name(), example), []byte(res), 0644)
+	err = os.WriteFile(fmt.Sprintf("%v/%v.%v.txt", h.Theme.Name(), h.Theme.Name(), example), []byte(res), 0644)
 	if err != nil {
 		panic(err)
 	}

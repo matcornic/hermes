@@ -2,7 +2,7 @@ name: build
 
 on:
   pull_request:
-    branch:
+    branches:
       - master
 
 jobs:
@@ -10,91 +10,59 @@ jobs:
     name: Review code
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Go 1.15
-        uses: actions/setup-go@v2-beta
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Go base on go.mod
+        uses: actions/setup-go@v4
         with:
-          go-version: 1.15
+          go-version-file: ${{ github.workspace }}/go.mod
         id: go
 
-      - name: Check out code
-        uses: actions/checkout@v2
-
-      - uses: actions/cache@v1
-        with:
-          path: ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-
       - name: Check suspicious constructs (vet)
-        run: go vet ./...
-
-      # necessary for private repos as staticcheck needs executes mod vendor
-      - name: Configure git for private modules
-        run: git config --global url."https://${USERNAME}:${ACCESSTOKEN}@github.com".insteadOf "https://github.com"
-
-      # https://staticcheck.io/docs/checks
-      - name: Check suspicious constructs (staticcheck)
         run: |
-          go get honnef.co/go/tools/cmd/staticcheck
-          go mod vendor
-          staticcheck ./...
+          go vet ./...
+
+      - name: Staticcheck
+        uses: dominikh/staticcheck-action@v1.3.0
 
   security:
     name: Review security
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Go 1.15
-        uses: actions/setup-go@v2-beta
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Go base on go.mod
+        uses: actions/setup-go@v4
         with:
-          go-version: 1.15
+          go-version-file: ${{ github.workspace }}/go.mod
         id: go
 
-      - name: Check out code
-        uses: actions/checkout@v2
+      - name: Security Scanner
+        uses: securego/gosec@master
+        with:
+          args: ./...
 
-      # https://github.com/securego/gosec
-      - name: Scan for security issues (gosec)
-        run: |
-          export PATH=$PATH:$(go env GOPATH)/bin
-          curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b GOPATH/bin v2.4.0
-          GOPATH/bin/gosec ./...
+      - name: WriteGoList for dependency check tool
+        run: go list -json -test ./... > go.list
 
-  vulnerabilities:
-    name: Dependency vulnerability check
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-
-      # https://github.com/sonatype-nexus-community/nancy
-      - name: Run Nancy
-        run: |
-          cd /tmp && mkdir tools && cd -
-          curl -s -L "https://github.com/sonatype-nexus-community/nancy/releases/download/v0.3.1/nancy-linux.amd64-v0.3.1" -o "/tmp/tools/nancy"
-          chmod +x /tmp/tools/nancy
-          /tmp/tools/nancy go.sum
+      - name: Dependency vulnerability check
+        uses: sonatype-nexus-community/nancy-github-action@main
 
   test:
     name: Test
     runs-on: ubuntu-latest
-
     steps:
-      - name: Set up Go 1.15
-        uses: actions/setup-go@v2-beta
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Go base on go.mod
+        uses: actions/setup-go@v4
         with:
-          go-version: 1.15
+          go-version-file: ${{ github.workspace }}/go.mod
         id: go
 
-      - name: Check out code
-        uses: actions/checkout@v2
-
-      - uses: actions/cache@v1
-        with:
-          path: ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-
       - name: test
-        run: go test ./...
+        run: |
+          go test -v ./... -cover -coverprofile=cover.out
