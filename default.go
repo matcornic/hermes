@@ -452,7 +452,7 @@ func (dt *Default) HTMLTemplate() string {
                     <p>
                       {{.Email.Body.Signature}},
                       <br>
-                      {{.Hermes.Product.Name}}
+                      The {{.Hermes.Product.Name}} Team
                     </p>
 
                     {{ if (eq .Email.Body.FreeMarkdown "") }}
@@ -463,8 +463,7 @@ func (dt *Default) HTMLTemplate() string {
                                 {{if $action.Button.Text}}
                                 <tr>
                                   <td>
-                                    <p class="sub">{{$.Hermes.Product.TroubleText | replace "{ACTION}" $action.Button.Text}}</p>
-                                    <p class="sub"><a href="{{ $action.Button.Link }}">{{ $action.Button.Link }}</a></p>
+                                    <p class="sub">{{ $.Hermes.Product.TroubleText }}</p>
                                   </td>
                                 </tr>
                                 {{ end }}
