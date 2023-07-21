@@ -2,6 +2,7 @@ package hermes
 
 import (
 	"bytes"
+	"fmt"
 	"html/template"
 
 	"github.com/Masterminds/sprig"
@@ -30,7 +31,10 @@ type Theme interface {
 type TextDirection string
 
 var templateFuncs = template.FuncMap{
-	"url":  func(s string) template.URL { return template.URL(s) },
+	"url": func(s string) template.URL { return template.URL(s) },
+	"encode": func(s string) template.URL {
+		return template.URL(fmt.Sprintf("data:image/svg+xml;base64,%s", s))
+	},
 	"safe": func(s string) template.HTML { return template.HTML(s) }, // Used for keeping comments in generated template
 }
 
@@ -48,6 +52,7 @@ type Product struct {
 	Logo        string // e.g. https://matcornic.github.io/img/logo.png
 	Copyright   string // Copyright © 2019 Hermes. All rights reserved.
 	TroubleText string // TroubleText is the sentence at the end of the email for users having trouble with the button (default to `If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.`)
+	EncodedLogo bool
 }
 
 // Email is the email containing a body
