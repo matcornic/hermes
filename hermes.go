@@ -44,13 +44,11 @@ const TDRightToLeft TextDirection = "rtl"
 // Product represents your company product (brand)
 // Appears in header & footer of e-mails
 type Product struct {
-	Name                     string
-	Link                     string // e.g. https://matcornic.github.io
-	Logo                     string // e.g. https://matcornic.github.io/img/logo.png
-	Copyright                string // Copyright © 2019 Hermes. All rights reserved.
-	TroubleText              string // TroubleText is the sentence at the end of the email for users having trouble with the button (default to `If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.`)
-	UnsubscribeURL           string // A URL shown in the email footer that allows the user to unsubscribe
-	ManageEmailPreferenceURL string // A URL shown in the email footer that allows the user to manage their email preferences
+	Name        string
+	Link        string // e.g. https://matcornic.github.io
+	Logo        string // e.g. https://matcornic.github.io/img/logo.png
+	Copyright   string // Copyright © 2019 Hermes. All rights reserved.
+	TroubleText string // TroubleText is the sentence at the end of the email for users having trouble with the button (default to `If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.`)
 }
 
 // Email is the email containing a body
@@ -64,16 +62,18 @@ type Markdown template.HTML
 
 // Body is the body of the email, containing all interesting data
 type Body struct {
-	Name         string   // The name of the contacted person
-	Intros       []string // Intro sentences, first displayed in the email
-	Dictionary   []Entry  // A list of key+value (useful for displaying parameters/settings/personal info)
-	Table        Table    // Table is an table where you can put data (pricing grid, a bill, and so on)
-	Actions      []Action // Actions are a list of actions that the user will be able to execute via a button click
-	Outros       []string // Outro sentences, last displayed in the email
-	Greeting     string   // Greeting for the contacted person (default to 'Hi')
-	Signature    string   // Signature for the contacted person (default to 'Yours truly')
-	Title        string   // Title replaces the greeting+name when set
-	FreeMarkdown Markdown // Free markdown content that replaces all content other than header and footer
+	Name                     string   // The name of the contacted person
+	Intros                   []string // Intro sentences, first displayed in the email
+	Dictionary               []Entry  // A list of key+value (useful for displaying parameters/settings/personal info)
+	Table                    Table    // Table is an table where you can put data (pricing grid, a bill, and so on)
+	Actions                  []Action // Actions are a list of actions that the user will be able to execute via a button click
+	Outros                   []string // Outro sentences, last displayed in the email
+	Greeting                 string   // Greeting for the contacted person (default to 'Hi')
+	Signature                string   // Signature for the contacted person (default to 'Yours truly')
+	Title                    string   // Title replaces the greeting+name when set
+	FreeMarkdown             Markdown // Free markdown content that replaces all content other than header and footer
+	UnsubscribeURL           string   // A URL shown in the email footer that allows the user to unsubscribe
+	ManageEmailPreferenceURL string   // A URL shown in the email footer that allows the user to manage their email preferences
 }
 
 // ToHTML converts Markdown to HTML

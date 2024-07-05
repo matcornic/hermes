@@ -483,14 +483,14 @@ func (dt *Default) HTMLTemplate() string {
                     <p class="sub center">
                       {{.Hermes.Product.Copyright}}
                     </p>
-					{{- if (not (eq .Hermes.Product.UnsubscribeURL "")) }}
+					{{- if (not (eq .Hermes.Body.UnsubscribeURL "")) }}
 					<p class="sub center">
-                      No longer wish to receive these emails? <a href="{{.Hermes.Product.UnsubscribeURL}}">Unsubscribe</a>
+                      No longer wish to receive these emails? <a href="{{.Hermes.Body.UnsubscribeURL}}">Unsubscribe</a>
                     </p>
 					{{- end }}
-					{{- if (not (eq .Hermes.Product.ManageEmailPreferenceURL "")) }}
+					{{- if (not (eq .Hermes.Body.ManageEmailPreferenceURL "")) }}
 					<p class="sub center">
-                      <a href="{{.Hermes.Product.ManageEmailPreferenceURL}}">Manage preferences</a>
+                      <a href="{{.Hermes.Body.ManageEmailPreferenceURL}}">Manage preferences</a>
                     </p>
 					{{- end }}
                   </td>
@@ -570,13 +570,13 @@ func (dt *Default) PlainTextTemplate() string {
 <p>{{.Email.Body.Signature}},<br>{{.Hermes.Product.Name}} - {{.Hermes.Product.Link}}</p>
 
 <p>{{.Hermes.Product.Copyright}}</p>
-{{- if (not (eq .Hermes.Product.UnsubscribeURL "")) }}
+{{- if (not (eq .Hermes.Body.UnsubscribeURL "")) }}
 
-<p>No longer wish to receive these emails? {{.Hermes.Product.UnsubscribeURL}}</p>
+<p>No longer wish to receive these emails? {{.Hermes.Body.UnsubscribeURL}}</p>
 {{- end }}
-{{- if (not (eq .Hermes.Product.ManageEmailPreferenceURL "")) }}
+{{- if (not (eq .Hermes.Body.ManageEmailPreferenceURL "")) }}
 
-<p>Manage preferences {{.Hermes.Product.ManageEmailPreferenceURL}}</p>
+<p>Manage preferences {{.Hermes.Body.ManageEmailPreferenceURL}}</p>
 {{- end }}
 `
 }
