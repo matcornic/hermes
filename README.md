@@ -1,8 +1,7 @@
 # Hermes
 
-[![Build Status](https://travis-ci.org/matcornic/hermes.svg?branch=master)](https://travis-ci.org/matcornic/hermes)
+[![Build Status](https://github.com/matcornic/hermes/actions/workflows/main.yml/badge.svg)](https://github.com/matcornic/hermes/actions/workflows/main.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/matcornic/hermes)](https://goreportcard.com/report/github.com/matcornic/hermes)
-[![Go Coverage](https://codecov.io/github/matcornic/hermes/coverage.svg)](https://codecov.io/github/matcornic/hermes/)
 [![Godoc](https://godoc.org/github.com/matcornic/hermes?status.svg)](https://godoc.org/github.com/matcornic/hermes)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmatcornic%2Fhermes.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmatcornic%2Fhermes?ref=badge_shield)
 
@@ -18,11 +17,19 @@ It's a package that generates clean, responsive HTML e-mails for sending transac
 First install the package:
 
 ```
-go get -u github.com/matcornic/hermes/v2
+go get -u github.com/matcornic/hermes
 ```
 
-> Starting from release *v2.0.0*, Hermes uses [Go modules](https://github.com/golang/go/wiki/Modules). The latest version of Hermes requires at least Go 1.11 with gomodules enabled.
-> You can still use an Hermes release compatible with prior Go versions by using *v1.2.0* release
+## Migrate from `v2` to `v3`
+
+At the time of `v2` creation, Go modules logic and best practices were still unsure.
+Having a dedicated `v2` module is meant to be used for projects hosting and maintaining `v1` and `v2` at the same time, so people can use both versions at the same time. There is no need for that in this kind of project.
+Now that go modules usage is standard, starting from `v3.x.x` tags, we decided to migrate back to `github.com/matcornic/hermes` instead of `github.com/matcornic/hermes/v2`.
+`v2` tags will still use `github.com/matcornic/hermes/v2` as the import path, `v3` will use `github.com/matcornic/hermes` as the import path.
+
+So, just replace your import path from `github.com/matcornic/hermes/v2` to `github.com/matcornic/hermes` and run `go get github.com/matcornic/hermes@3.0.0` (or newer) to update the dependency.
+
+## Use Hermes
 
 Then, start using the package by importing and configuring it:
 
@@ -79,7 +86,7 @@ if err != nil {
 }
 
 // Optionally, preview the generated HTML e-mail by writing it to a local file
-err = ioutil.WriteFile("preview.html", []byte(emailBody), 0644)
+err = os.WriteFile("preview.html", []byte(emailBody), 0644)
 if err != nil {
     panic(err) // Tip: Handle error with something else than a panic ;)
 }
@@ -106,7 +113,7 @@ Need help, or have questions? Just reply to this email, we'd love to help.
 Yours truly,
 Hermes - https://example-hermes.com/
 
-Copyright © 2017 Hermes. All rights reserved.
+Copyright © 2025 Hermes. All rights reserved.
 ```
 
 > Theme templates will be embedded in your application binary. If you want to use external templates (for configuration), use your own theme by implementing `hermes.Theme` interface with code searching for your files.
@@ -205,7 +212,7 @@ h := hermes.Hermes{
         Name: "Hermes",
         Link: "https://example-hermes.com/",
         // Custom copyright notice
-        Copyright: "Copyright © 2017 Dharma Initiative. All rights reserved."
+        Copyright: "Copyright © 2025 Dharma Initiative. All rights reserved."
     },
 }
 ```
@@ -337,7 +344,7 @@ If you need more flexibility in the content of your generated e-mail, while keep
 email := hermes.Email{
 		Body: hermes.Body{
 			FreeMarkdown: `
-> _Hermes_ service will shutdown the **1st August 2017** for maintenance operations. 
+> _Hermes_ service will shutdown the **1st August 2025** for maintenance operations. 
 
 Services will be unavailable based on the following schedule:
 
@@ -371,7 +378,7 @@ Hi Jon Snow,
 > 
 > 
 > 
-> Hermes service will shutdown the *1st August 2017* for maintenance
+> Hermes service will shutdown the *1st August 2025* for maintenance
 > operations.
 > 
 > 
@@ -391,7 +398,7 @@ Feel free to contact us for any question regarding this matter at support@hermes
 Yours truly,
 Hermes - https://example-hermes.com/
 
-Copyright © 2017 Hermes. All rights reserved.
+Copyright © 2025 Hermes. All rights reserved.
 ```
 
 Be aware that this content will replace existing tables, dictionary and actions. Only intros, outros, header and footer will be kept.

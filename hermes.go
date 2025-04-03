@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"html/template"
 
+	"dario.cat/mergo"
 	"github.com/Masterminds/sprig"
-	"github.com/imdario/mergo"
 	"github.com/jaytaylor/html2text"
 	"github.com/russross/blackfriday/v2"
 	"github.com/vanng822/go-premailer/premailer"
@@ -44,11 +44,14 @@ const TDRightToLeft TextDirection = "rtl"
 // Product represents your company product (brand)
 // Appears in header & footer of e-mails
 type Product struct {
-	Name        string
-	Link        string // e.g. https://matcornic.github.io
-	Logo        string // e.g. https://matcornic.github.io/img/logo.png
-	Copyright   string // Copyright © 2019 Hermes. All rights reserved.
-	TroubleText string // TroubleText is the sentence at the end of the email for users having trouble with the button (default to `If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.`)
+	Name      string
+	Link      string // e.g. https://matcornic.github.io
+	Logo      string // e.g. https://matcornic.github.io/img/logo.png
+	Copyright string // Copyright © 2019 Hermes. All rights reserved.
+	// TroubleText is the sentence at the end of the email for users having trouble with the button
+	// (default to `If you’re having trouble with the button '{ACTION}',
+	// copy and paste the URL below into your web browser.`)
+	TroubleText string
 }
 
 // Email is the email containing a body
@@ -76,7 +79,7 @@ type Body struct {
 
 // ToHTML converts Markdown to HTML
 func (c Markdown) ToHTML() template.HTML {
-	return template.HTML(blackfriday.Run([]byte(string(c))))
+	return template.HTML(blackfriday.Run([]byte(c)))
 }
 
 // Entry is a simple entry of a map
@@ -145,7 +148,7 @@ func setDefaultHermesValues(h *Hermes) error {
 		TextDirection: defaultTextDirection,
 		Product: Product{
 			Name:        "Hermes",
-			Copyright:   "Copyright © 2020 Hermes. All rights reserved.",
+			Copyright:   "Copyright © 2025 Hermes. All rights reserved.",
 			TroubleText: "If you’re having trouble with the button '{ACTION}', copy and paste the URL below into your web browser.",
 		},
 	}
@@ -158,6 +161,7 @@ func setDefaultHermesValues(h *Hermes) error {
 	if h.TextDirection != TDLeftToRight && h.TextDirection != TDRightToLeft {
 		h.TextDirection = defaultTextDirection
 	}
+
 	return nil
 }
 
@@ -168,6 +172,7 @@ func (h *Hermes) GenerateHTML(email Email) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	return h.generateTemplate(email, h.Theme.HTMLTemplate())
 }
 
@@ -182,11 +187,11 @@ func (h *Hermes) GeneratePlainText(email Email) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	return html2text.FromString(template, html2text.Options{PrettyTables: true})
 }
 
 func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {
-
 	err := setDefaultEmailValues(&email)
 	if err != nil {
 		return "", err
@@ -200,6 +205,7 @@ func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	var b bytes.Buffer
 	err = t.Execute(&b, Template{*h, email})
 	if err != nil {
@@ -216,9 +222,11 @@ func (h *Hermes) generateTemplate(email Email, tplt string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	html, err := prem.Transform()
 	if err != nil {
 		return "", err
 	}
+
 	return html, nil
 }

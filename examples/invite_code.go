@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/matcornic/hermes/v2"
+	"github.com/matcornic/hermes"
 )
 
 type inviteCode struct {
@@ -21,7 +21,7 @@ func (w *inviteCode) Email() hermes.Email {
 			Actions: []hermes.Action{
 				{
 					Instructions: "Please copy your invite code:",
-					InviteCode: "123456",
+					InviteCode:   "123456",
 				},
 			},
 			Outros: []string{
