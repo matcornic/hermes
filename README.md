@@ -27,7 +27,7 @@ Having a dedicated `v2` module is meant to be used for projects hosting and main
 Now that go modules usage is standard, starting from `v3.x.x` tags, we decided to migrate back to `github.com/matcornic/hermes` instead of `github.com/matcornic/hermes/v2`.
 `v2` tags will still use `github.com/matcornic/hermes/v2` as the import path, `v3` will use `github.com/matcornic/hermes` as the import path.
 
-So, just replace your import path from `github.com/matcornic/hermes/v2` to `github.com/matcornic/hermes` and run `go get github.com/matcornic/hermes@3.0.0` (or newer) to update the dependency.
+So, just replace your import path from `github.com/matcornic/hermes/v2` to `github.com/matcornic/hermes` and run `go get github.com/matcornic/hermes@v3.0.0` (or newer) to update the dependency.
 
 ## Use Hermes
 
