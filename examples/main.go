@@ -3,13 +3,24 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/go-gomail/gomail"
-	"github.com/matcornic/hermes/v2"
-	"golang.org/x/crypto/ssh/terminal"
-	"io/ioutil"
+	"log"
 	"net/mail"
 	"os"
 	"strconv"
+
+	"github.com/go-gomail/gomail"
+	"golang.org/x/term"
+
+	"github.com/matcornic/hermes"
+)
+
+var (
+	errEmptyServerConfig   = errors.New("SMTP server config is empty")
+	errEmptyPort           = errors.New("SMTP port config is empty")
+	errEmptyUser           = errors.New("SMTP user is empty")
+	errEmptySenderIdentity = errors.New("SMTP sender identity is empty")
+	errEmptySenderEmail    = errors.New("SMTP sender email is empty")
+	errEmptyReceiverEmails = errors.New("no receiver emails configured")
 )
 
 type example interface {
@@ -55,8 +66,8 @@ func main() {
 		password := os.Getenv("HERMES_SMTP_PASSWORD")
 		SMTPUser := os.Getenv("HERMES_SMTP_USER")
 		if password == "" {
-			fmt.Printf("Enter SMTP password of '%s' account: ", SMTPUser)
-			bytePassword, _ := terminal.ReadPassword(0)
+			log.Printf("Enter SMTP password of '%s' account: ", SMTPUser)
+			bytePassword, _ := term.ReadPassword(0)
 			password = string(bytePassword)
 		}
 		smtpConfig := smtpAuthentication{
@@ -74,12 +85,12 @@ func main() {
 			h.Theme = theme
 			for _, e := range examples {
 				options.Subject = "Hermes | " + h.Theme.Name() + " | " + e.Name()
-				fmt.Printf("Sending email '%s'...\n", options.Subject)
-				htmlBytes, err := ioutil.ReadFile(fmt.Sprintf("%v/%v.%v.html", h.Theme.Name(), h.Theme.Name(), e.Name()))
+				log.Printf("Sending email '%s'...\n", options.Subject)
+				htmlBytes, err := os.ReadFile(fmt.Sprintf("%v/%v.%v.html", h.Theme.Name(), h.Theme.Name(), e.Name()))
 				if err != nil {
 					panic(err)
 				}
-				txtBytes, err := ioutil.ReadFile(fmt.Sprintf("%v/%v.%v.txt", h.Theme.Name(), h.Theme.Name(), e.Name()))
+				txtBytes, err := os.ReadFile(fmt.Sprintf("%v/%v.%v.txt", h.Theme.Name(), h.Theme.Name(), e.Name()))
 				if err != nil {
 					panic(err)
 				}
@@ -98,11 +109,12 @@ func generateEmails(h hermes.Hermes, email hermes.Email, example string) {
 	if err != nil {
 		panic(err)
 	}
-	err = os.MkdirAll(h.Theme.Name(), 0744)
+	err = os.MkdirAll(h.Theme.Name(), 0750)
 	if err != nil {
 		panic(err)
 	}
-	err = ioutil.WriteFile(fmt.Sprintf("%v/%v.%v.html", h.Theme.Name(), h.Theme.Name(), example), []byte(res), 0644)
+	htmlFile := fmt.Sprintf("%v/%v.%v.html", h.Theme.Name(), h.Theme.Name(), example)
+	err = os.WriteFile(htmlFile, []byte(res), 0600)
 	if err != nil {
 		panic(err)
 	}
@@ -112,7 +124,8 @@ func generateEmails(h hermes.Hermes, email hermes.Email, example string) {
 	if err != nil {
 		panic(err)
 	}
-	err = ioutil.WriteFile(fmt.Sprintf("%v/%v.%v.txt", h.Theme.Name(), h.Theme.Name(), example), []byte(res), 0644)
+	plaintextFile := fmt.Sprintf("%v/%v.%v.txt", h.Theme.Name(), h.Theme.Name(), example)
+	err = os.WriteFile(plaintextFile, []byte(res), 0600)
 	if err != nil {
 		panic(err)
 	}
@@ -137,26 +150,27 @@ type sendOptions struct {
 func send(smtpConfig smtpAuthentication, options sendOptions, htmlBody string, txtBody string) error {
 
 	if smtpConfig.Server == "" {
-		return errors.New("SMTP server config is empty")
+		return errEmptyServerConfig
 	}
+
 	if smtpConfig.Port == 0 {
-		return errors.New("SMTP port config is empty")
+		return errEmptyPort
 	}
 
 	if smtpConfig.SMTPUser == "" {
-		return errors.New("SMTP user is empty")
+		return errEmptyUser
 	}
 
 	if smtpConfig.SenderIdentity == "" {
-		return errors.New("SMTP sender identity is empty")
+		return errEmptySenderIdentity
 	}
 
 	if smtpConfig.SenderEmail == "" {
-		return errors.New("SMTP sender email is empty")
+		return errEmptySenderEmail
 	}
 
 	if options.To == "" {
-		return errors.New("no receiver emails configured")
+		return errEmptyReceiverEmails
 	}
 
 	from := mail.Address{

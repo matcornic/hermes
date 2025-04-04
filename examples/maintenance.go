@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/matcornic/hermes/v2"
+	"github.com/matcornic/hermes"
 )
 
 type maintenance struct {
@@ -16,7 +16,7 @@ func (w *maintenance) Email() hermes.Email {
 		Body: hermes.Body{
 			Name: "Jon Snow",
 			FreeMarkdown: `
-> _Hermes_ service will shutdown the **1st August 2017** for maintenance operations. 
+> _Hermes_ service will shutdown the **1st August 2025** for maintenance operations. 
 
 Services will be unavailable based on the following schedule:
 

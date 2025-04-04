@@ -1,8 +1,10 @@
 package hermes
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 var testedThemes = []Theme{
@@ -11,10 +13,10 @@ var testedThemes = []Theme{
 	new(Flat),
 }
 
-/////////////////////////////////////////////////////
-// Every theme should display the same information //
-// Find below the tests to check that              //
-/////////////////////////////////////////////////////
+// ===============================================
+// Every theme should display the same information
+// Find below the tests to check that
+// ===============================================
 
 // Implement this interface when creating a new example checking a common feature of all themes
 type Example interface {
@@ -94,11 +96,11 @@ func (ed *SimpleExample) getExample() (Hermes, Email) {
 			},
 		},
 	}
+
 	return h, email
 }
 
 func (ed *SimpleExample) assertHTMLContent(t *testing.T, r string) {
-
 	// Assert on product
 	assert.Contains(t, r, "HermesName", "Product: Should find the name of the product in email")
 	assert.Contains(t, r, "http://hermes-link.com", "Product: Should find the link of the product in email")
@@ -121,7 +123,6 @@ func (ed *SimpleExample) assertHTMLContent(t *testing.T, r string) {
 }
 
 func (ed *SimpleExample) assertPlainTextContent(t *testing.T, r string) {
-
 	// Assert on product
 	assert.Contains(t, r, "HermesName", "Product: Should find the name of the product in email")
 	assert.Contains(t, r, "http://hermes-link.com", "Product: Should find the link of the product in email")
@@ -171,6 +172,7 @@ func (ed *WithTitleInsteadOfNameExample) getExample() (Hermes, Email) {
 			Title: "A new e-mail",
 		},
 	}
+
 	return h, email
 }
 
@@ -204,6 +206,7 @@ func (ed *WithGreetingDifferentThanDefault) getExample() (Hermes, Email) {
 			Name:     "Jon Snow",
 		},
 	}
+
 	return h, email
 }
 
@@ -237,6 +240,7 @@ func (ed *WithSignatureDifferentThanDefault) getExample() (Hermes, Email) {
 			Signature: "Best regards",
 		},
 	}
+
 	return h, email
 }
 
@@ -266,15 +270,16 @@ func (ed *WithInviteCode) getExample() (Hermes, Email) {
 
 	email := Email{
 		Body{
-			Name:      "Jon Snow",
+			Name: "Jon Snow",
 			Actions: []Action{
 				{
 					Instructions: "Here is your invite code:",
-					InviteCode: "123456",
+					InviteCode:   "123456",
 				},
 			},
 		},
 	}
+
 	return h, email
 }
 
@@ -306,7 +311,7 @@ func (ed *WithFreeMarkdownContent) getExample() (Hermes, Email) {
 		Body{
 			Name: "Jon Snow",
 			FreeMarkdown: `
-> _Hermes_ service will shutdown the **1st August 2017** for maintenance operations. 
+> _Hermes_ service will shutdown the **1st August 2025** for maintenance operations. 
 
 Services will be unavailable based on the following schedule:
 
@@ -352,6 +357,7 @@ Feel free to contact us for any question regarding this matter at [support@herme
 			},
 		},
 	}
+
 	return h, email
 }
 
@@ -383,44 +389,65 @@ func (ed *WithFreeMarkdownContent) assertPlainTextContent(t *testing.T, r string
 	assert.NotContains(t, r, "<tr>", "Should not find html tr tags")
 	assert.NotContains(t, r, "<a>", "Should not find html link tags")
 	assert.NotContains(t, r, "should not be displayed", "Should find any other content that the one from FreeMarkdown object")
-
 }
 
-// Test all the themes for the features
-
 func TestThemeSimple(t *testing.T) {
+	t.Parallel()
 	for _, theme := range testedThemes {
-		checkExample(t, &SimpleExample{theme})
+		t.Run(theme.Name(), func(t *testing.T) {
+			t.Parallel()
+			checkExample(t, &SimpleExample{theme})
+		})
 	}
 }
 
 func TestThemeWithTitleInsteadOfName(t *testing.T) {
+	t.Parallel()
 	for _, theme := range testedThemes {
-		checkExample(t, &WithTitleInsteadOfNameExample{theme})
+		t.Run(theme.Name(), func(t *testing.T) {
+			t.Parallel()
+			checkExample(t, &WithTitleInsteadOfNameExample{theme})
+		})
 	}
 }
 
 func TestThemeWithGreetingDifferentThanDefault(t *testing.T) {
+	t.Parallel()
 	for _, theme := range testedThemes {
-		checkExample(t, &WithGreetingDifferentThanDefault{theme})
+		t.Run(theme.Name(), func(t *testing.T) {
+			t.Parallel()
+			checkExample(t, &WithGreetingDifferentThanDefault{theme})
+		})
 	}
 }
 
 func TestThemeWithGreetingDiffrentThanDefault(t *testing.T) {
+	t.Parallel()
 	for _, theme := range testedThemes {
-		checkExample(t, &WithSignatureDifferentThanDefault{theme})
+		t.Run(theme.Name(), func(t *testing.T) {
+			t.Parallel()
+			checkExample(t, &WithSignatureDifferentThanDefault{theme})
+		})
 	}
 }
 
 func TestThemeWithFreeMarkdownContent(t *testing.T) {
+	t.Parallel()
 	for _, theme := range testedThemes {
-		checkExample(t, &WithFreeMarkdownContent{theme})
+		t.Run(theme.Name(), func(t *testing.T) {
+			t.Parallel()
+			checkExample(t, &WithFreeMarkdownContent{theme})
+		})
 	}
 }
 
 func TestThemeWithInviteCode(t *testing.T) {
+	t.Parallel()
 	for _, theme := range testedThemes {
-		checkExample(t, &WithInviteCode{theme})
+		t.Run(theme.Name(), func(t *testing.T) {
+			t.Parallel()
+			checkExample(t, &WithInviteCode{theme})
+		})
 	}
 }
 
@@ -431,7 +458,7 @@ func checkExample(t *testing.T, ex Example) {
 	// When generating HTML template
 	r, err := h.GenerateHTML(email)
 	t.Log(r)
-	assert.Nil(t, err)
+	require.NoError(t, err)
 	assert.NotEmpty(t, r)
 
 	// Then asserting HTML is OK
@@ -440,19 +467,21 @@ func checkExample(t *testing.T, ex Example) {
 	// When generating plain text template
 	r, err = h.GeneratePlainText(email)
 	t.Log(r)
-	assert.Nil(t, err)
+	require.NoError(t, err)
 	assert.NotEmpty(t, r)
 
 	// Then asserting plain text is OK
 	ex.assertPlainTextContent(t, r)
 }
 
-////////////////////////////////////////////
-// Tests on default values for all themes //
-// It does not check email content        //
-////////////////////////////////////////////
+// ======================================
+// Tests on default values for all themes
+// It does not check email content
+// ======================================
 
 func TestHermes_TextDirectionAsDefault(t *testing.T) {
+	t.Parallel()
+
 	h := Hermes{
 		Product: Product{
 			Name: "Hermes",
@@ -485,21 +514,26 @@ func TestHermes_TextDirectionAsDefault(t *testing.T) {
 	}
 
 	_, err := h.GenerateHTML(email)
-	assert.Nil(t, err)
-	assert.Equal(t, h.TextDirection, TDLeftToRight)
-	assert.Equal(t, h.Theme.Name(), "default")
+	require.NoError(t, err)
+	assert.Equal(t, TDLeftToRight, h.TextDirection)
+	assert.Equal(t, "default", h.Theme.Name())
 }
 
 func TestHermes_Default(t *testing.T) {
-	h := Hermes{}
-	setDefaultHermesValues(&h)
-	email := Email{}
-	setDefaultEmailValues(&email)
+	t.Parallel()
 
-	assert.Equal(t, h.TextDirection, TDLeftToRight)
-	assert.Equal(t, h.Theme, new(Default))
-	assert.Equal(t, h.Product.Name, "Hermes")
-	assert.Equal(t, h.Product.Copyright, "Copyright © 2020 Hermes. All rights reserved.")
+	h := Hermes{}
+	err := setDefaultHermesValues(&h)
+	require.NoError(t, err)
+
+	email := Email{}
+	err = setDefaultEmailValues(&email)
+	require.NoError(t, err)
+
+	assert.Equal(t, TDLeftToRight, h.TextDirection)
+	assert.Equal(t, new(Default), h.Theme)
+	assert.Equal(t, "Hermes", h.Product.Name)
+	assert.Equal(t, "Copyright © 2025 Hermes. All rights reserved.", h.Product.Copyright)
 
 	assert.Empty(t, email.Body.Actions)
 	assert.Empty(t, email.Body.Dictionary)
@@ -510,7 +544,7 @@ func TestHermes_Default(t *testing.T) {
 	assert.Empty(t, email.Body.Table.Columns.CustomAlignment)
 	assert.Empty(t, string(email.Body.FreeMarkdown))
 
-	assert.Equal(t, email.Body.Greeting, "Hi")
-	assert.Equal(t, email.Body.Signature, "Yours truly")
+	assert.Equal(t, "Hi", email.Body.Greeting)
+	assert.Equal(t, "Yours truly", email.Body.Signature)
 	assert.Empty(t, email.Body.Title)
 }

@@ -1,13 +1,44 @@
-linters-settings:
-  lll:
-    line-length: 150
-
 linters:
   enable-all: true
+  disable:
+    - gochecknoglobals
+    - funlen
+    - exhaustruct
+    - depguard
+    - varnamelen
+    - wsl
+    - wrapcheck
+    - whitespace
+    - thelper
+    - testpackage
+    - godot
+    - mnd
+    - gomoddirectives
+
+linters-settings:
+  gosec:
+    excludes:
+      - G203 # Use of unescaped data in HTML templates - this packages generates HTML from a template
+  lll:
+    line-length: 150
+  revive:
+    rules:
+      - name: package-comments
+        disabled: true
 
 issues:
-  max-same: 0 # Disable maximum count of issues with the same text.
-  exclude:
-  - G104 # Duplicate of errcheck
-
-  exclude-use-default: false
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - lll
+    - path: flat\.go
+      linters:
+        - lll
+    - path: default\.go
+      linters:
+        - lll
+    - path: examples/maintenance\.go
+      linters:
+        - lll
