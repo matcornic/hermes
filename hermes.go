@@ -65,16 +65,19 @@ type Markdown template.HTML
 
 // Body is the body of the email, containing all interesting data
 type Body struct {
-	Name         string   // The name of the contacted person
-	Intros       []string // Intro sentences, first displayed in the email
-	Dictionary   []Entry  // A list of key+value (useful for displaying parameters/settings/personal info)
-	Table        Table    // Table is an table where you can put data (pricing grid, a bill, and so on)
-	Actions      []Action // Actions are a list of actions that the user will be able to execute via a button click
-	Outros       []string // Outro sentences, last displayed in the email
-	Greeting     string   // Greeting for the contacted person (default to 'Hi')
-	Signature    string   // Signature for the contacted person (default to 'Yours truly')
-	Title        string   // Title replaces the greeting+name when set
-	FreeMarkdown Markdown // Free markdown content that replaces all content other than header and footer
+	Name           string   // The name of the contacted person
+	Intros         []string // Intro sentences, first displayed in the email
+	IntrosMarkdown Markdown // Intro in markdown, will override Intros
+	Dictionary     []Entry  // A list of key+value (useful for displaying parameters/settings/personal info)
+	Table          Table    // Table is an table where you can put data (pricing grid, a bill, and so on)
+	Actions        []Action // Actions are a list of actions that the user will be able to execute via a button click
+	Outros         []string // Outro sentences, last displayed in the email
+	OutrosMarkdown Markdown // Outro in markdown, will override Outros
+	Greeting       string   // Greeting for the contacted person (default to 'Hi')
+	Signature      string   // Signature for the contacted person (default to 'Yours truly')
+	SignatureName  string   // Contact person name
+	Title          string   // Title replaces the greeting+name when set
+	FreeMarkdown   Markdown // Free markdown content that replaces all content other than header and footer
 }
 
 // ToHTML converts Markdown to HTML
