@@ -15,4 +15,6 @@ Need help, or have questions? Just reply to this email, we'd love to help.
 Yours truly,
 Hermes - https://example-hermes.com/
 
+Unsubscribe ( https://hermes-example.com/unsubscribe?token=d9729feb74992cc3482b350163a1a010 )
+
 Copyright © 2025 Hermes. All rights reserved.

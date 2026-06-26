@@ -120,6 +120,7 @@ func (ed *SimpleExample) assertHTMLContent(t *testing.T, r string) {
 	assert.Contains(t, r, "#22BC66", "Action: Button should have given color")
 	assert.Contains(t, r, "https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010", "Action: Button should have link")
 	assert.Contains(t, r, "Need help, or have questions", "Outro: Should have outro")
+	assert.NotContains(t, r, "Unsubscribe", "Unsubscribe: Should not appear when link is not set")
 }
 
 func (ed *SimpleExample) assertPlainTextContent(t *testing.T, r string) {
@@ -150,6 +151,7 @@ func (ed *SimpleExample) assertPlainTextContent(t *testing.T, r string) {
 	assert.NotContains(t, r, "#22BC66", "Action: Button should not have color in plain text")
 	assert.Contains(t, r, "https://hermes-example.com/confirm?token=d9729feb74992cc3482b350163a1a010", "Action: Even if button is not possible in plain text, it should have the link")
 	assert.Contains(t, r, "Need help, or have questions", "Outro: Should have outro")
+	assert.NotContains(t, r, "Unsubscribe", "Unsubscribe: Should not appear when link is not set")
 }
 
 type WithTitleInsteadOfNameExample struct {
@@ -291,6 +293,76 @@ func (ed *WithInviteCode) assertHTMLContent(t *testing.T, r string) {
 func (ed *WithInviteCode) assertPlainTextContent(t *testing.T, r string) {
 	assert.Contains(t, r, "Here is your invite code", "Should contains the instruction")
 	assert.Contains(t, r, "123456", "Should contain the short code")
+}
+
+type WithUnsubscribeLink struct {
+	theme Theme
+}
+
+func (ed *WithUnsubscribeLink) getExample() (Hermes, Email) {
+	h := Hermes{
+		Theme: ed.theme,
+		Product: Product{
+			Name: "Hermes",
+			Link: "http://hermes.com",
+		},
+		DisableCSSInlining: true,
+	}
+
+	email := Email{
+		Body{
+			Name:            "Jon Snow",
+			UnsubscribeLink: "https://hermes-example.com/unsubscribe?token=abc123",
+		},
+	}
+
+	return h, email
+}
+
+func (ed *WithUnsubscribeLink) assertHTMLContent(t *testing.T, r string) {
+	assert.Contains(t, r, `href="https://hermes-example.com/unsubscribe?token=abc123"`, "Unsubscribe: Should find the unsubscribe link")
+	assert.Contains(t, r, ">Unsubscribe<", "Unsubscribe: Should use default link text")
+}
+
+func (ed *WithUnsubscribeLink) assertPlainTextContent(t *testing.T, r string) {
+	assert.Contains(t, r, "https://hermes-example.com/unsubscribe?token=abc123", "Unsubscribe: Should find the unsubscribe link")
+	assert.Contains(t, r, "Unsubscribe", "Unsubscribe: Should use default link text")
+}
+
+type WithUnsubscribeLinkCustomText struct {
+	theme Theme
+}
+
+func (ed *WithUnsubscribeLinkCustomText) getExample() (Hermes, Email) {
+	h := Hermes{
+		Theme: ed.theme,
+		Product: Product{
+			Name: "Hermes",
+			Link: "http://hermes.com",
+		},
+		DisableCSSInlining: true,
+	}
+
+	email := Email{
+		Body{
+			Name:            "Jon Snow",
+			UnsubscribeLink: "https://hermes-example.com/unsubscribe?token=abc123",
+			UnsubscribeText: "Manage email preferences",
+		},
+	}
+
+	return h, email
+}
+
+func (ed *WithUnsubscribeLinkCustomText) assertHTMLContent(t *testing.T, r string) {
+	assert.Contains(t, r, `href="https://hermes-example.com/unsubscribe?token=abc123"`, "Unsubscribe: Should find the unsubscribe link")
+	assert.Contains(t, r, ">Manage email preferences<", "Unsubscribe: Should use custom link text")
+	assert.NotContains(t, r, ">Unsubscribe<", "Unsubscribe: Should not use default link text")
+}
+
+func (ed *WithUnsubscribeLinkCustomText) assertPlainTextContent(t *testing.T, r string) {
+	assert.Contains(t, r, "https://hermes-example.com/unsubscribe?token=abc123", "Unsubscribe: Should find the unsubscribe link")
+	assert.Contains(t, r, "Manage email preferences", "Unsubscribe: Should use custom link text")
 }
 
 type WithFreeMarkdownContent struct {
@@ -447,6 +519,26 @@ func TestThemeWithInviteCode(t *testing.T) {
 		t.Run(theme.Name(), func(t *testing.T) {
 			t.Parallel()
 			checkExample(t, &WithInviteCode{theme})
+		})
+	}
+}
+
+func TestThemeWithUnsubscribeLink(t *testing.T) {
+	t.Parallel()
+	for _, theme := range testedThemes {
+		t.Run(theme.Name(), func(t *testing.T) {
+			t.Parallel()
+			checkExample(t, &WithUnsubscribeLink{theme})
+		})
+	}
+}
+
+func TestThemeWithUnsubscribeLinkCustomText(t *testing.T) {
+	t.Parallel()
+	for _, theme := range testedThemes {
+		t.Run(theme.Name(), func(t *testing.T) {
+			t.Parallel()
+			checkExample(t, &WithUnsubscribeLinkCustomText{theme})
 		})
 	}
 }

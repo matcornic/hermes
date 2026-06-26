@@ -480,6 +480,11 @@ func (dt *Default) HTMLTemplate() string {
               <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-cell">
+                    {{ if .Email.Body.UnsubscribeLink }}
+                    <p class="sub center">
+                      <a href="{{ .Email.Body.UnsubscribeLink | url }}" target="_blank">{{ if .Email.Body.UnsubscribeText }}{{ .Email.Body.UnsubscribeText }}{{ else }}Unsubscribe{{ end }}</a>
+                    </p>
+                    {{ end }}
                     <p class="sub center">
                       {{.Hermes.Product.Copyright}}
                     </p>
@@ -558,6 +563,10 @@ func (dt *Default) PlainTextTemplate() string {
   {{ end }}
 {{ end }}
 <p>{{.Email.Body.Signature}},<br>{{.Hermes.Product.Name}} - {{.Hermes.Product.Link}}</p>
+
+{{ if .Email.Body.UnsubscribeLink }}
+<p><a href="{{ .Email.Body.UnsubscribeLink }}">{{ if .Email.Body.UnsubscribeText }}{{ .Email.Body.UnsubscribeText }}{{ else }}Unsubscribe{{ end }}</a></p>
+{{ end }}
 
 <p>{{.Hermes.Product.Copyright}}</p>
 `

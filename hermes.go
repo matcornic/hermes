@@ -73,8 +73,10 @@ type Body struct {
 	Outros       []string // Outro sentences, last displayed in the email
 	Greeting     string   // Greeting for the contacted person (default to 'Hi')
 	Signature    string   // Signature for the contacted person (default to 'Yours truly')
-	Title        string   // Title replaces the greeting+name when set
-	FreeMarkdown Markdown // Free markdown content that replaces all content other than header and footer
+	Title            string // Title replaces the greeting+name when set
+	FreeMarkdown     Markdown // Free markdown content that replaces all content other than header and footer
+	UnsubscribeLink  string   // Optional URL for an unsubscribe link in the email footer
+	UnsubscribeText  string   // Optional text for the unsubscribe link (defaults to 'Unsubscribe')
 }
 
 // ToHTML converts Markdown to HTML

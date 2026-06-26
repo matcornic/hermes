@@ -35,6 +35,7 @@ func (w *welcome) Email() hermes.Email {
 			Outros: []string{
 				"Need help, or have questions? Just reply to this email, we'd love to help.",
 			},
+			UnsubscribeLink: "https://hermes-example.com/unsubscribe?token=d9729feb74992cc3482b350163a1a010",
 		},
 	}
 }
