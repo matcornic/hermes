@@ -11,6 +11,9 @@ var testedThemes = []Theme{
 	// Insert your new theme here
 	new(Default),
 	new(Flat),
+	new(Cerberus),
+	new(Neopolitan),
+	new(Salted),
 }
 
 // ===============================================
