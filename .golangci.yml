@@ -39,6 +39,15 @@ issues:
     - path: default\.go
       linters:
         - lll
+    - path: cerberus\.go
+      linters:
+        - lll
+    - path: neopolitan\.go
+      linters:
+        - lll
+    - path: salted\.go
+      linters:
+        - lll
     - path: examples/maintenance\.go
       linters:
         - lll

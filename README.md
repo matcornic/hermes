@@ -164,6 +164,12 @@ The following open-source themes are bundled with this package:
 
 <img src="screens/flat/welcome.png" height="200" /> <img src="screens/flat/reset.png" height="200" /> <img src="screens/flat/receipt.png" height="200" />
 
+The following themes are ported from [mailgen](https://github.com/eladnava/mailgen) (only their visual design; the content is driven by Hermes' own data model):
+
+* `cerberus`, a dark theme based on the responsive [Cerberus](https://github.com/TedGoas/Cerberus) patterns
+* `neopolitan`, a colorful theme using the Neapolitan (teal/orange/dark) palette
+* `salted`, a clean theme based on the [Salted](https://github.com/leemunroe/responsive-html-email-template) / A List Apart template
+
 ## RTL Support
 
 To change the default text direction (left-to-right), simply override it as follows:
