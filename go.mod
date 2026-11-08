@@ -1,6 +1,6 @@
 module github.com/matcornic/hermes
 
-go 1.24.2
+go 1.23.0
 
 // https://github.com/darccio/mergo?tab=readme-ov-file#100
 // for github.com/Masterminds/sprig
